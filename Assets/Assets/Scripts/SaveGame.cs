@@ -5,7 +5,7 @@ public class SaveGame : MonoBehaviour
     // Inicia o Singleton do SaveSame.
     private static SaveGame saveGame;
 
-    public static SaveGame Instance
+    public static SaveGame instance
     {
         get
         {
@@ -18,8 +18,8 @@ public class SaveGame : MonoBehaviour
                 // Se não encontrar, cria uma nova GameObject com esse script
                 if (saveGame == null)
                 {
-                    GameObject go = new GameObject("GameManager");
-                    saveGame = go.AddComponent<SaveGame>();
+                    GameObject obj = new GameObject("GameManager");
+                    saveGame = obj.AddComponent<SaveGame>();
                 }
             }
             return saveGame;

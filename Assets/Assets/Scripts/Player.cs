@@ -1,18 +1,25 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("References")]
     SaveGame saveGame;
     Rigidbody rb; 
-    [SerializeField] float speed;
+    Animator anim;
+
+    [Header("Moviment")]
+    [SerializeField] float speed = 100;
     Vector3 moveDirection;
     bool move;
 
+    [Header("Turn")]
+    [SerializeField] Transform camera;
+    [SerializeField] float mouseSensitivity = 100;
+
     private void Awake()
     {
-        saveGame = SaveGame.Instance;
+        saveGame = SaveGame.instance;
     }
     void Start()
     {
@@ -21,6 +28,7 @@ public class Player : MonoBehaviour
         transform.eulerAngles = saveGame.playerRotation;
 
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,12 +39,13 @@ public class Player : MonoBehaviour
         saveGame.playerRotation = transform.eulerAngles;
 
         Movement();
-        print(rb.linearVelocity);
+        Turn();
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = moveDirection * Time.fixedDeltaTime * speed;
+        transform.Translate(moveDirection * Time.fixedDeltaTime * speed);
+        //rb.linearVelocity = moveDirection * Time.fixedDeltaTime * speed;
         if (!move)
         {
             rb.linearVelocity = new Vector3(
@@ -62,5 +71,23 @@ public class Player : MonoBehaviour
 
         // Armazena o Movimento do Player.
         moveDirection = (moveHorizontal != 0 && moveVertical != 0) ? moveDiagonal : moveNormal;
+        // Fala para o animator se o Player está em movimento.
+        anim.SetBool("isWalking", move);
     }
+
+    float rotationY;
+    private void Turn()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+        rotationY -= mouseY;
+        rotationY = Mathf.Clamp(rotationY, -50, 30);
+
+        camera.rotation = Quaternion.Euler(rotationY, transform.eulerAngles.y, 0);
+        transform.Rotate(Vector3.up * mouseX);
+    }
+
 }
