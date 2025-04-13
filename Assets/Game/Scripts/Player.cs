@@ -14,14 +14,9 @@ public class Player : MonoBehaviour
     bool move;
     
     [Header("Turn")]
-    [SerializeField] Transform camera;
+    [SerializeField] Transform look;
     [SerializeField] float mouseSensitivity = 100; // Sensibilidade do mouse.
     float rangeRotationX; // Limite de rotação no eixo X.
-
-    [Header("Jump")]
-    [SerializeField] float jumpPower = 20;
-    bool isGrounded;
-    bool jump;
 
     private void Awake()
     {
@@ -95,31 +90,15 @@ public class Player : MonoBehaviour
         rangeRotationX -= mouseY;
         rangeRotationX = Mathf.Clamp(rangeRotationX, -50, 30);
         
-        camera.rotation = Quaternion.Euler(rangeRotationX, transform.eulerAngles.y, 0);
+        look.rotation = Quaternion.Euler(rangeRotationX, transform.eulerAngles.y, 0);
         transform.Rotate(Vector3.up * mouseX);
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.CompareTag("Grounded"))
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.CompareTag("Grounded"))
-        {
-            isGrounded = false;
-        }
     }
 
 
     private void TryJump()
     {
-        if (Input.GetButtonDown("Jump"))
-            jump = true;
+        //if (Input.GetButtonDown("Jump"))
+            //jump = true;
     }
 
     /*IEnumator void Jump()
@@ -127,7 +106,7 @@ public class Player : MonoBehaviour
         
         if (isGrounded)
         {
-            if (jump)
+            if (jump
             {
                 rb.AddRelativeForce(Vector3.up * jumpPower, ForceMode.Impulse);
             }

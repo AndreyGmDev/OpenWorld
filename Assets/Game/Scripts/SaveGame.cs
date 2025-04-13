@@ -13,7 +13,7 @@ public class SaveGame : MonoBehaviour
             if (saveGame == null)
             {
                 // Procura o SaveGame na cena
-                saveGame = FindObjectOfType<SaveGame>();
+                saveGame = FindFirstObjectByType<SaveGame>();
 
                 // Se não encontrar, cria uma nova GameObject com esse script
                 if (saveGame == null)
