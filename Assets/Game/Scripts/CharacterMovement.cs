@@ -1,5 +1,4 @@
 using KinematicCharacterController;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public struct CharacterMovementInput
@@ -44,13 +43,13 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
     private float jumpRequestExpireTime;
 
     private bool wantsToCrouch; // Apertando o input de crouch.
-    private bool isCrouching; // Está no crouch?
-    private Collider[] probedColliders;
+    [HideInInspector] public bool isCrouching; // Está no crouch?
+    private Collider[] probedColliders = new Collider[8];
 
     private bool isAiming;
     private Quaternion lookRotation;
-    public CameraController.Orientation normalOrientation;
-    public CameraController.Orientation aimingOrientation;
+    private CameraController.Orientation normalOrientation;
+    private CameraController.Orientation aimingOrientation;
 
     public float jumpSpeed => Mathf.Sqrt(2 * gravity * jumpHeight);
 
@@ -69,7 +68,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
             moveInput.y = 0;
             moveInput.Normalize();
         }
-
+        
         if (input.WantsToJump)
         {
             jumpRequestExpireTime = Time.time + jumpRequestDuration;
@@ -86,7 +85,6 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
-
         if (isAiming)
         {
             // Rotação quando o player estiver mirando.
@@ -213,6 +211,8 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
     // Função responsável por calcular as animações.
     private void UpdateAnimation()
     {
+        if (animator == null) return;
+
         if (motor.GroundingStatus.IsStableOnGround)
         {
             if (moveInput.magnitude != 0)

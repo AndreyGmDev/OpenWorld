@@ -1,5 +1,11 @@
 using UnityEngine;
 
+public struct SaveGameInfos
+{
+    public Vector3 PlayerPosition;
+    public Quaternion PlayerRotation;
+}
+
 public class SaveGame : MonoBehaviour
 {
     // Inicia o Singleton do SaveSame.
@@ -26,10 +32,10 @@ public class SaveGame : MonoBehaviour
         }
     }
     // Finalização do Singleton.
-   
+
     // Váriaveis do player. Utilizado no Script do Player.
     public Vector3 playerPosition = Vector3.zero;
-    public Vector3 playerRotation = Vector3.zero;
+    public Quaternion playerRotation = Quaternion.identity;
 
     private void Awake()
     {
@@ -43,39 +49,40 @@ public class SaveGame : MonoBehaviour
             Destroy(gameObject);
         }
 
-
         // Pega os saves criados anteriormente.
         GetPlayerTransform();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Realiza saves em tempo de execução.
-        SavePlayerTransform();
-    }
-
     private void GetPlayerTransform()
     {
-        if (PlayerPrefs.HasKey("playerPositionX") && PlayerPrefs.HasKey("playerPositionY") && PlayerPrefs.HasKey("playerPositionZ"))
+        if (PlayerPrefs.HasKey("playerPositionX"))
         {
-            playerPosition = new Vector3(PlayerPrefs.GetFloat("playerPositionX"), PlayerPrefs.GetFloat("playerPositionY"), PlayerPrefs.GetFloat("playerPositionZ"));
+            playerPosition = new Vector3(
+                PlayerPrefs.GetFloat("playerPositionX"),
+                PlayerPrefs.GetFloat("playerPositionY"),
+                PlayerPrefs.GetFloat("playerPositionZ"));
         }
 
-        if (PlayerPrefs.HasKey("playerRotationX") && PlayerPrefs.HasKey("playerRotationY") && PlayerPrefs.HasKey("playerRotationZ"))
+        if (PlayerPrefs.HasKey("playerRotationX"))
         {
-            playerRotation = new Vector3(PlayerPrefs.GetFloat("playerRotationX"), PlayerPrefs.GetFloat("playerRotationY"), PlayerPrefs.GetFloat("playerRotationZ"));
+            playerRotation = new Quaternion(
+                PlayerPrefs.GetFloat("playerRotationX"),
+                PlayerPrefs.GetFloat("playerRotationY"),
+                PlayerPrefs.GetFloat("playerRotationZ"),
+                PlayerPrefs.GetFloat("playerRotationW"));
         }
     }
 
-    private void SavePlayerTransform()
+    // Recebe o SavePlayerTransform do PlayerController.
+    public void SavePlayerTransform(in SaveGameInfos infos)
     {
-        PlayerPrefs.SetFloat("playerPositionX", playerPosition.x);
-        PlayerPrefs.SetFloat("playerPositionY", playerPosition.y);
-        PlayerPrefs.SetFloat("playerPositionZ", playerPosition.z);
+        PlayerPrefs.SetFloat("playerPositionX", infos.PlayerPosition.x);
+        PlayerPrefs.SetFloat("playerPositionY", infos.PlayerPosition.y);
+        PlayerPrefs.SetFloat("playerPositionZ", infos.PlayerPosition.z);
 
-        PlayerPrefs.SetFloat("playerRotationX", playerRotation.x);
-        PlayerPrefs.SetFloat("playerRotationY", playerRotation.y);
-        PlayerPrefs.SetFloat("playerRotationZ", playerRotation.z);
+        PlayerPrefs.SetFloat("playerRotationX", infos.PlayerRotation.x);
+        PlayerPrefs.SetFloat("playerRotationY", infos.PlayerRotation.y);
+        PlayerPrefs.SetFloat("playerRotationZ", infos.PlayerRotation.z);
+        PlayerPrefs.SetFloat("playerRotationW", infos.PlayerRotation.w);
     }
 }
