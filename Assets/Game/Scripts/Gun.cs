@@ -7,8 +7,8 @@ public class Gun : MonoBehaviour
     InputSystem_Actions inputActions;
 
     [Header("Vectors")]
-    [SerializeField] Transform initialPositionShoot;
     [SerializeField] Transform directionShoot;
+    [SerializeField] Transform visualTest;
 
     [SerializeField] Mode mode;
 
@@ -57,13 +57,24 @@ public class Gun : MonoBehaviour
 
         // Calcula a trajetoria do tiro.
         RaycastHit hit;
-        Physics.Raycast(initialPositionShoot.position, directionShoot.forward, out hit, Mathf.Infinity);
-        if (hit.point != null)
+        Physics.Raycast(directionShoot.position, directionShoot.forward, out hit, Mathf.Infinity);
+        if (hit.point != Vector3.zero)
         {
+            if (visualTest != null)
+            {
+                visualTest.position = hit.point;
+            }
 
+            Hittable hittable = hit.transform.GetComponent<Hittable>();
+            if (hittable != null)
+            {
+                hittable.HitAddForce(directionShoot.forward);
+            }
         }
+
+        // Visual in UnityEditor.
         if (hit.point != null)
-            Debug.DrawLine(initialPositionShoot.position, hit.point, Color.red, 1f);
+            Debug.DrawLine(directionShoot.position, hit.point, Color.red, 1f);
 
         // Diminui uma munição da arma.
         currentAmmo--;
