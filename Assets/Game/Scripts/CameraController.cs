@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] CinemachineThirdPersonFollow cinemachineTPFollow; // Referência da  de movimentação do Player.
+    [SerializeField] CinemachineThirdPersonFollow playerFollowCamera; // Referência da  de movimentação do Player.
+    [SerializeField] CinemachineThirdPersonFollow playerAimCamera; // Referência da  de movimentação da mira.
     [SerializeField] CharacterMovement characterMovement; // Referência do  Script de movimentação do Player.
     [SerializeField] Transform cameraTarget; // Target em que a câmera está mirando.
 
@@ -15,18 +16,14 @@ public class CameraController : MonoBehaviour
 
     [Header("RotationCamera")]
     [SerializeField] Vector2 XRotationRange = new Vector2(-50, 50); // Limite de rotação no eixo x (vertical).
-    [SerializeField, Range(0.1f,5)] float mouseSensitivity;
+    [SerializeField, Range(0.1f,5)] float normalSensitivity;
+    [SerializeField, Range(0.1f,5)] float aimSensitivity;
+    private float sensitivity = 1; 
 
-    [Header("Normal")]
-    [SerializeField] float normalZoom = 5; // Distância da câmera até o Player, quando está normal.
-    [SerializeField] Vector3 normalOffset = new Vector3(0.5f, 0, 0); // Offset da câmera quando está normal.
+    [Header("Orientation")]
     public Orientation normalOrientation;// Pega o estado de normal do Player.
-
-    [Header("Aiming")]
-    [SerializeField] Vector3 aimingOffset = new Vector3(0.5f, 0, 0); // Offset da câmera quando está mirando.
-    [SerializeField] float aimingZoom = 2; // Distância da câmera até o Player, quando está mirando.
-    [HideInInspector] public bool isAiming; // Confere se o player está mirando.
     public Orientation aimingOrientation; // Pega o estado de mirar do Player.
+    [HideInInspector] public bool isAiming; // Confere se o player está mirando.
 
     private Vector2 targetLook;
     private float targetHeight = 1;
@@ -58,7 +55,7 @@ public class CameraController : MonoBehaviour
 
     public void IncrementLookRotation(Vector2 lookAt)
     {
-        targetLook += lookAt * mouseSensitivity;
+        targetLook += lookAt * sensitivity;
         targetLook.x = Mathf.Clamp(targetLook.x, XRotationRange.x, XRotationRange.y);
     }
 
@@ -66,15 +63,15 @@ public class CameraController : MonoBehaviour
     {
         if (mouseLeftClick)
         {
-            cinemachineTPFollow.CameraDistance = aimingZoom;
-            cinemachineTPFollow.ShoulderOffset = aimingOffset;
+            sensitivity = aimSensitivity;
             isAiming = true;
+            playerAimCamera.gameObject.SetActive(true);
         }
         else
         {
-            cinemachineTPFollow.CameraDistance = normalZoom;
-            cinemachineTPFollow.ShoulderOffset = normalOffset;
+            sensitivity = normalSensitivity;
             isAiming = false;
+            playerAimCamera.gameObject.SetActive(false);
         }
         
     }
