@@ -1,0 +1,1 @@
+{"playerController":{"instanceID":-1562},"playerPosition":{"x":2.991848945617676,"y":0.006999971345067024,"z":16.95900535583496},"playerRotation":{"x":0.0,"y":-0.7742890119552612,"z":0.0,"w":-0.6328322291374207},"cameraControllerRotation":{"x":-29.799999237060548,"y":-1755.7872314453125},"slotPlayer":2.0}

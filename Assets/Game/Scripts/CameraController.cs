@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     public Orientation aimingOrientation; // Pega o estado de mirar do Player.
     [HideInInspector] public bool isAiming; // Confere se o player está mirando.
 
-    private Vector2 targetLook;
+    public Vector2 targetLook;
     private float targetHeight = 1;
     public Quaternion lookRotation => cameraTarget.rotation;
     public enum Orientation {towardsCamera, towardMovement}; // Enum para orientação do Player.

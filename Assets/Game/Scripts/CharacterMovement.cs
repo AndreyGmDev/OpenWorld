@@ -44,12 +44,16 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
 
     private bool wantsToCrouch; // Apertando o input de crouch.
     [HideInInspector] public bool isCrouching; // Está no crouch?
-    private Collider[] probedColliders = new Collider[8];
+    private Collider[] probedColliders = new Collider[8]; // Colisão que identifica se há algum objeto sobre o player enquanto ele está no crouch, se sim, player fica no crouch, se não, player levanta.
 
-    private bool isAiming;
-    private Quaternion lookRotation;
-    private CameraController.Orientation normalOrientation;
-    private CameraController.Orientation aimingOrientation;
+    private bool isAiming; // Player está mirando?
+    private Quaternion lookRotation; // Rotação da câmera.
+    private CameraController.Orientation normalOrientation; // Modo de orientação do player normal.
+    private CameraController.Orientation aimingOrientation; // Modo de orientação do player enquanto está mirando.
+
+    // Responsável por alterar a rotação do player quando chamada a função SetUpdateRotation().
+    private Quaternion setRotation; // Rotação indicada pela função.
+    private bool rotate; // O player é rotacionado 1 vez a cada vez que a função for chamada.
 
     public float jumpSpeed => Mathf.Sqrt(2 * gravity * jumpHeight);
 
@@ -83,8 +87,23 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
 
     }
 
+    // Seta o player para uma rotação especifica.
+    public void SetUpdateRotation(Quaternion currentRotation)
+    {
+        setRotation = currentRotation;
+        rotate = true;
+    }
+
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
+        if (rotate)
+        {
+            currentRotation = setRotation;
+            currentRotation.x = 0;
+            currentRotation.z = 0;
+            rotate = false;
+        }
+        
         if (isAiming)
         {
             // Rotação quando o player estiver mirando.

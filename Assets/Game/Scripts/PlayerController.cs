@@ -1,11 +1,10 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] CharacterMovement characterMovement;
-    [SerializeField] CameraController cameraController;
+    public CharacterMovement characterMovement;
+    public CameraController cameraController;
+    public Hotbar hotbar;
     private SaveGame saveGame;
     private bool mouseLeftClickInThisFrame;
     private InputSystem_Actions inputActions;
@@ -18,8 +17,6 @@ public class PlayerController : MonoBehaviour
 
         // Carregar as informações do SaveGame.
         saveGame = SaveGame.instance;
-        characterMovement.motor.SetPosition(saveGame.playerPosition);
-        characterMovement.motor.RotateCharacter(saveGame.playerRotation);
     }
 
     private void Update()
@@ -57,10 +54,13 @@ public class PlayerController : MonoBehaviour
 
         // Passar informações para o SaveGame.
 
-        saveGame.SavePlayerTransform(new SaveGameInfos
+        saveGame.SavePlayerData(new SaveGameInfos
         {
+            PlayerController = this,
             PlayerPosition = characterMovement.transform.position,
-            PlayerRotation = characterMovement.transform.rotation
+            PlayerRotation = characterMovement.transform.rotation,
+            CameraControllerRotation = cameraController.targetLook,
+            SlotPlayer = hotbar.saveSlot
         });
     }
 }

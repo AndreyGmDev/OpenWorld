@@ -89,6 +89,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Slots"",
+                    ""type"": ""Value"",
+                    ""id"": ""3804b3a8-5041-4abd-a891-e63115e96feb"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,50 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4645a3d8-da24-4295-aac7-d65da0ceae62"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Slots"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75b09ad9-e7e8-4143-821f-56c95faba7e4"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Slots"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ef86438-0e1f-4d83-9a1b-ce5d14a17ab4"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Slots"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""619a2113-76b0-45b4-8116-8376fa35e0e8"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Slots"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -294,6 +347,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Game_Aiming = m_Game.FindAction("Aiming", throwIfNotFound: true);
         m_Game_Shoot = m_Game.FindAction("Shoot", throwIfNotFound: true);
         m_Game_Reload = m_Game.FindAction("Reload", throwIfNotFound: true);
+        m_Game_Slots = m_Game.FindAction("Slots", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -370,6 +424,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_Aiming;
     private readonly InputAction m_Game_Shoot;
     private readonly InputAction m_Game_Reload;
+    private readonly InputAction m_Game_Slots;
     public struct GameActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -381,6 +436,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Aiming => m_Wrapper.m_Game_Aiming;
         public InputAction @Shoot => m_Wrapper.m_Game_Shoot;
         public InputAction @Reload => m_Wrapper.m_Game_Reload;
+        public InputAction @Slots => m_Wrapper.m_Game_Slots;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -411,6 +467,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @Slots.started += instance.OnSlots;
+            @Slots.performed += instance.OnSlots;
+            @Slots.canceled += instance.OnSlots;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -436,6 +495,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @Slots.started -= instance.OnSlots;
+            @Slots.performed -= instance.OnSlots;
+            @Slots.canceled -= instance.OnSlots;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -545,6 +607,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnAiming(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnSlots(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

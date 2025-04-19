@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -17,7 +16,7 @@ public class Gun : MonoBehaviour
     [SerializeField] int currentAmmo = 6;
     [SerializeField] float reloadTime;
 
-    private enum Mode { pressToShoot, canHoldToShoot, needHoldToShoot}
+    private enum Mode { pressToShoot, canHoldToShoot, needHoldToShoot }
     private void Awake()
     {
         // Inicializando o NewInputSystem.
@@ -53,7 +52,15 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
+        // Confere se ainda há munição na arma.
         if (currentAmmo < 1) return;
+
+        GameObject playerController = GameObject.Find("PlayerController");
+        CharacterMovement characterMovement = playerController.transform.GetChild(0).GetComponent<CharacterMovement>();
+        if (characterMovement != null)
+        {
+            characterMovement.SetUpdateRotation(directionShoot.rotation);
+        }
 
         // Calcula a trajetoria do tiro.
         RaycastHit hit;
