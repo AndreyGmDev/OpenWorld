@@ -7,7 +7,8 @@ public class Hotbar : MonoBehaviour
     private InputSystem_Actions inputActions;
     private float slotAnt;
     private float slot = 1;
-    public float saveSlot = 1;
+    [HideInInspector] public float saveSlot = 1;
+
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
