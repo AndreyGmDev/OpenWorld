@@ -14,7 +14,15 @@ public class Gun : MonoBehaviour
     [Header("GunInfos")]
     [SerializeField] int maxAmmo = 6;
     [SerializeField] int currentAmmo = 6;
-    [SerializeField] float reloadTime;
+    [SerializeField] float reloadTime = 2;
+    [SerializeField] float delayShoots = 0.4f;
+
+    private bool isReloading;
+    private float countDelayShoots;
+
+    //[Header("NeedHoldToShootInfos")]
+    //[SerializeField] float holdInitialTime = 0.1f;
+    //[Min(0.1f), SerializeField] float holdFinalTime = 1;
 
     private enum Mode { pressToShoot, canHoldToShoot, needHoldToShoot }
     private void Awake()
@@ -24,18 +32,23 @@ public class Gun : MonoBehaviour
         inputActions.Enable();
     }
 
+    private void Start()
+    {
+        countDelayShoots = delayShoots;
+    }
+
     private void Update()
     {
         switch (mode)
         {
             case Mode.pressToShoot:
-                if (inputActions.Game.Shoot.WasPressedThisFrame())
+                if (inputActions.Game.Shoot.WasPressedThisFrame() && countDelayShoots <= 0 && !isReloading)
                 {
                     Shoot();
                 }
                 break;
             case Mode.canHoldToShoot:
-                if (inputActions.Game.Shoot.IsPressed())
+                if (inputActions.Game.Shoot.IsPressed() && countDelayShoots <= 0 && !isReloading)
                 {
                     Shoot();
                 }
@@ -44,7 +57,12 @@ public class Gun : MonoBehaviour
                 break;
         }
 
-        if (inputActions.Game.Reload.WasPressedThisFrame())
+        if (countDelayShoots > 0)
+        {
+            countDelayShoots -= Time.deltaTime;
+        }
+
+        if (inputActions.Game.Reload.WasPressedThisFrame() && !isReloading)
         {
             StartCoroutine("Reload");
         }
@@ -54,6 +72,9 @@ public class Gun : MonoBehaviour
     {
         // Confere se ainda há munição na arma.
         if (currentAmmo < 1) return;
+
+        // Seta o delay para poder atirar novamente.
+        countDelayShoots = delayShoots;
 
         GameObject playerController = GameObject.Find("PlayerController");
         CharacterMovement characterMovement = playerController.transform.GetChild(0).GetComponent<CharacterMovement>();
@@ -89,8 +110,12 @@ public class Gun : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        isReloading = true;
+
         yield return new WaitForSeconds(reloadTime);
 
         currentAmmo = maxAmmo;
+
+        isReloading = false;
     }
 }

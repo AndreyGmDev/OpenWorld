@@ -98,6 +98,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PickUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e66a9da-fd5b-4fd5-b7f7-ca421ab8bdfc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -265,6 +274,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""Slots"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a13ea2ef-1675-4be7-b179-30db6c10cc19"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""PickUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -348,6 +368,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Game_Shoot = m_Game.FindAction("Shoot", throwIfNotFound: true);
         m_Game_Reload = m_Game.FindAction("Reload", throwIfNotFound: true);
         m_Game_Slots = m_Game.FindAction("Slots", throwIfNotFound: true);
+        m_Game_PickUp = m_Game.FindAction("PickUp", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -425,6 +446,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_Shoot;
     private readonly InputAction m_Game_Reload;
     private readonly InputAction m_Game_Slots;
+    private readonly InputAction m_Game_PickUp;
     public struct GameActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -437,6 +459,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Game_Shoot;
         public InputAction @Reload => m_Wrapper.m_Game_Reload;
         public InputAction @Slots => m_Wrapper.m_Game_Slots;
+        public InputAction @PickUp => m_Wrapper.m_Game_PickUp;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -470,6 +493,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Slots.started += instance.OnSlots;
             @Slots.performed += instance.OnSlots;
             @Slots.canceled += instance.OnSlots;
+            @PickUp.started += instance.OnPickUp;
+            @PickUp.performed += instance.OnPickUp;
+            @PickUp.canceled += instance.OnPickUp;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -498,6 +524,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Slots.started -= instance.OnSlots;
             @Slots.performed -= instance.OnSlots;
             @Slots.canceled -= instance.OnSlots;
+            @PickUp.started -= instance.OnPickUp;
+            @PickUp.performed -= instance.OnPickUp;
+            @PickUp.canceled -= instance.OnPickUp;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -608,6 +637,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnSlots(InputAction.CallbackContext context);
+        void OnPickUp(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
