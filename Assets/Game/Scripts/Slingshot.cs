@@ -17,7 +17,6 @@ public class Slingshot : MonoBehaviour
     [SerializeField] int currentAmmo = 6;
     [SerializeField] float force = 3;
 
-    [SerializeField] float reloadTime = 2;
     [SerializeField] float delayShoots = 0.4f;
 
     private float countDelayShoots;

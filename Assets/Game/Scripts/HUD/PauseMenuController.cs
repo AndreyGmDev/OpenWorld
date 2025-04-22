@@ -19,8 +19,15 @@ public class PauseMenuController : MonoBehaviour
     {
         ArrangeOptions();
         pauseCanvas.enabled = false; // Desativa o menu inicialmente
+
+        //Button sla;
+       // sla.onClick.AddListener(csasa);
     }
 
+    private void csasa(string map)
+    {
+
+    }
     void Update()
     {
         // Ativar/Desativar o menu de pausa
