@@ -127,7 +127,6 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
                     currentRotation.z = 0;
                     break;
             }
-
         }
         else
         {
@@ -152,7 +151,6 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
                     currentRotation.z = 0;
                     break;
             }
-            
         }
     }
 
@@ -219,6 +217,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
             currentVelocity.y -= gravity * deltaTime;
         }
 
+        // Atualiza a animação.
         UpdateAnimation();
     }
 

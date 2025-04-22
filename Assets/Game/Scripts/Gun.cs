@@ -20,10 +20,6 @@ public class Gun : MonoBehaviour
     private bool isReloading;
     private float countDelayShoots;
 
-    //[Header("NeedHoldToShootInfos")]
-    //[SerializeField] float holdInitialTime = 0.1f;
-    //[Min(0.1f), SerializeField] float holdFinalTime = 1;
-
     private enum Mode { pressToShoot, canHoldToShoot, needHoldToShoot }
     private void Awake()
     {

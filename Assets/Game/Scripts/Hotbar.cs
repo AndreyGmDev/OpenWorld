@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Hotbar : MonoBehaviour
 {
-    [SerializeField] GameObject[] itens;
+    public GameObject[] itens;
 
     private InputSystem_Actions inputActions;
     private float slotAnt;

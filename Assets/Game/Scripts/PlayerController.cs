@@ -1,4 +1,7 @@
+using System;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class PlayerController : MonoBehaviour
 {
@@ -45,12 +48,7 @@ public class PlayerController : MonoBehaviour
         
         cameraController.IncrementLookRotation(new Vector2(look.y,look.x));
 
-        bool mouseLeftClick = inputActions.Game.Aiming.IsPressed();
-        if (mouseLeftClickInThisFrame != mouseLeftClick)
-        {
-            cameraController.IncrementZoomCamera(mouseLeftClick);
-        }
-        mouseLeftClickInThisFrame = mouseLeftClick;
+        AllowIncrementZoomCamera();
 
         // Passar informações para o SaveGame.
 
@@ -62,5 +60,28 @@ public class PlayerController : MonoBehaviour
             CameraControllerRotation = cameraController.targetLook,
             SlotPlayer = hotbar.saveSlot
         });
+    }
+
+    private void AllowIncrementZoomCamera()
+    {
+        bool mouseLeftClick = inputActions.Game.Aiming.IsPressed();
+        int slot = Convert.ToInt32(hotbar.saveSlot - 1);
+
+        if (hotbar.itens[slot].CompareTag("CanAim"))
+        {
+            if (mouseLeftClickInThisFrame != mouseLeftClick)
+            {
+                cameraController.IncrementZoomCamera(mouseLeftClick);
+            }
+            mouseLeftClickInThisFrame = mouseLeftClick;
+        }
+        else
+        {
+            if (mouseLeftClickInThisFrame != mouseLeftClick)
+            {
+                cameraController.IncrementZoomCamera(false);
+            }
+            mouseLeftClickInThisFrame = mouseLeftClick;
+        }
     }
 }

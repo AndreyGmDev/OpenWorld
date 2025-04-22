@@ -4,11 +4,13 @@ public class Slingshot : MonoBehaviour
 {
     InputSystem_Actions inputActions;
 
-    [SerializeField] Transform spawnTransform;
+    [Header("References")]
     [SerializeField] GameObject stone;
 
     [Header("Vectors")]
+    [SerializeField] Transform spawnTransform;
     [SerializeField] Transform directionShoot;
+    private Vector3 mouseDirection;
 
     [Header("GunInfos")]
     [SerializeField] int maxAmmo = 6;
@@ -20,7 +22,6 @@ public class Slingshot : MonoBehaviour
 
     private float countDelayShoots;
 
-    [SerializeField] float holdInitialTime = 0.1f;
     [SerializeField] float holdFinalTime = 1;
     private float holdTime;
 
@@ -31,9 +32,10 @@ public class Slingshot : MonoBehaviour
         inputActions.Enable();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         countDelayShoots = delayShoots;
+        holdTime = 0;
     }
 
     private void Update()
@@ -62,6 +64,22 @@ public class Slingshot : MonoBehaviour
         {
             PickUpItem();
         }
+
+        Raycast();
+    }
+
+    private void Raycast()
+    {
+        RaycastHit hit;
+        Physics.Raycast(directionShoot.position, directionShoot.forward, out hit, Mathf.Infinity);
+        if (hit.point != Vector3.zero)
+        {
+            mouseDirection = hit.point;
+        }
+
+        // Visual in UnityEditor.
+        if (hit.point != null)
+            Debug.DrawLine(directionShoot.position, hit.point, Color.red);
     }
 
     private void PickUpItem()
@@ -108,7 +126,8 @@ public class Slingshot : MonoBehaviour
 
         float currentForce = force * holdTime;
         var spawnedStone = Instantiate(stone,spawnTransform.position, Quaternion.identity);
-        spawnedStone.GetComponent<SlingshotProject>().directionShoot = directionShoot.forward * currentForce;
+        //spawnedStone.GetComponent<SlingshotProject>().directionShoot = directionShoot.forward * currentForce;
+        spawnedStone.GetComponent<SlingshotProject>().directionShoot = (mouseDirection - spawnTransform.position).normalized * currentForce;
 
         // Diminui uma munição da arma.
         currentAmmo--; 
