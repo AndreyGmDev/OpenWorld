@@ -28,7 +28,6 @@ public class SaveGame : MonoBehaviour
         public Vector3 playerPosition;
         public Quaternion playerRotation;
         public Vector2 cameraControllerRotation;
-        //public float slotPlayer;
     }
 
     public class HotbarData

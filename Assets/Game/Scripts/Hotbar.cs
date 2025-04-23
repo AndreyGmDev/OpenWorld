@@ -3,7 +3,6 @@ using UnityEngine;
 public class Hotbar : MonoBehaviour
 {
     public GameObject[] itens;
-    public GameObject item;
 
     private InputSystem_Actions inputActions;
     private float slotAnt;

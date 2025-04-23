@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Hotbar hotbar;
     private SaveGame saveGame;
     private bool mouseLeftClickInThisFrame;
+    private bool mouseRightClickInThisFrame;
     private InputSystem_Actions inputActions;
     Vector2 moveInput = Vector2.zero;
     private void Awake()
@@ -23,6 +24,15 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
+    {
+        // Inputs player.
+        Inputs();
+
+        // Passar informações para o SaveGame.
+        PassToSaveGame();
+    }
+
+    private void Inputs()
     {
         // Passar informações para CharacterMovement.
 
@@ -45,11 +55,42 @@ public class PlayerController : MonoBehaviour
         // Passar informações para câmera.
 
         Vector2 look = inputActions.Game.Look.ReadValue<Vector2>();
-        
-        cameraController.IncrementLookRotation(new Vector2(look.y,look.x));
+
+        cameraController.IncrementLookRotation(new Vector2(look.y, look.x));
 
         AllowIncrementZoomCamera();
+    }
 
+    private void AllowIncrementZoomCamera()
+    {
+        bool mouseRightClick = inputActions.Game.Aiming.IsPressed();
+        bool mouseLeftClick = inputActions.Game.Shoot.IsPressed();
+        int slot = Convert.ToInt32(hotbar.saveSlot - 1);
+        slot = Mathf.Clamp(slot, 0, hotbar.itens.Length);
+
+        ItemConditions itemCondition = hotbar.itens[slot].GetComponent<ItemConditions>();
+        if (itemCondition != null)
+        {
+            bool rightClick = false;
+            bool leftClick = false;
+
+            if (itemCondition.CheckRightClickAim())
+            {
+                rightClick = mouseRightClick;
+            }
+            
+
+            if (itemCondition.CheckLeftClickAim())
+            {
+                leftClick = mouseLeftClick;
+            }
+
+            cameraController.IncrementZoomCamera(rightClick || leftClick);
+        }
+    }
+
+    private void PassToSaveGame()
+    {
         // Passar informações para o SaveGame.
 
         saveGame.SavePlayerData(new SaveGameInfos
@@ -67,29 +108,5 @@ public class PlayerController : MonoBehaviour
             Slot = hotbar.saveSlot,
             Itens = hotbar.itens,
         });
-    }
-
-    private void AllowIncrementZoomCamera()
-    {
-        bool mouseLeftClick = inputActions.Game.Aiming.IsPressed();
-        int slot = Convert.ToInt32(hotbar.saveSlot - 1);
-        slot = Mathf.Clamp(slot, 0, hotbar.itens.Length);
-
-        if (hotbar.itens[slot].CompareTag("CanAim"))
-        {
-            if (mouseLeftClickInThisFrame != mouseLeftClick)
-            {
-                cameraController.IncrementZoomCamera(mouseLeftClick);
-            }
-            mouseLeftClickInThisFrame = mouseLeftClick;
-        }
-        else
-        {
-            if (mouseLeftClickInThisFrame != mouseLeftClick)
-            {
-                cameraController.IncrementZoomCamera(false);
-            }
-            mouseLeftClickInThisFrame = mouseLeftClick;
-        }
     }
 }
