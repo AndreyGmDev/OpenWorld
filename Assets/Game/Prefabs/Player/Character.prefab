@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 1152406395051127457}
   m_Layer: 0
   m_Name: Slingshot
-  m_TagString: Untagged
+  m_TagString: CanAim
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,15 +245,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10dfec8e508acfb46b3a70dfab58087b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stone: {fileID: 0}
+  spawnTransform: {fileID: 0}
   directionShoot: {fileID: 0}
-  visualTest: {fileID: 0}
   maxAmmo: 6
   currentAmmo: 6
-  maxReserveAmmo: 8
-  currentReserveAmmo: 8
-  reloadTime: 2
+  force: 3
   delayShoots: 0.4
-  holdInitialTime: 0.1
   holdFinalTime: 1
 --- !u!1 &5220421583562434660
 GameObject:
@@ -394,7 +392,7 @@ GameObject:
   - component: {fileID: 2163886742287164436}
   m_Layer: 0
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: CanAim
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

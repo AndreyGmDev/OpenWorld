@@ -3,6 +3,7 @@ using UnityEngine;
 public class Hotbar : MonoBehaviour
 {
     public GameObject[] itens;
+    public GameObject item;
 
     private InputSystem_Actions inputActions;
     private float slotAnt;
@@ -23,7 +24,17 @@ public class Hotbar : MonoBehaviour
 
     private void Update()
     {
+        int n = 0;
+        foreach (var item in itens)
+        {
+            if (item != null)
+            {
+                n++;
+            }
+        }
+
         slot = inputActions.Game.Slots.ReadValue<float>();
+        slot = Mathf.Clamp(slot, 0, n);
 
         if (slot != slotAnt)
         {
@@ -42,7 +53,8 @@ public class Hotbar : MonoBehaviour
         // Desativa todos os itens primeiro.
         for (int i = 0; i < itens.Length; i++)
         {
-            itens[i].SetActive(false);
+            if (itens[i] != null)
+                itens[i].SetActive(false);
         }
 
         // Ativa o item selecionado.

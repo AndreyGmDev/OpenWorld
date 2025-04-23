@@ -58,7 +58,14 @@ public class PlayerController : MonoBehaviour
             PlayerPosition = characterMovement.transform.position,
             PlayerRotation = characterMovement.transform.rotation,
             CameraControllerRotation = cameraController.targetLook,
-            SlotPlayer = hotbar.saveSlot
+            //SlotPlayer = hotbar.saveSlot
+        });
+
+        saveGame.SaveHotbarData(new SaveGameInfos
+        {
+            Hotbar = hotbar,
+            Slot = hotbar.saveSlot,
+            Itens = hotbar.itens,
         });
     }
 
@@ -66,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         bool mouseLeftClick = inputActions.Game.Aiming.IsPressed();
         int slot = Convert.ToInt32(hotbar.saveSlot - 1);
+        slot = Mathf.Clamp(slot, 0, hotbar.itens.Length);
 
         if (hotbar.itens[slot].CompareTag("CanAim"))
         {
