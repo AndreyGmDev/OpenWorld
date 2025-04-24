@@ -1,1 +1,1 @@
-{"hotbar":{"instanceID":-439424},"slot":0.0,"itens":[{"instanceID":-439208},{"instanceID":-439210},{"instanceID":-439212}]}
+{"hotbar":{"instanceID":-104138},"slot":0.0,"itens":[{"instanceID":-104068},{"instanceID":-104070},{"instanceID":-104072}]}
