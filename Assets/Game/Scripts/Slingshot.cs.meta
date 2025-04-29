@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 10dfec8e508acfb46b3a70dfab58087b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - stone: {instanceID: 0}
+  - spawnTransform: {instanceID: 0}
+  - directionShoot: {instanceID: 0}
+  - readySFX: {fileID: 8300000, guid: e35540e634fafca4bb4f4944aca227ca, type: 3}
+  - shootSFX: {fileID: 8300000, guid: bd6984127494c0b4ba145bc800b59ffe, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

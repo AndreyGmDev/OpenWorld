@@ -1202,6 +1202,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 896693858}
     - target: {fileID: 1278973756379228778, guid: 749891557e966e3499697df131c7718d, type: 3}
+      propertyPath: readySFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e35540e634fafca4bb4f4944aca227ca, type: 3}
+    - target: {fileID: 1278973756379228778, guid: 749891557e966e3499697df131c7718d, type: 3}
+      propertyPath: shootSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: bd6984127494c0b4ba145bc800b59ffe, type: 3}
+    - target: {fileID: 1278973756379228778, guid: 749891557e966e3499697df131c7718d, type: 3}
       propertyPath: directionShoot
       value: 
       objectReference: {fileID: 937281168}
@@ -2258,7 +2266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173f04bd36a54ea4e988b78cf9cfc9be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXObject: {fileID: 1178108761053463025, guid: 75b667a2a2973cc42a955de71c5f12bf, type: 3}
+  sfxObject: {fileID: 4971946268018815030, guid: 75b667a2a2973cc42a955de71c5f12bf, type: 3}
 --- !u!4 &1641248693
 Transform:
   m_ObjectHideFlags: 0
@@ -2268,7 +2276,7 @@ Transform:
   m_GameObject: {fileID: 1641248691}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.786665, y: -1.2738177, z: -1.894995}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

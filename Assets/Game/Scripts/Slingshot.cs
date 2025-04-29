@@ -20,6 +20,8 @@ public class Slingshot : MonoBehaviour
     [SerializeField] float delayShoots = 0.4f;
 
     private float countDelayShoots;
+    [SerializeField] AudioClip readySFX;
+    [SerializeField] AudioClip shootSFX;
 
     [SerializeField] float holdFinalTime = 1;
     private float holdTime;
@@ -43,6 +45,10 @@ public class Slingshot : MonoBehaviour
         {
             if (inputActions.Game.Shoot.IsPressed())
             {
+                if (holdTime == 0f)
+                {
+                    SFXManager.instance.PlaySoundFXClip(readySFX, transform, 1f);
+                }
                 if (holdTime < holdFinalTime)
                 {
                     holdTime += Time.deltaTime;
@@ -127,6 +133,9 @@ public class Slingshot : MonoBehaviour
         var spawnedStone = Instantiate(stone,spawnTransform.position, Quaternion.identity);
         //spawnedStone.GetComponent<SlingshotProject>().directionShoot = directionShoot.forward * currentForce;
         spawnedStone.GetComponent<SlingshotProject>().directionShoot = (mouseDirection - spawnTransform.position).normalized * currentForce;
+
+        // Tocar SFX
+        SFXManager.instance.PlaySoundFXClip(shootSFX, transform, 1f);
 
         // Diminui uma munição da arma.
         currentAmmo--; 

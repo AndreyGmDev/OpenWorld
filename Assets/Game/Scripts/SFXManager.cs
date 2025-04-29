@@ -1,28 +1,37 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SFXManager : MonoBehaviour
 {
-   public static SFXManager Instance;
-    [SerializeField] private AudioSource SFXObject;
-
+   public static SFXManager instance;
+   public AudioSource sfxObject;
+   private AudioSource current = null;
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
-        AudioSource audioSource = Instantiate(SFXObject, spawnTransform.position, Quaternion.identity);
+        Interrupt();
 
-        audioSource.clip = audioClip;
+        current = Instantiate(sfxObject, spawnTransform.position, Quaternion.identity);
 
-        audioSource.volume = volume;
+        current.clip = audioClip;
 
-        audioSource.Play();
+        current.volume = volume;
 
-        float clipLength = audioSource.clip.length;
+        current.Play();
 
-        Destroy(audioSource.gameObject, clipLength);
+        float clipLength = current.clip.length;
+
+        Destroy(current.gameObject, clipLength);
     }
-
+    public void Interrupt()
+    {
+        if (current == null) return;
+        current.Stop();
+        Destroy(current.gameObject);
+        current = null;
+    }
 }
