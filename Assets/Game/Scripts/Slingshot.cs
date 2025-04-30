@@ -47,7 +47,8 @@ public class Slingshot : MonoBehaviour
             {
                 if (holdTime == 0f)
                 {
-                    SFXManager.instance.PlaySoundFXClip(readySFX, transform, 1f);
+                    if (readySFX != null)
+                        SFXManager.instance.PlaySoundFXClip(readySFX, transform, 1f);
                 }
                 if (holdTime < holdFinalTime)
                 {
@@ -136,7 +137,8 @@ public class Slingshot : MonoBehaviour
 
         // Tocar SFX
         SFXManager.instance.Interrupt();
-        SFXManager.instance.PlaySoundFXClip(shootSFX, transform, 1f);
+        if (shootSFX != null)
+            SFXManager.instance.PlaySoundFXClip(shootSFX, transform, 1f);
 
         // Diminui uma munição da arma.
         currentAmmo--; 
