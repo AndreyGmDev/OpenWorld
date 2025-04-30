@@ -13,8 +13,6 @@ public class SFXManager : MonoBehaviour
 
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
-        Interrupt();
-
         current = Instantiate(sfxObject, spawnTransform.position, Quaternion.identity);
 
         current.clip = audioClip;

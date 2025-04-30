@@ -17,6 +17,9 @@ public class Gun : MonoBehaviour
     [SerializeField] float reloadTime = 2;
     [SerializeField] float delayShoots = 0.4f;
 
+    [SerializeField] AudioClip reloadSFX;
+    [SerializeField] AudioClip shootSFX;
+
     private bool isReloading;
     private float countDelayShoots;
 
@@ -79,6 +82,9 @@ public class Gun : MonoBehaviour
             characterMovement.SetUpdateRotation(directionShoot.rotation);
         }
 
+        //SFX
+        SFXManager.instance.PlaySoundFXClip(shootSFX, transform, 1f);
+
         // Calcula a trajetoria do tiro.
         RaycastHit hit;
         Physics.Raycast(directionShoot.position, directionShoot.forward, out hit, Mathf.Infinity);
@@ -106,7 +112,11 @@ public class Gun : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        if (currentAmmo == maxAmmo) yield break;
+
         isReloading = true;
+
+        SFXManager.instance.PlaySoundFXClip(reloadSFX, transform, 1f);
 
         yield return new WaitForSeconds(reloadTime);
 

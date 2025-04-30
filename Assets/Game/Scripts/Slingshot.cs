@@ -135,6 +135,7 @@ public class Slingshot : MonoBehaviour
         spawnedStone.GetComponent<SlingshotProject>().directionShoot = (mouseDirection - spawnTransform.position).normalized * currentForce;
 
         // Tocar SFX
+        SFXManager.instance.Interrupt();
         SFXManager.instance.PlaySoundFXClip(shootSFX, transform, 1f);
 
         // Diminui uma munição da arma.
