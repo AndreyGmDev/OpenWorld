@@ -1,4 +1,5 @@
 using System.IO;
+using UnityEditor.Playables;
 using UnityEngine;
 
 public struct SaveGameInfos
@@ -13,6 +14,10 @@ public struct SaveGameInfos
     public Hotbar Hotbar;
     public float Slot;
     public GameObject[] Itens;
+
+    // DaylightCycle infos.
+    public DaylightCycle DaylightCycle;
+    public float Seconds;
 }
 
 public class SaveGame : MonoBehaviour
@@ -20,6 +25,9 @@ public class SaveGame : MonoBehaviour
     // Nomes dos arquivos que serão salvos as informações
     const string SAVEPLAYER = "/player_state.txt";
     const string SAVEHOTBAR = "/hotbar_state.txt";
+    const string SAVEDAY    = "/day_state.txt";
+
+    [SerializeField, Tooltip("Delay between each game save")] float delaySaveGame = 30;
 
     // SaveGame do player em arquivo Json.
     public class PlayerData
@@ -35,6 +43,12 @@ public class SaveGame : MonoBehaviour
         public Hotbar hotbar;
         public float slot;
         public GameObject[] itens;
+    }
+
+    public class DaylightCycleData
+    {
+        public DaylightCycle daylightCycle;
+        public float seconds;
     }
 
     // Inicia o Singleton do SaveSame.
@@ -77,61 +91,107 @@ public class SaveGame : MonoBehaviour
         // Pega os saves criados anteriormente.
         LoadPlayerData();
         LoadHotbarData();
+        LoadDaylightCycleData();
+    }
+
+    private void Start()
+    {
+        InvokeRepeating("MakeSaves", delaySaveGame, delaySaveGame);
+    }
+
+    PlayerData playerData = new PlayerData();
+    HotbarData hotbarData = new HotbarData();
+    DaylightCycleData daylightCycleData = new DaylightCycleData();
+    private void MakeSaves()
+    {
+        if (playerData.playerController != null)
+        {
+            string jsonPlayerData = JsonUtility.ToJson(playerData);
+            File.WriteAllText(Application.dataPath + SAVEPLAYER, jsonPlayerData);
+        }
+
+        if (hotbarData.hotbar != null)
+        {
+            string jsonHotbarData = JsonUtility.ToJson(hotbarData);
+            File.WriteAllText(Application.dataPath + SAVEHOTBAR, jsonHotbarData);
+        }
+
+        if (daylightCycleData.daylightCycle != null)
+        {
+            string jsonDaylightCycleData = JsonUtility.ToJson(daylightCycleData);
+            File.WriteAllText(Application.dataPath + SAVEDAY, jsonDaylightCycleData);
+        }
     }
 
     // Recebe o SavePlayerTransform do PlayerController.
     public void SavePlayerData(in SaveGameInfos infos)
     {
-        PlayerData playerData = new PlayerData();
-
         playerData.playerController = infos.PlayerController; // Grava a referência do script que passou as informações pro SaveGame.
         playerData.playerPosition = infos.PlayerPosition;
         playerData.playerRotation = infos.PlayerRotation;
         playerData.cameraControllerRotation = infos.CameraControllerRotation;
-
-        string jsonPlayerData = JsonUtility.ToJson(playerData);
-        File.WriteAllText(Application.dataPath + SAVEPLAYER, jsonPlayerData);
     }
 
     private void LoadPlayerData()
     {
+        if (playerData == null) return;
+
         if (File.Exists(Application.dataPath + SAVEPLAYER))
         {
             string jsonPlayerData = File.ReadAllText(Application.dataPath + SAVEPLAYER);
-            PlayerData playerData = JsonUtility.FromJson<PlayerData>(jsonPlayerData);
+            PlayerData _playerData = JsonUtility.FromJson<PlayerData>(jsonPlayerData);
           
-            if (playerData.playerController != null)
+            if (_playerData.playerController != null)
             {
-                playerData.playerController.characterMovement.motor.SetPosition(playerData.playerPosition);
-                playerData.playerController.characterMovement.motor.RotateCharacter(playerData.playerRotation);
-                playerData.playerController.cameraController.targetLook = playerData.cameraControllerRotation;
+                _playerData.playerController.characterMovement.motor.SetPosition(_playerData.playerPosition);
+                _playerData.playerController.characterMovement.motor.RotateCharacter(_playerData.playerRotation);
+                _playerData.playerController.cameraController.targetLook = _playerData.cameraControllerRotation;
             }
         }
     }
 
     public void SaveHotbarData(in SaveGameInfos infos)
     {
-        HotbarData hotbarData = new HotbarData();
-
         hotbarData.hotbar = infos.Hotbar;
         hotbarData.slot = infos.Slot;
         hotbarData.itens = infos.Itens;
-
-        string jsonHotbarData = JsonUtility.ToJson(hotbarData);
-        File.WriteAllText(Application.dataPath + SAVEHOTBAR, jsonHotbarData);
     }
 
     private void LoadHotbarData()
     {
+        if (hotbarData == null) return;
+
         if (File.Exists(Application.dataPath + SAVEHOTBAR))
         {
             string jsonHotbarData = File.ReadAllText(Application.dataPath + SAVEHOTBAR);
-            HotbarData hotbarData = JsonUtility.FromJson<HotbarData>(jsonHotbarData);
+            HotbarData _hotbarData = JsonUtility.FromJson<HotbarData>(jsonHotbarData);
 
-            if (hotbarData.hotbar != null)
+            if (_hotbarData.hotbar != null)
             {
-                hotbarData.hotbar.saveSlot = hotbarData.slot;
-                hotbarData.hotbar.itens = hotbarData.itens;
+                _hotbarData.hotbar.saveSlot = _hotbarData.slot;
+                _hotbarData.hotbar.itens = _hotbarData.itens;
+            }
+        }
+    }
+
+    public void SaveDaylightCycleData(in SaveGameInfos infos)
+    {
+        daylightCycleData.daylightCycle = infos.DaylightCycle;
+        daylightCycleData.seconds = infos.Seconds;
+    }
+
+    private void LoadDaylightCycleData()
+    {
+        if (daylightCycleData == null) return;
+
+        if (File.Exists(Application.dataPath + SAVEDAY))
+        {
+            string jsonDaylightCycleData = File.ReadAllText(Application.dataPath+ SAVEDAY);
+            DaylightCycleData _daylightCycleData = JsonUtility.FromJson<DaylightCycleData>(jsonDaylightCycleData);
+
+            if (_daylightCycleData.daylightCycle != null)
+            {
+                _daylightCycleData.daylightCycle.seconds = _daylightCycleData.seconds;
             }
         }
     }

@@ -10,13 +10,16 @@ public class DaylightCycle : MonoBehaviour
     [SerializeField, Tooltip("time in Seconds of the lenght of the day")] float cycleTime;
     [SerializeField] TextMeshProUGUI timeOfTheDay;
 
-    private float seconds;
+    [HideInInspector] public float seconds;
     private float multiplier;
+
+    SaveGame saveGame;
 
     private void Start()
     {
         multiplier = REAL_TIME_DAY_LENGTH / cycleTime;
-        seconds = REAL_TIME_DAY_LENGTH / 2;
+
+        saveGame = SaveGame.instance;
     }
 
     private void Update()
@@ -30,6 +33,15 @@ public class DaylightCycle : MonoBehaviour
 
         CycleChange();
         InterfaceTime();
+
+        if (SaveGame.instance != null)
+        {
+            saveGame.SaveDaylightCycleData(new SaveGameInfos
+            {
+                DaylightCycle = this,
+                Seconds = seconds
+            });
+        }
     }
 
     private void CycleChange()
