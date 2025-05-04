@@ -954,6 +954,7 @@ MonoBehaviour:
   directionalLight: {fileID: 410087041}
   cycleTime: 30
   timeOfTheDay: {fileID: 338390199}
+  seconds: 0
 --- !u!1 &494544100
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,7 +984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5f20e29252e734f939758c36c2360e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delaySaveGame: 30
+  delaySaveGame: 2
 --- !u!4 &494544102
 Transform:
   m_ObjectHideFlags: 0

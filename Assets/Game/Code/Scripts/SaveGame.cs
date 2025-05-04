@@ -23,6 +23,7 @@ public struct SaveGameInfos
 public class SaveGame : MonoBehaviour
 {
     // Nomes dos arquivos que serão salvos as informações
+    const string FINALPATH  = "/Saves";
     const string SAVEPLAYER = "/player_state.txt";
     const string SAVEHOTBAR = "/hotbar_state.txt";
     const string SAVEDAY    = "/day_state.txt";
@@ -38,6 +39,7 @@ public class SaveGame : MonoBehaviour
         public Vector2 cameraControllerRotation;
     }
 
+    // SaveGame da Hotbar em arquivo Json.
     public class HotbarData
     {
         public Hotbar hotbar;
@@ -45,6 +47,7 @@ public class SaveGame : MonoBehaviour
         public GameObject[] itens;
     }
 
+    // SaveGame do DaylightCycle em arquivo Json.
     public class DaylightCycleData
     {
         public DaylightCycle daylightCycle;
@@ -76,6 +79,7 @@ public class SaveGame : MonoBehaviour
     }
     // Finalização do Singleton.
 
+    // Carrega as informações do save nos determinados locais.
     private void Awake()
     {
         // Permite somente uma instância de SaveGame na cêna.
@@ -96,6 +100,7 @@ public class SaveGame : MonoBehaviour
 
     private void Start()
     {
+        // Faz o save de tempos em tempos.
         InvokeRepeating("MakeSaves", delaySaveGame, delaySaveGame);
     }
 
@@ -107,19 +112,19 @@ public class SaveGame : MonoBehaviour
         if (playerData.playerController != null)
         {
             string jsonPlayerData = JsonUtility.ToJson(playerData);
-            File.WriteAllText(Application.dataPath + SAVEPLAYER, jsonPlayerData);
+            File.WriteAllText(Application.dataPath + FINALPATH + SAVEPLAYER, jsonPlayerData);
         }
 
         if (hotbarData.hotbar != null)
         {
             string jsonHotbarData = JsonUtility.ToJson(hotbarData);
-            File.WriteAllText(Application.dataPath + SAVEHOTBAR, jsonHotbarData);
+            File.WriteAllText(Application.dataPath + FINALPATH + SAVEHOTBAR, jsonHotbarData);
         }
 
         if (daylightCycleData.daylightCycle != null)
         {
             string jsonDaylightCycleData = JsonUtility.ToJson(daylightCycleData);
-            File.WriteAllText(Application.dataPath + SAVEDAY, jsonDaylightCycleData);
+            File.WriteAllText(Application.dataPath + FINALPATH + SAVEDAY, jsonDaylightCycleData);
         }
     }
 
@@ -136,9 +141,9 @@ public class SaveGame : MonoBehaviour
     {
         if (playerData == null) return;
 
-        if (File.Exists(Application.dataPath + SAVEPLAYER))
+        if (File.Exists(Application.dataPath + FINALPATH + SAVEPLAYER))
         {
-            string jsonPlayerData = File.ReadAllText(Application.dataPath + SAVEPLAYER);
+            string jsonPlayerData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEPLAYER);
             PlayerData _playerData = JsonUtility.FromJson<PlayerData>(jsonPlayerData);
           
             if (_playerData.playerController != null)
@@ -161,9 +166,9 @@ public class SaveGame : MonoBehaviour
     {
         if (hotbarData == null) return;
 
-        if (File.Exists(Application.dataPath + SAVEHOTBAR))
+        if (File.Exists(Application.dataPath + FINALPATH + SAVEHOTBAR))
         {
-            string jsonHotbarData = File.ReadAllText(Application.dataPath + SAVEHOTBAR);
+            string jsonHotbarData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEHOTBAR);
             HotbarData _hotbarData = JsonUtility.FromJson<HotbarData>(jsonHotbarData);
 
             if (_hotbarData.hotbar != null)
@@ -184,9 +189,9 @@ public class SaveGame : MonoBehaviour
     {
         if (daylightCycleData == null) return;
 
-        if (File.Exists(Application.dataPath + SAVEDAY))
+        if (File.Exists(Application.dataPath + FINALPATH + SAVEDAY))
         {
-            string jsonDaylightCycleData = File.ReadAllText(Application.dataPath+ SAVEDAY);
+            string jsonDaylightCycleData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDAY);
             DaylightCycleData _daylightCycleData = JsonUtility.FromJson<DaylightCycleData>(jsonDaylightCycleData);
 
             if (_daylightCycleData.daylightCycle != null)
