@@ -12,6 +12,14 @@ public class PauseMenuController : MonoBehaviour
     public Canvas pauseCanvas; // Canvas do menu de pausa
     public KeyCode pauseKey = KeyCode.Escape; // Tecla para ativar/desativar o menu
 
+    [SerializeField] Button settingsButton;
+    [SerializeField] Button resumeButton;
+    [SerializeField] Button exitButton;
+
+    [SerializeField] GameObject settingsCanvas;
+    [SerializeField] GameObject resumeCanvas;
+    [SerializeField] GameObject exitCanvas;
+
     private int currentIndex = 0;
     private bool isPaused = false;
 
@@ -20,22 +28,32 @@ public class PauseMenuController : MonoBehaviour
         ArrangeOptions();
         pauseCanvas.enabled = false; // Desativa o menu inicialmente
 
-        //Button sla;
-       // sla.onClick.AddListener(csasa);
-    }
+        resumeButton.onClick.AddListener(DisablePauseCanvas);
 
-    private void csasa(string map)
+        settingsButton.onClick.AddListener(() => SetActive(settingsCanvas, true));
+        exitButton.onClick.AddListener(() => SetActive(exitCanvas, true));
+    }
+    private void DisablePauseCanvas()
     {
+        isPaused = !isPaused;
+        pauseCanvas.enabled = isPaused;
+        Time.timeScale = isPaused ? 0 : 1;
 
+        SetActive(settingsCanvas, false);
+        SetActive(exitCanvas, false);
     }
+
+    private void SetActive(GameObject canvas, bool t)
+    {
+        canvas.SetActive(t);
+    }
+
     void Update()
     {
         // Ativar/Desativar o menu de pausa
         if (Input.GetKeyDown(pauseKey))
         {
-            isPaused = !isPaused;
-            pauseCanvas.enabled = isPaused;
-            Time.timeScale = isPaused ? 0 : 1;
+            DisablePauseCanvas();
         }
 
         if (!isPaused) return;

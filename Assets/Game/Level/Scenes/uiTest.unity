@@ -1117,7 +1117,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: bec60b32678cde841b51d966e8882d01, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -1743,8 +1743,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2907,6 +2907,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810508792}
   m_CullTransparentMesh: 1
+--- !u!1 &812678036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812678038}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &812678038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812678036}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.537841, y: 44.025154, z: -38.842396}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &822552789
 GameObject:
   m_ObjectHideFlags: 0
@@ -3765,19 +3796,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 916515983}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 205556838}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &916515983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4976,7 +4995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1422984066
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5011,7 +5030,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b3bad5ad6a0d3554191381c75a7c6e06, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -5159,19 +5178,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1444723965}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1422984065}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1444723965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5646,7 +5653,7 @@ GameObject:
   - component: {fileID: 1501155987}
   - component: {fileID: 1501155986}
   - component: {fileID: 1501155985}
-  - component: {fileID: 1501155984}
+  - component: {fileID: 1501155989}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -5654,25 +5661,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1501155984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501155983}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8bd0548274191a4dbfa62d661bf0b3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuOptions: []
-  spacing: 0
-  centerScale: 0
-  sideScale: 0
-  lerpSpeed: 0
-  pauseCanvas: {fileID: 1501155987}
-  pauseKey: 27
 --- !u!114 &1501155985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5762,6 +5750,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1501155989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501155983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bd0548274191a4dbfa62d661bf0b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuOptions: []
+  spacing: 800
+  centerScale: 1.5
+  sideScale: 0.7
+  lerpSpeed: 10
+  pauseCanvas: {fileID: 1501155987}
+  pauseKey: 27
+  settingsButton: {fileID: 1444723964}
+  resumeButton: {fileID: 2045439332}
+  exitButton: {fileID: 916515982}
+  settingsCanvas: {fileID: 1422984065}
+  resumeCanvas: {fileID: 1501155983}
+  exitCanvas: {fileID: 205556838}
 --- !u!1 &1508438341
 GameObject:
   m_ObjectHideFlags: 0
@@ -7802,3 +7815,4 @@ SceneRoots:
   - {fileID: 351653180}
   - {fileID: 1501155988}
   - {fileID: 2074358779}
+  - {fileID: 812678038}

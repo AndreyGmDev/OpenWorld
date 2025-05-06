@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class BlinkingTMP : MonoBehaviour
 {
@@ -10,14 +12,23 @@ public class BlinkingTMP : MonoBehaviour
     void Start()
     {
         textMeshPro = GetComponent<TextMeshProUGUI>();
-        InvokeRepeating(nameof(ToggleVisibility), 0f, blinkInterval);
+        StartCoroutine(nameof(ToggleVisibility));
     }
 
-    void ToggleVisibility()
+    IEnumerator ToggleVisibility()
     {
-        isVisible = !isVisible;
         Color currentColor = textMeshPro.color;
-        currentColor.a = isVisible ? 1f : 0f; // 1 = visível, 0 = invisível
-        textMeshPro.color = currentColor;
+
+        while (true)
+        {
+            isVisible = Time.timeScale >= 0.5 ? true : !isVisible; // Enquanto o jogo funcionar não vai ficar piscando.
+            
+            currentColor.a = isVisible ? 1f : 0f; // 1 = visível, 0 = invisível
+            textMeshPro.color = currentColor;
+
+            yield return new WaitForSecondsRealtime(blinkInterval);
+
+            yield return new WaitForNextFrameUnit();
+        }
     }
 }
