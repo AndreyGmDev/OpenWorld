@@ -70,8 +70,19 @@ public class SaveGame : MonoBehaviour
                 // Se não encontrar, cria uma nova GameObject com esse script
                 if (saveGame == null)
                 {
-                    GameObject obj = new GameObject("GameManager");
-                    saveGame = obj.AddComponent<SaveGame>();
+                    // Confere se existe esse GameObject em cena, se houver, adiciona o script nele.
+                    if (GameObject.Find("GameManager"))
+                    {
+                        GameObject obj = GameObject.Find("GameManager");
+                        obj.AddComponent<SaveConfigs>();
+                        print("Adicione o Script SaveGame no GameManager");
+                    }
+                    else
+                    {
+                        GameObject obj = new GameObject("GameManager");
+                        saveGame = obj.AddComponent<SaveGame>();
+                        print("Crie um GameManager e adicione o Script SaveGame no GameManager");
+                    }
                 }
             }
             return saveGame;
@@ -89,6 +100,7 @@ public class SaveGame : MonoBehaviour
         }
         else if (saveGame != this)
         {
+            print("Procure esses objetos e retire o script SaveGame até sobrar apenas um: " + gameObject.name + ", " + saveGame.name);
             Destroy(gameObject);
         }
 

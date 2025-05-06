@@ -20,11 +20,15 @@ public class Slingshot : MonoBehaviour
     [SerializeField] float delayShoots = 0.4f;
 
     private float countDelayShoots;
-    [SerializeField] AudioClip readySFX;
-    [SerializeField] AudioClip shootSFX;
 
     [SerializeField] float holdFinalTime = 1;
     private float holdTime;
+
+    [Header("SFX")]
+    [SerializeField] AudioClip readySFX;
+    [SerializeField] AudioClip shootSFX;
+    private float slingShootVolume = 1f;
+    private float slingReadyVolume = 1f;
 
     private void Awake()
     {
@@ -41,37 +45,7 @@ public class Slingshot : MonoBehaviour
 
     private void Update()
     {
-        if (countDelayShoots <= 0)
-        {
-            if (inputActions.Game.Shoot.IsPressed())
-            {
-                if (holdTime == 0f)
-                {
-                    if (readySFX != null)
-                        SFXManager.instance.PlaySoundFXClip(readySFX, transform, 1f);
-                }
-                if (holdTime < holdFinalTime)
-                {
-                    holdTime += Time.deltaTime;
-                }
-            }
-            if (inputActions.Game.Shoot.WasReleasedThisFrame())
-            {
-                Shoot();
-            }
-        }
-
-        if (countDelayShoots > 0)
-        {
-            countDelayShoots -= Time.deltaTime;
-        }
-
-        if (inputActions.Game.PickUp.WasPressedThisFrame())
-        {
-            PickUpItem();
-        }
-
-        Raycast();
+        TryShoot();
     }
 
     private void Raycast()
@@ -115,11 +89,52 @@ public class Slingshot : MonoBehaviour
         }
     }
 
+    private void TryShoot()
+    {
+        if (countDelayShoots <= 0)
+        {
+            // Impede de atirar se não houver munição.
+            if (currentAmmo < 1) return;
+
+            // Enquanto segura, o tiro é carregado.
+            if (inputActions.Game.Shoot.IsPressed())
+            {
+                if (holdTime < holdFinalTime)
+                {
+                    holdTime += Time.deltaTime;
+                }
+            }
+
+            // Atira quando solta o botão de atirar.
+            if (inputActions.Game.Shoot.WasReleasedThisFrame())
+            {
+                Shoot();
+            }
+
+            // Toca o som de carregar o slingshoot uma unica vez.
+            if (inputActions.Game.Shoot.WasPressedThisFrame())
+            {
+                if (readySFX != null)
+                {
+                    SFXManager.instance.PlaySoundFXClip(readySFX, transform, slingReadyVolume);
+                }
+            }
+        }
+
+        if (countDelayShoots > 0)
+        {
+            countDelayShoots -= Time.deltaTime;
+        }
+
+        if (inputActions.Game.PickUp.WasPressedThisFrame())
+        {
+            PickUpItem();
+        }
+
+        Raycast();
+    }
     private void Shoot()
     {
-        // Confere se ainda há munição na arma.
-        if (currentAmmo < 1) return;
-
         // Seta o delay para poder atirar novamente.
         countDelayShoots = delayShoots;
 
@@ -138,7 +153,9 @@ public class Slingshot : MonoBehaviour
         // Tocar SFX
         SFXManager.instance.Interrupt();
         if (shootSFX != null)
-            SFXManager.instance.PlaySoundFXClip(shootSFX, transform, 1f);
+        {
+            SFXManager.instance.PlaySoundFXClip(shootSFX, transform, slingShootVolume);
+        }
 
         // Diminui uma munição da arma.
         currentAmmo--; 
