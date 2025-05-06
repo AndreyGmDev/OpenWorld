@@ -10,7 +10,7 @@ public class SaveConfigs : MonoBehaviour
 
     private static SaveConfigs saveConfigs;
 
-    public static SaveConfigs instance
+    public static SaveConfigs Instance
     {
         get
         {
