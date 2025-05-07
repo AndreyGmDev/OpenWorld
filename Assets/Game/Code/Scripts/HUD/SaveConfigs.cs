@@ -1,13 +1,27 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.Assertions.Must;
+using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
+
+public struct SaveConfigsInfos
+{
+    // Audio.
+    public float Volume;
+    public float Sfx;
+    public float Music;
+
+    // Video.
+    public int Resolution;
+    public int Quality;
+    public bool Vsync;
+
+    // Controls.
+    public float NormalSensitivity;
+    public float AimSensitivity;
+}
 
 public class SaveConfigs : MonoBehaviour
 {
-    [Range(0,1)] public float volume = 0.5f;
-    [Range(0,1)] public float sfx = 0.3f;
-    [Range(0,1)] public float music = 0.5f;
-
     private static SaveConfigs saveConfigs;
 
     public static SaveConfigs Instance
@@ -56,23 +70,76 @@ public class SaveConfigs : MonoBehaviour
 
     private void Start()
     {
-        Load();
+        
     }
 
-    public void Save()
+    public void Save(in SaveConfigsInfos infos)
     {
         // Audio.
-        PlayerPrefs.SetFloat("volume", volume);
-        PlayerPrefs.SetFloat("sfx", sfx);
-        PlayerPrefs.SetFloat("music", music);
+        PlayerPrefs.SetFloat("volume", infos.Volume);
+        PlayerPrefs.SetFloat("sfx", infos.Sfx);
+        PlayerPrefs.SetFloat("music", infos.Music);
+
+        // Video.
+        PlayerPrefs.SetInt("resolution", infos.Resolution);
+        PlayerPrefs.SetInt("quality", infos.Quality);
+        PlayerPrefs.SetInt("vsync", infos.Vsync ? 1 : 0);
+
+        // Controls.
+        PlayerPrefs.SetFloat("normalSensitivity", infos.NormalSensitivity);
+        PlayerPrefs.SetFloat("aimSensitivity", infos.AimSensitivity);
+
         PlayerPrefs.Save();
     }
 
-    private void Load()
+    public class ConfigsData
     {
         // Audio.
-        PlayerPrefs.GetFloat("volume");
-        PlayerPrefs.GetFloat("sfx");
-        PlayerPrefs.GetFloat("music");
+        public float volume;
+        public float sfx;
+        public float music;
+
+        // Video.
+        public int ddpResolution;
+        public int ddpQuality;
+        public bool vsync;
+
+        // Controls.
+        public float normalSensitivity;
+        public float aimSensitivity;
+    }
+
+    public ConfigsData Load()
+    {
+        ConfigsData configsData = new ConfigsData();
+
+        // Audio.
+        if (PlayerPrefs.HasKey("volume"))
+            configsData.volume = PlayerPrefs.GetFloat("volume");
+
+        if (PlayerPrefs.HasKey("sfx"))
+            configsData.sfx = PlayerPrefs.GetFloat("sfx");
+
+        if (PlayerPrefs.HasKey("music"))
+            configsData.music = PlayerPrefs.GetFloat("music");
+
+        // Video.
+        if (PlayerPrefs.HasKey("resolution"))
+            configsData.ddpResolution = PlayerPrefs.GetInt("resolution");
+
+        if (PlayerPrefs.HasKey("quality"))
+            configsData.ddpQuality = PlayerPrefs.GetInt("quality");
+
+        if (PlayerPrefs.HasKey("vsync"))
+            configsData.vsync = PlayerPrefs.GetFloat("vsync") == 1 ? true : false;
+
+        // Controls.
+        if (PlayerPrefs.HasKey("normalSensitivity"))
+            configsData.normalSensitivity = PlayerPrefs.GetFloat("normalSensitivity");
+
+        if (PlayerPrefs.HasKey("aimSensitivity"))
+            configsData.aimSensitivity = PlayerPrefs.GetFloat("aimSensitivity");
+
+        return configsData;
     }
 }

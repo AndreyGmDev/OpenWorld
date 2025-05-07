@@ -113,7 +113,7 @@ public class SaveGame : MonoBehaviour
     private void Start()
     {
         // Faz o save de tempos em tempos.
-        InvokeRepeating("MakeSaves", delaySaveGame, delaySaveGame);
+        InvokeRepeating(nameof(MakeSaves), delaySaveGame, delaySaveGame);
     }
 
     PlayerData playerData = new PlayerData();

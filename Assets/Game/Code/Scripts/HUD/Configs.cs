@@ -19,26 +19,26 @@ public class Configs : MonoBehaviour
     [SerializeField] Dropdown ddpResolution;
     [SerializeField] Dropdown ddpQuality;
     [SerializeField] bool vsync;
-    [SerializeField] Toggle fullScreen;
 
     private List<string> resolutions = new List<string>();
     private List<string> quality = new List<string>();
 
     [Header("Controls Settings")]
-    [SerializeField] float normalSensitivity;
-    [SerializeField] float aimSensitivity;
+    [SerializeField] Slider normalSensitivity;
+    [SerializeField] Slider aimSensitivity;
 
     private SaveConfigs saveConfigs;
     private MixerManager mixerManager;
 
     private void Start()
     {
+        // Carrega os managers.
         saveConfigs = SaveConfigs.Instance;
         mixerManager = MixerManager.Instance;
-        
+
         if (save != null)
         {
-            save.onClick.AddListener(saveConfigs.Save);
+            save.onClick.AddListener(Save);
             save.onClick.AddListener(() => gameObject.SetActive(false));
         }
 
@@ -64,7 +64,6 @@ public class Configs : MonoBehaviour
 
         // Adiciona toas as opções possiveis na interface.
         ddpResolution.AddOptions(resolutions);
-        ddpResolution.value = 0;
 
         // Qualidade.
         /*quality = QualitySettings.names.ToList();
@@ -72,13 +71,8 @@ public class Configs : MonoBehaviour
         ddpQuality.AddOptions(quality);
         ddpQuality.value = QualitySettings.GetQualityLevel();*/
 
-        /*var teste = Screen.resolutions.ToList();*/
-
-    }
-
-    private void Update()
-    {
-        
+        // Carrega o save.
+        Load();
     }
 
     private void ChangeResolution()
@@ -88,5 +82,48 @@ public class Configs : MonoBehaviour
         int h = Convert.ToInt32(currentResolution[0].Trim());
         Screen.SetResolution(w, h, true);
     }
+    private void Update()
+    {
+    }
+    // Chama o código de Save no SaveConfigs e passa as variáveis.
+    private void Save()
+    {
+        saveConfigs.Save(new SaveConfigsInfos
+        {
+            // Audio.
+            Volume = volumeSlider.value,
+            Sfx = sfxSlider.value,
+            Music = musicSlider.value,
 
+            // Video.
+            Resolution = ddpResolution.value,
+            Quality = ddpQuality.value,
+            Vsync = vsync,
+
+            // Controls.
+            NormalSensitivity = normalSensitivity.value,
+            AimSensitivity = aimSensitivity.value,
+        });
+    }
+
+    // Carrega o Load.
+    private void Load()
+    {
+        ConfigsData configsData = new ConfigsData();
+        configsData = saveConfigs.Load();
+
+        // Audio.
+        volumeSlider.value = configsData.volume;
+        sfxSlider.value = configsData.sfx;
+        musicSlider.value = configsData.music;
+
+        // Video.
+        ddpResolution.value = configsData.ddpResolution;
+        ddpQuality.value = configsData.ddpQuality;
+        vsync = configsData.vsync;
+
+        // Controls.
+        normalSensitivity.value = configsData.normalSensitivity;
+        aimSensitivity.value = configsData.aimSensitivity;
+    }
 }
