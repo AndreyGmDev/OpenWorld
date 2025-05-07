@@ -16,8 +16,8 @@ public class CameraController : MonoBehaviour
 
     [Header("RotationCamera")]
     [SerializeField] Vector2 XRotationRange = new Vector2(-50, 50); // Limite de rotação no eixo x (vertical).
-    [SerializeField, Range(0.1f,5)] float normalSensitivity;
-    [SerializeField, Range(0.1f,5)] float aimSensitivity;
+    [Range(0.1f,5)] static float normalSensitivity;
+    [Range(0.1f,5)] static float aimSensitivity;
     private float sensitivity = 1; 
 
     [Header("Orientation")]
@@ -74,5 +74,15 @@ public class CameraController : MonoBehaviour
             playerAimCamera.gameObject.SetActive(false);
         }
         
+    }
+
+    public static void SetNormalSensitivity(float value)
+    {
+        normalSensitivity = value;
+    }
+
+    public static void SetAimSensitivity(float value)
+    {
+        aimSensitivity = value;
     }
 }

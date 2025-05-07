@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using static SaveConfigs;
 
 public class Configs : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class Configs : MonoBehaviour
     [Header("Video Settings")]
     [SerializeField] Dropdown ddpResolution;
     [SerializeField] Dropdown ddpQuality;
-    [SerializeField] bool vsync;
+    [SerializeField] Toggle vsync;
 
     private List<string> resolutions = new List<string>();
     private List<string> quality = new List<string>();
@@ -31,31 +30,15 @@ public class Configs : MonoBehaviour
     private SaveConfigs saveConfigs;
     private MixerManager mixerManager;
 
-    private void Start()
+    private void Awake()
     {
         // Carrega os managers.
         saveConfigs = SaveConfigs.Instance;
         mixerManager = MixerManager.Instance;
 
-        if (save != null)
-        {
-            save.onClick.AddListener(Save);
-            save.onClick.AddListener(() => gameObject.SetActive(false));
-        }
-
-        if (back != null)
-        {
-            back.onClick.AddListener(() => gameObject.SetActive(false));
-        }
-
-        // Audio.
-        volumeSlider.onValueChanged.AddListener(mixerManager.SetMasterVolume);
-        sfxSlider.onValueChanged.AddListener(mixerManager.SetSFXVolume);
-        musicSlider.onValueChanged.AddListener(mixerManager.SetMusicVolume);
-
         // Configs resolution.
         Resolution[] allResolutions = Screen.resolutions; // Cria um array com todas as resoluções.
-        allResolutions = allResolutions.OrderByDescending(x  => x.width).ToArray(); // Inverte a ordem da lista.
+        allResolutions = allResolutions.OrderByDescending(x => x.width).ToArray(); // Inverte a ordem da lista.
 
         // Formata e adiciona todas as resoluções na lista.
         foreach (var resolution in allResolutions)
@@ -67,25 +50,74 @@ public class Configs : MonoBehaviour
         ddpResolution.AddOptions(resolutions);
 
         // Qualidade.
-        /*quality = QualitySettings.names.ToList();
+        quality = QualitySettings.names.ToList();
         quality = quality.OrderByDescending(x => x).ToList();
         ddpQuality.AddOptions(quality);
-        ddpQuality.value = QualitySettings.GetQualityLevel();*/
+        ddpQuality.value = QualitySettings.GetQualityLevel();
 
         // Carrega o save.
         Load();
+
+        ChangeVideoSettings();
     }
 
-    private void ChangeResolution()
+    private void Start()
     {
+        if (save != null)
+        {
+            save.onClick.AddListener(Save);
+            save.onClick.AddListener(ChangeVideoSettings);
+            save.onClick.AddListener(() => gameObject.SetActive(false));
+        }
+
+        if (back != null)
+        {
+            back.onClick.AddListener(() => gameObject.SetActive(false));
+        }
+
+        // Audio.
+        if (volumeSlider != null)
+        {
+            volumeSlider.onValueChanged.AddListener(mixerManager.SetMasterVolume);
+        }
+        
+        if (sfxSlider != null)
+        {
+            sfxSlider.onValueChanged.AddListener(mixerManager.SetSFXVolume);
+        }
+        
+        if (musicSlider != null)
+        {
+            musicSlider.onValueChanged.AddListener(mixerManager.SetMusicVolume);
+        }
+
+        if (normalSensitivity != null)
+        {
+            normalSensitivity.onValueChanged.AddListener(CameraController.SetNormalSensitivity);
+        }
+
+        if (aimSensitivity != null)
+        {
+            aimSensitivity.onValueChanged.AddListener(CameraController.SetAimSensitivity);
+        }
+    }
+
+    private void ChangeVideoSettings()
+    {
+        // Resolution.
         string[] currentResolution = resolutions[ddpResolution.value].Split("X");
         int w = Convert.ToInt32(currentResolution[0].Trim());
         int h = Convert.ToInt32(currentResolution[0].Trim());
         Screen.SetResolution(w, h, true);
+
+        // Vsync
+        QualitySettings.vSyncCount = vsync.isOn ? 2 : 0;
+        
+        // FPS
+        //Application.targetFrameRate = 60;
     }
-    private void Update()
-    {
-    }
+
+    
     // Chama o código de Save no SaveConfigs e passa as variáveis.
     private void Save()
     {
@@ -99,7 +131,7 @@ public class Configs : MonoBehaviour
             // Video.
             Resolution = ddpResolution.value,
             Quality = ddpQuality.value,
-            Vsync = vsync,
+            Vsync = vsync.isOn,
 
             // Controls.
             NormalSensitivity = normalSensitivity.value,
@@ -121,7 +153,7 @@ public class Configs : MonoBehaviour
         // Video.
         ddpResolution.value = configsData.ddpResolution;
         ddpQuality.value = configsData.ddpQuality;
-        vsync = configsData.vsync;
+        vsync.isOn = configsData.vsync;
 
         // Controls.
         normalSensitivity.value = configsData.normalSensitivity;

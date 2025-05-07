@@ -20,6 +20,23 @@ public struct SaveConfigsInfos
     public float AimSensitivity;
 }
 
+public class ConfigsData
+{
+    // Audio.
+    public float volume;
+    public float sfx;
+    public float music;
+
+    // Video.
+    public int ddpResolution;
+    public int ddpQuality;
+    public bool vsync;
+
+    // Controls.
+    public float normalSensitivity;
+    public float aimSensitivity;
+}
+
 public class SaveConfigs : MonoBehaviour
 {
     private static SaveConfigs saveConfigs;
@@ -68,11 +85,6 @@ public class SaveConfigs : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void Save(in SaveConfigsInfos infos)
     {
         // Audio.
@@ -90,23 +102,6 @@ public class SaveConfigs : MonoBehaviour
         PlayerPrefs.SetFloat("aimSensitivity", infos.AimSensitivity);
 
         PlayerPrefs.Save();
-    }
-
-    public class ConfigsData
-    {
-        // Audio.
-        public float volume;
-        public float sfx;
-        public float music;
-
-        // Video.
-        public int ddpResolution;
-        public int ddpQuality;
-        public bool vsync;
-
-        // Controls.
-        public float normalSensitivity;
-        public float aimSensitivity;
     }
 
     public ConfigsData Load()
@@ -131,7 +126,7 @@ public class SaveConfigs : MonoBehaviour
             configsData.ddpQuality = PlayerPrefs.GetInt("quality");
 
         if (PlayerPrefs.HasKey("vsync"))
-            configsData.vsync = PlayerPrefs.GetFloat("vsync") == 1 ? true : false;
+            configsData.vsync = PlayerPrefs.GetInt("vsync") == 1 ? true : false;
 
         // Controls.
         if (PlayerPrefs.HasKey("normalSensitivity"))
