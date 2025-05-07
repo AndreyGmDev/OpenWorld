@@ -7820,10 +7820,8 @@ MonoBehaviour:
   ddpResolution: {fileID: 1927865830}
   ddpQuality: {fileID: 1845884494}
   vsync: 0
-  fullScreen: {fileID: 0}
-  normalSensitivity: 0
-  aimSensitivity: 0
-  audioClip: {fileID: 8300000, guid: c75678c18312f2b4780bb02323f526c6, type: 3}
+  normalSensitivity: {fileID: 1801149742}
+  aimSensitivity: {fileID: 896400242}
 --- !u!1 &1444723959
 GameObject:
   m_ObjectHideFlags: 0
