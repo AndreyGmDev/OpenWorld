@@ -1,5 +1,4 @@
 using System.IO;
-using UnityEditor.Playables;
 using UnityEngine;
 
 public struct SaveGameInfos
@@ -119,7 +118,7 @@ public class SaveGame : MonoBehaviour
     PlayerData playerData = new PlayerData();
     HotbarData hotbarData = new HotbarData();
     DaylightCycleData daylightCycleData = new DaylightCycleData();
-    private void MakeSaves()
+    public void MakeSaves()
     {
         if (playerData.playerController != null)
         {

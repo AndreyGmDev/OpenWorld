@@ -4,18 +4,23 @@ using System.Collections.Generic;
 
 public class PauseMenuController : MonoBehaviour
 {
-    public List<RectTransform> menuOptions; // Referência às opções do menu
-    public float spacing = 800f; // Espaço entre as opções (ajustado para deixar fora da tela)
-    public float centerScale = 1.5f; // Escala para a opção central
-    public float sideScale = 0.7f; // Escala para opções laterais
-    public float lerpSpeed = 10f; // Velocidade de animação
-    public Canvas pauseCanvas; // Canvas do menu de pausa
-    public KeyCode pauseKey = KeyCode.Escape; // Tecla para ativar/desativar o menu
+    [Header("Components")]
+    [SerializeField] List<RectTransform> menuOptions; // Referência às opções do menu
+    [SerializeField] Canvas pauseCanvas; // Canvas do menu de pausa.
 
+    [Header("Infos")]
+    [SerializeField] float spacing = 800f; // Espaço entre as opções (ajustado para deixar fora da tela)
+    [SerializeField] float centerScale = 1.5f; // Escala para a opção central
+    [SerializeField] float sideScale = 0.7f; // Escala para opções laterais
+    [SerializeField] float lerpSpeed = 10f; // Velocidade de animação
+
+    [Header("Buttons")]
     [SerializeField] Button settingsButton;
     [SerializeField] Button resumeButton;
+    [SerializeField] Button saveButton;
     [SerializeField] Button exitButton;
 
+    [Header("Canvas")]
     [SerializeField] GameObject settingsCanvas;
     [SerializeField] GameObject resumeCanvas;
     [SerializeField] GameObject exitCanvas;
@@ -23,14 +28,18 @@ public class PauseMenuController : MonoBehaviour
     private int currentIndex = 0;
     private bool isPaused = false;
 
+    InputSystem_Actions inputActions;
     void Start()
     {
+        inputActions = new InputSystem_Actions();
+        inputActions.Enable();
         ArrangeOptions();
         pauseCanvas.enabled = false; // Desativa o menu inicialmente
 
         resumeButton.onClick.AddListener(DisablePauseCanvas);
 
         settingsButton.onClick.AddListener(() => SetActive(settingsCanvas, true));
+        saveButton.onClick.AddListener(SaveGame.instance.MakeSaves);
         exitButton.onClick.AddListener(() => SetActive(exitCanvas, true));
     }
     private void DisablePauseCanvas()
@@ -51,7 +60,7 @@ public class PauseMenuController : MonoBehaviour
     void Update()
     {
         // Ativar/Desativar o menu de pausa
-        if (Input.GetKeyDown(pauseKey))
+        if (inputActions.UI.Pause.WasPressedThisFrame())
         {
             DisablePauseCanvas();
         }
