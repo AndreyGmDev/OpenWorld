@@ -16,8 +16,8 @@ public class CameraController : MonoBehaviour
 
     [Header("RotationCamera")]
     [SerializeField] Vector2 XRotationRange = new Vector2(-50, 50); // Limite de rotação no eixo x (vertical).
-    [Range(0.1f,5)] static float normalSensitivity;
-    [Range(0.1f,5)] static float aimSensitivity;
+    [Range(0.1f,5)] static float normalSensitivity = 2f;
+    [Range(0.1f,5)] static float aimSensitivity = 0.5f;
     private float sensitivity = 1; 
 
     [Header("Orientation")]

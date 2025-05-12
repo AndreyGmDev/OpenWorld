@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -28,11 +29,11 @@ public class PauseMenuController : MonoBehaviour
     private int currentIndex = 0;
     private bool isPaused = false;
 
-    InputSystem_Actions inputActions;
+    InputActionsManager input;
     void Start()
     {
-        inputActions = new InputSystem_Actions();
-        inputActions.Enable();
+        input = InputActionsManager.Instance;
+
         ArrangeOptions();
         pauseCanvas.enabled = false; // Desativa o menu inicialmente
 
@@ -47,6 +48,12 @@ public class PauseMenuController : MonoBehaviour
         isPaused = !isPaused;
         pauseCanvas.enabled = isPaused;
         Time.timeScale = isPaused ? 0 : 1;
+        Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+
+        if (isPaused)
+            input.inputActions.Game.Disable();
+        else
+            input.inputActions.Game.Enable();
 
         SetActive(settingsCanvas, false);
         SetActive(exitCanvas, false);
@@ -60,7 +67,7 @@ public class PauseMenuController : MonoBehaviour
     void Update()
     {
         // Ativar/Desativar o menu de pausa
-        if (inputActions.UI.Pause.WasPressedThisFrame())
+        if (input.inputActions.UI.Pause.WasPressedThisFrame())
         {
             DisablePauseCanvas();
         }

@@ -1,7 +1,5 @@
 using System;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-using UnityEngine.Splines;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,15 +7,14 @@ public class PlayerController : MonoBehaviour
     public CameraController cameraController;
     public Hotbar hotbar;
     private SaveGame saveGame;
-    private bool mouseLeftClickInThisFrame;
-    private bool mouseRightClickInThisFrame;
-    private InputSystem_Actions inputActions;
+    private InputActionsManager input;
+
+    //private InputSystem_Actions inputActions;
     Vector2 moveInput = Vector2.zero;
     private void Awake()
     {
         // Inicializando o NewInputSystem.
-        inputActions = new InputSystem_Actions();
-        inputActions.Enable();
+        input = InputActionsManager.Instance;
 
         // Carregar as informações do SaveGame.
         saveGame = SaveGame.instance;
@@ -36,9 +33,9 @@ public class PlayerController : MonoBehaviour
     {
         // Passar informações para CharacterMovement.
 
-        moveInput = inputActions.Game.Move.ReadValue<Vector2>();
-        bool wantsToJump = inputActions.Game.Jump.WasPressedThisFrame();
-        bool wantsToCrouch = inputActions.Game.Crouch.IsPressed();
+        moveInput = input.inputActions.Game.Move.ReadValue<Vector2>();
+        bool wantsToJump = input.inputActions.Game.Jump.WasPressedThisFrame();
+        bool wantsToCrouch = input.inputActions.Game.Crouch.IsPressed();
 
         characterMovement.SetInput(new CharacterMovementInput()
         {
@@ -54,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
         // Passar informações para câmera.
 
-        Vector2 look = inputActions.Game.Look.ReadValue<Vector2>();
+        Vector2 look = input.inputActions.Game.Look.ReadValue<Vector2>();
 
         cameraController.IncrementLookRotation(new Vector2(look.y, look.x));
 
@@ -63,8 +60,8 @@ public class PlayerController : MonoBehaviour
 
     private void AllowIncrementZoomCamera()
     {
-        bool mouseRightClick = inputActions.Game.Aiming.IsPressed();
-        bool mouseLeftClick = inputActions.Game.Shoot.IsPressed();
+        bool mouseRightClick = input.inputActions.Game.Aiming.IsPressed();
+        bool mouseLeftClick = input.inputActions.Game.Shoot.IsPressed();
         int slot = Convert.ToInt32(hotbar.saveSlot - 1);
         slot = Mathf.Clamp(slot, 0, hotbar.itens.Length);
 
