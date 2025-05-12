@@ -4,6 +4,10 @@ public class UIRotate : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 100f; // Velocidade de rotação em graus por segundo
 
+    void Start()
+    {
+        Cursor.visible = true;
+    }
     void Update()
     {
         // Calcula o ângulo de rotação baseado no tempo e velocidade
