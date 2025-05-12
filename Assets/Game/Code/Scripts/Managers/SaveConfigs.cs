@@ -11,6 +11,7 @@ public struct SaveConfigsInfos
     public int Resolution;
     public int Quality;
     public bool Vsync;
+    public bool ShowFPS;
 
     // Controls.
     public float NormalSensitivity;
@@ -28,6 +29,7 @@ public class ConfigsData
     public int ddpResolution;
     public int ddpQuality;
     public bool vsync;
+    public bool showFPS;
 
     // Controls.
     public float normalSensitivity;
@@ -93,6 +95,7 @@ public class SaveConfigs : MonoBehaviour
         PlayerPrefs.SetInt("resolution", infos.Resolution);
         PlayerPrefs.SetInt("quality", infos.Quality);
         PlayerPrefs.SetInt("vsync", infos.Vsync ? 1 : 0);
+        PlayerPrefs.SetInt("showFPS", infos.ShowFPS ? 1 : 0);
 
         // Controls.
         PlayerPrefs.SetFloat("normalSensitivity", infos.NormalSensitivity);
@@ -124,6 +127,9 @@ public class SaveConfigs : MonoBehaviour
 
         if (PlayerPrefs.HasKey("vsync"))
             configsData.vsync = PlayerPrefs.GetInt("vsync") == 1 ? true : false;
+
+        if (PlayerPrefs.HasKey("showFPS"))
+            configsData.showFPS = PlayerPrefs.GetInt("showFPS") == 1 ? true : false;
 
         // Controls.
         if (PlayerPrefs.HasKey("normalSensitivity"))

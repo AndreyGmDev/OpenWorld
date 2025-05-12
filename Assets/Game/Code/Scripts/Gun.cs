@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class Gun : MonoBehaviour
 {
-    InputSystem_Actions inputActions;
-
     [Header("Vectors")]
     [SerializeField] Transform directionShoot;
     [SerializeField] Transform visualTest;
@@ -23,12 +22,13 @@ public class Gun : MonoBehaviour
     private bool isReloading;
     private float countDelayShoots;
 
+    InputActionsManager input;
+
     private enum Mode { pressToShoot, canHoldToShoot, needHoldToShoot }
     private void Awake()
     {
         // Inicializando o NewInputSystem.
-        inputActions = new InputSystem_Actions();
-        inputActions.Enable();
+        input = InputActionsManager.Instance;
     }
 
     private void Start()
@@ -41,13 +41,13 @@ public class Gun : MonoBehaviour
         switch (mode)
         {
             case Mode.pressToShoot:
-                if (inputActions.Game.Shoot.WasPressedThisFrame() && countDelayShoots <= 0 && !isReloading)
+                if (input.inputActions.Game.Shoot.WasPressedThisFrame() && countDelayShoots <= 0 && !isReloading)
                 {
                     Shoot();
                 }
                 break;
             case Mode.canHoldToShoot:
-                if (inputActions.Game.Shoot.IsPressed() && countDelayShoots <= 0 && !isReloading)
+                if (input.inputActions.Game.Shoot.IsPressed() && countDelayShoots <= 0 && !isReloading)
                 {
                     Shoot();
                 }
@@ -61,7 +61,7 @@ public class Gun : MonoBehaviour
             countDelayShoots -= Time.deltaTime;
         }
 
-        if (inputActions.Game.Reload.WasPressedThisFrame() && !isReloading)
+        if (input.inputActions.Game.Reload.WasPressedThisFrame() && !isReloading)
         {
             StartCoroutine("Reload");
         }
@@ -84,7 +84,7 @@ public class Gun : MonoBehaviour
 
         //SFX
         if (shootSFX != null)
-            SFXManager.instance.PlaySoundFXClip(shootSFX, transform, 1f);
+            SFXManager.Instance.PlaySoundFXClip(shootSFX, transform, 1f);
 
         // Calcula a trajetoria do tiro.
         RaycastHit hit;
@@ -118,7 +118,7 @@ public class Gun : MonoBehaviour
         isReloading = true;
 
         if (reloadSFX != null)
-            SFXManager.instance.PlaySoundFXClip(reloadSFX, transform, 1f);
+            SFXManager.Instance.PlaySoundFXClip(reloadSFX, transform, 1f);
 
         yield return new WaitForSeconds(reloadTime);
 

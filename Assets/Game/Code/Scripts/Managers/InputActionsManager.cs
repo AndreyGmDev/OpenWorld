@@ -24,7 +24,7 @@ public class InputActionsManager : MonoBehaviour
                     if (GameObject.Find("GameManager"))
                     {
                         GameObject obj = GameObject.Find("GameManager");
-                        obj.AddComponent<MixerManager>();
+                        obj.AddComponent<InputActionsManager>();
                         print("Adicione o Script InputActionManager no GameManager");
                     }
                     else

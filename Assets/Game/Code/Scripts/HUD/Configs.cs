@@ -21,6 +21,8 @@ public class Configs : MonoBehaviour
     private int ddpResolutionRealValue; // Valor da resolução real. Só é alterado quando o botão Apply/Save for pressionado.
     [SerializeField] Dropdown ddpQuality; // Valor da qualidade selecionada.
     [SerializeField] Toggle vsync; // bool para o vsync ativo.
+    [SerializeField] Toggle showFPS; // bool para o Show FPS ativo.
+    [SerializeField] TextMeshProUGUI fps; // Onde mostra o FPS.
 
     private List<string> resolutions = new List<string>(); // Lista com todas as resoluções possiveis a serem selecionadas.
     private List<string> quality = new List<string>(); // Lista com todas as qualidades possiveis a serem selecionadas.
@@ -29,10 +31,10 @@ public class Configs : MonoBehaviour
     [SerializeField] Slider normalSensitivity; // Sensibilidade do player sem mirar.
     [SerializeField] Slider aimSensitivity; // Sensibilidade do player mirarando.
 
+    // Managers
     private SaveConfigs saveConfigs; // Manager do SaveConfigs.
     private MixerManager mixerManager; // Manager do Mixer.
 
-    public TextMeshProUGUI fps;
 
     private void Awake()
     {
@@ -50,8 +52,7 @@ public class Configs : MonoBehaviour
             resolutions.Add(string.Format("{0} X {1}", resolution.width, resolution.height));
         }
 
-        // Adiciona toas as opções possiveis na interface.
-        ddpResolution.AddOptions(resolutions);
+        ddpResolution.AddOptions(resolutions); // Adiciona toas as opções possiveis na interface.
 
         // Qualidade.
         quality = QualitySettings.names.ToList();
@@ -62,7 +63,13 @@ public class Configs : MonoBehaviour
         // Carrega o save.
         Load();
 
+        // Carrega o video settings.
         ChangeVideoSettings();
+
+        if (fps != null)
+        {
+            fps.enabled = showFPS.isOn;
+        }
     }
 
     private void Start()
@@ -70,7 +77,7 @@ public class Configs : MonoBehaviour
         if (save != null)
         {
             save.onClick.AddListener(ChangeVideoSettings);
-            save.onClick.AddListener(() => Save(0));
+            save.onClick.AddListener(Save);
             save.onClick.AddListener(() => gameObject.SetActive(false));
         }
 
@@ -83,39 +90,43 @@ public class Configs : MonoBehaviour
         if (volumeSlider != null)
         {
             volumeSlider.onValueChanged.AddListener(mixerManager.SetMasterVolume);
-            volumeSlider.onValueChanged.AddListener(Save);
+            volumeSlider.onValueChanged.AddListener((_) => Save());
         }
         
         if (sfxSlider != null)
         {
             sfxSlider.onValueChanged.AddListener(mixerManager.SetSFXVolume);
-            sfxSlider.onValueChanged.AddListener(Save);
+            sfxSlider.onValueChanged.AddListener((_) => Save());
         }
         
         if (musicSlider != null)
         {
             musicSlider.onValueChanged.AddListener(mixerManager.SetMusicVolume);
-            musicSlider.onValueChanged.AddListener(Save);
+            musicSlider.onValueChanged.AddListener((_) => Save());
         }
 
+        // Video.
+        if (showFPS != null)
+        {
+            if (fps != null)
+            {
+                showFPS.onValueChanged.AddListener((_) => fps.enabled = showFPS.isOn);
+            }
+            showFPS.onValueChanged.AddListener((_) => Save());
+        }
+
+        // Controls.
         if (normalSensitivity != null)
         {
             normalSensitivity.onValueChanged.AddListener(CameraController.SetNormalSensitivity);
-            normalSensitivity.onValueChanged.AddListener(Save);
+            normalSensitivity.onValueChanged.AddListener((_) => Save());
         }
 
         if (aimSensitivity != null)
         {
             aimSensitivity.onValueChanged.AddListener(CameraController.SetAimSensitivity);
-            aimSensitivity.onValueChanged.AddListener(Save);
-        }
-
-        //InvokeRepeating(nameof(ShowFps), 0f, 0.2f);
-    }
-
-    private void ShowFps()
-    {
-        //fps.text = Mathf.Floor(1 / Time.deltaTime).ToString() + " FPS";
+            aimSensitivity.onValueChanged.AddListener((_) => Save());
+        } 
     }
 
     private void ChangeVideoSettings()
@@ -130,14 +141,13 @@ public class Configs : MonoBehaviour
 
         // Vsync
         QualitySettings.vSyncCount = vsync.isOn ? 1 : 0;
-        
-        // FPS
+       
         //Application.targetFrameRate = 9;
     }
 
     
     // Chama o código de Save no SaveConfigs e passa as variáveis.
-    private void Save(float doNothing)
+    private void Save()
     {
         saveConfigs.Save(new SaveConfigsInfos
         {
@@ -150,6 +160,7 @@ public class Configs : MonoBehaviour
             Resolution = ddpResolutionRealValue,
             Quality = ddpQuality.value,
             Vsync = vsync.isOn,
+            ShowFPS = showFPS.isOn,
 
             // Controls.
             NormalSensitivity = normalSensitivity.value,
@@ -160,8 +171,7 @@ public class Configs : MonoBehaviour
     // Carrega o Load.
     private void Load()
     {
-        ConfigsData configsData = new ConfigsData();
-        configsData = saveConfigs.Load();
+        ConfigsData configsData = saveConfigs.Load();
 
         // Audio.
         volumeSlider.value = configsData.volume;
@@ -172,6 +182,7 @@ public class Configs : MonoBehaviour
         ddpResolution.value = configsData.ddpResolution;
         ddpQuality.value = configsData.ddpQuality;
         vsync.isOn = configsData.vsync;
+        showFPS.isOn = configsData.showFPS;
 
         // Controls.
         normalSensitivity.value = configsData.normalSensitivity;

@@ -47,6 +47,7 @@ public class MixerManager : MonoBehaviour
             print("Procure esses objetos e retire o script MixerManager até sobrar apenas um: " + gameObject.name + ", " + mixerManager.name);
             Destroy(gameObject);
         }
+
     }
 
     [SerializeField] private AudioMixer audioMixer;

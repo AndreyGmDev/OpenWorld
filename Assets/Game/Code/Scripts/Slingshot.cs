@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Slingshot : MonoBehaviour
 {
-    InputSystem_Actions inputActions;
-
     [Header("References")]
     [SerializeField] GameObject stone;
 
@@ -30,11 +28,12 @@ public class Slingshot : MonoBehaviour
     private float slingShootVolume = 1f;
     private float slingReadyVolume = 1f;
 
+    InputActionsManager input;
+
     private void Awake()
     {
         // Inicializando o NewInputSystem.
-        inputActions = new InputSystem_Actions();
-        inputActions.Enable();
+        input = InputActionsManager.Instance;
     }
 
     private void OnEnable()
@@ -97,7 +96,7 @@ public class Slingshot : MonoBehaviour
             if (currentAmmo < 1) return;
 
             // Enquanto segura, o tiro é carregado.
-            if (inputActions.Game.Shoot.IsPressed())
+            if (input.inputActions.Game.Shoot.IsPressed())
             {
                 if (holdTime < holdFinalTime)
                 {
@@ -106,17 +105,17 @@ public class Slingshot : MonoBehaviour
             }
 
             // Atira quando solta o botão de atirar.
-            if (inputActions.Game.Shoot.WasReleasedThisFrame())
+            if (input.inputActions.Game.Shoot.WasReleasedThisFrame())
             {
                 Shoot();
             }
 
             // Toca o som de carregar o slingshoot uma unica vez.
-            if (inputActions.Game.Shoot.WasPressedThisFrame())
+            if (input.inputActions.Game.Shoot.WasPressedThisFrame())
             {
                 if (readySFX != null)
                 {
-                    SFXManager.instance.PlaySoundFXClip(readySFX, transform, slingReadyVolume);
+                    SFXManager.Instance.PlaySoundFXClip(readySFX, transform, slingReadyVolume);
                 }
             }
         }
@@ -126,7 +125,7 @@ public class Slingshot : MonoBehaviour
             countDelayShoots -= Time.deltaTime;
         }
 
-        if (inputActions.Game.PickUp.WasPressedThisFrame())
+        if (input.inputActions.Game.PickUp.WasPressedThisFrame())
         {
             PickUpItem();
         }
@@ -151,10 +150,10 @@ public class Slingshot : MonoBehaviour
         spawnedStone.GetComponent<SlingshotProject>().directionShoot = (mouseDirection - spawnTransform.position).normalized * currentForce;
 
         // Tocar SFX
-        SFXManager.instance.Interrupt();
+        SFXManager.Instance.Interrupt();
         if (shootSFX != null)
         {
-            SFXManager.instance.PlaySoundFXClip(shootSFX, transform, slingShootVolume);
+            SFXManager.Instance.PlaySoundFXClip(shootSFX, transform, slingShootVolume);
         }
 
         // Diminui uma munição da arma.
