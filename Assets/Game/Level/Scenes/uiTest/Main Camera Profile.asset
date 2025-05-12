@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.077
 --- !u!114 &-4105130526296394228
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -34,10 +34,10 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 2.88
+    m_Value: 1.19
   intensity:
     m_OverrideState: 1
-    m_Value: 114.35
+    m_Value: 8.37
   scatter:
     m_OverrideState: 1
     m_Value: 0.731
@@ -94,13 +94,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
-    m_Value: -0.22
+    m_Value: -0.27
   xMultiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.273
   yMultiplier:
     m_OverrideState: 1
     m_Value: 1
@@ -131,7 +131,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.361
+    m_Value: 0.354
   smoothness:
     m_OverrideState: 1
     m_Value: 0.423

@@ -1,1 +1,1 @@
-{"playerController":{"instanceID":-62942},"playerPosition":{"x":200.9833221435547,"y":20.734634399414064,"z":206.85096740722657},"playerRotation":{"x":0.0,"y":0.5350760817527771,"z":0.0,"w":-0.8448038697242737},"cameraControllerRotation":{"x":47.49998474121094,"y":109.89989471435547}}
+{"playerController":{"instanceID":-254584},"playerPosition":{"x":216.8000030517578,"y":11.845656394958496,"z":164.6999969482422},"playerRotation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},"cameraControllerRotation":{"x":0.0,"y":0.0}}
