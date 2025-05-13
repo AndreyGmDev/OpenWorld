@@ -19,7 +19,7 @@ public class DaylightCycle : MonoBehaviour
     {
         multiplier = REAL_TIME_DAY_LENGTH / cycleTime;
 
-        saveGame = SaveGame.instance;
+        saveGame = SaveGame.Instance;
     }
 
     private void Update()
@@ -34,7 +34,7 @@ public class DaylightCycle : MonoBehaviour
         CycleChange();
         InterfaceTime();
 
-        if (SaveGame.instance != null)
+        if (SaveGame.Instance != null)
         {
             saveGame.SaveDaylightCycleData(new SaveGameInfos
             {

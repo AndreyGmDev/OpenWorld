@@ -56,7 +56,7 @@ public class SaveGame : MonoBehaviour
     // Inicia o Singleton do SaveSame.
     private static SaveGame saveGame;
 
-    public static SaveGame instance
+    public static SaveGame Instance
     {
         get
         {

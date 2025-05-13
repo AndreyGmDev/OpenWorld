@@ -40,7 +40,7 @@ public class PauseMenuController : MonoBehaviour
         resumeButton.onClick.AddListener(DisablePauseCanvas);
 
         settingsButton.onClick.AddListener(() => SetActive(settingsCanvas, true));
-        saveButton.onClick.AddListener(SaveGame.instance.MakeSaves);
+        saveButton.onClick.AddListener(SaveGame.Instance.MakeSaves);
         exitButton.onClick.AddListener(() => SetActive(exitCanvas, true));
     }
     private void DisablePauseCanvas()

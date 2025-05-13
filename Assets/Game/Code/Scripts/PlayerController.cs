@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
         input = InputActionsManager.Instance;
 
         // Carregar as informações do SaveGame.
-        saveGame = SaveGame.instance;
+        saveGame = SaveGame.Instance;
     }
 
     private void Update()
