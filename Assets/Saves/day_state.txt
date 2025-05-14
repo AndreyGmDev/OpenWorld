@@ -1,1 +1,0 @@
-{"daylightCycle":{"instanceID":164806},"seconds":63.71796798706055}

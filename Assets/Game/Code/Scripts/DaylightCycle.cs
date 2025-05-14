@@ -1,4 +1,5 @@
 using System;
+using KinematicCharacterController.Walkthrough.ClimbingLadders;
 using TMPro;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class DaylightCycle : MonoBehaviour
         multiplier = REAL_TIME_DAY_LENGTH / cycleTime;
 
         saveGame = SaveGame.Instance;
+
+        Load();
     }
 
     private void Update()
@@ -33,15 +36,7 @@ public class DaylightCycle : MonoBehaviour
 
         CycleChange();
         InterfaceTime();
-
-        if (SaveGame.Instance != null)
-        {
-            saveGame.SaveDaylightCycleData(new SaveGameInfos
-            {
-                DaylightCycle = this,
-                Seconds = seconds
-            });
-        }
+        Save();
     }
 
     private void CycleChange()
@@ -57,6 +52,29 @@ public class DaylightCycle : MonoBehaviour
             Debug.Log(seconds);
             Debug.Log(timeOfTheDay);
             timeOfTheDay.text = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm");
+        }
+    }
+
+    // Passa as informações para o SaveGame.
+    private void Save()
+    {
+        if (saveGame != null)
+        {
+            saveGame.SaveDaylightCycleData(new SaveGameInfos
+            {
+                Seconds = seconds
+            });
+        }
+    }
+
+    // Carrega as informações do SaveGame.
+    private void Load()
+    {
+        if (saveGame != null)
+        {
+            SaveGameInfos save = saveGame.LoadPlayerData();
+
+            seconds = save.Seconds;
         }
     }
 }

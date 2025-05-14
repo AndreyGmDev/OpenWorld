@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
         saveGame = SaveGame.Instance;
     }
 
+    private void Start()
+    {
+        Load();
+    }
     private void Update()
     {
         // Inputs player.
@@ -86,24 +90,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Passa as informações para o SaveGame.
     private void PassToSaveGame()
     {
         // Passar informações para o SaveGame.
 
         saveGame.SavePlayerData(new SaveGameInfos
         {
-            PlayerController = this,
             PlayerPosition = characterMovement.transform.position,
             PlayerRotation = characterMovement.transform.rotation,
             CameraControllerRotation = cameraController.targetLook,
-            //SlotPlayer = hotbar.saveSlot
         });
 
         saveGame.SaveHotbarData(new SaveGameInfos
         {
-            Hotbar = hotbar,
             Slot = hotbar.saveSlot,
             Itens = hotbar.itens,
         });
+    }
+
+    // Carrega as informações do SaveGame.
+    private void Load()
+    {
+        if (saveGame != null)
+        {
+            SaveGameInfos save = saveGame.LoadPlayerData();
+
+            characterMovement.motor.SetPosition(save.PlayerPosition);
+            characterMovement.motor.RotateCharacter(save.PlayerRotation);
+            cameraController.targetLook = save.CameraControllerRotation;
+        }
     }
 }

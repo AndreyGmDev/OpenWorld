@@ -17,6 +17,7 @@ public class Hotbar : MonoBehaviour
 
     private void Start()
     {
+        Load();
         slot = saveSlot;
         ChangeSlot();
     }
@@ -63,6 +64,19 @@ public class Hotbar : MonoBehaviour
             {
                 itens[i].SetActive(true);
             }
+        }
+    }
+
+    // Carrega as informações do SaveGame.
+    private void Load()
+    {
+        SaveGame saveGame = SaveGame.Instance;
+
+        if (saveGame != null)
+        {
+            SaveGameInfos save = saveGame.LoadPlayerData();
+
+            saveSlot = save.Slot;
         }
     }
 }

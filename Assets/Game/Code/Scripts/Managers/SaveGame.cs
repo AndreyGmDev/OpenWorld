@@ -4,18 +4,15 @@ using UnityEngine;
 public struct SaveGameInfos
 {
     // Player infos.
-    public PlayerController PlayerController;
     public Vector3 PlayerPosition;
     public Quaternion PlayerRotation;
     public Vector2 CameraControllerRotation;
 
     // Hotbar infos.
-    public Hotbar Hotbar;
     public float Slot;
     public GameObject[] Itens;
 
     // DaylightCycle infos.
-    public DaylightCycle DaylightCycle;
     public float Seconds;
 }
 
@@ -23,35 +20,11 @@ public class SaveGame : MonoBehaviour
 {
     // Nomes dos arquivos que serão salvos as informações
     const string FINALPATH  = "/Saves";
-    const string SAVEPLAYER = "/player_state.txt";
-    const string SAVEHOTBAR = "/hotbar_state.txt";
-    const string SAVEDAY    = "/day_state.txt";
+    const string SAVEDATA = "/game_state.txt";
+    //const string SAVEPLAYER = "/player_state.txt";
+    //const string SAVEDAY    = "/day_state.txt";
 
     [SerializeField, Tooltip("Delay between each game save")] float delaySaveGame = 30;
-
-    // SaveGame do player em arquivo Json.
-    public class PlayerData
-    {
-        public PlayerController playerController; // Referência do script onde serão descarregadas as informações do PlayerData.
-        public Vector3 playerPosition;
-        public Quaternion playerRotation;
-        public Vector2 cameraControllerRotation;
-    }
-
-    // SaveGame da Hotbar em arquivo Json.
-    public class HotbarData
-    {
-        public Hotbar hotbar;
-        public float slot;
-        public GameObject[] itens;
-    }
-
-    // SaveGame do DaylightCycle em arquivo Json.
-    public class DaylightCycleData
-    {
-        public DaylightCycle daylightCycle;
-        public float seconds;
-    }
 
     // Inicia o Singleton do SaveSame.
     private static SaveGame saveGame;
@@ -102,11 +75,6 @@ public class SaveGame : MonoBehaviour
             print("Procure esses objetos e retire o script SaveGame até sobrar apenas um: " + gameObject.name + ", " + saveGame.name);
             Destroy(gameObject);
         }
-
-        // Pega os saves criados anteriormente.
-        LoadPlayerData();
-        LoadHotbarData();
-        LoadDaylightCycleData();
     }
 
     private void Start()
@@ -115,100 +83,95 @@ public class SaveGame : MonoBehaviour
         InvokeRepeating(nameof(MakeSaves), delaySaveGame, delaySaveGame);
     }
 
-    PlayerData playerData = new PlayerData();
-    HotbarData hotbarData = new HotbarData();
-    DaylightCycleData daylightCycleData = new DaylightCycleData();
+    SaveGameInfos saveGameInfos;
+    SaveGameInfos save = new SaveGameInfos();
     public void MakeSaves()
     {
-        if (playerData.playerController != null)
-        {
-            string jsonPlayerData = JsonUtility.ToJson(playerData);
-            File.WriteAllText(Application.dataPath + FINALPATH + SAVEPLAYER, jsonPlayerData);
-        }
+        string jsonPlayerData = JsonUtility.ToJson(saveGameInfos);
+        File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonPlayerData);
 
-        if (hotbarData.hotbar != null)
-        {
-            string jsonHotbarData = JsonUtility.ToJson(hotbarData);
-            File.WriteAllText(Application.dataPath + FINALPATH + SAVEHOTBAR, jsonHotbarData);
-        }
+        string jsonHotbarData = JsonUtility.ToJson(saveGameInfos);
+        File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonHotbarData);
 
-        if (daylightCycleData.daylightCycle != null)
-        {
-            string jsonDaylightCycleData = JsonUtility.ToJson(daylightCycleData);
-            File.WriteAllText(Application.dataPath + FINALPATH + SAVEDAY, jsonDaylightCycleData);
-        }
+        string jsonDaylightCycleData = JsonUtility.ToJson(saveGameInfos);
+        File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonDaylightCycleData);
     }
 
     // Recebe o SavePlayerTransform do PlayerController.
     public void SavePlayerData(in SaveGameInfos infos)
     {
-        playerData.playerController = infos.PlayerController; // Grava a referência do script que passou as informações pro SaveGame.
-        playerData.playerPosition = infos.PlayerPosition;
-        playerData.playerRotation = infos.PlayerRotation;
-        playerData.cameraControllerRotation = infos.CameraControllerRotation;
+        saveGameInfos.PlayerPosition = infos.PlayerPosition;
+        saveGameInfos.PlayerRotation = infos.PlayerRotation;
+        saveGameInfos.CameraControllerRotation = infos.CameraControllerRotation;
     }
 
-    private void LoadPlayerData()
+    public SaveGameInfos LoadPlayerData()
     {
-        if (playerData == null) return;
-
-        if (File.Exists(Application.dataPath + FINALPATH + SAVEPLAYER))
+        if (File.Exists(Application.dataPath + FINALPATH + SAVEDATA))
         {
-            string jsonPlayerData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEPLAYER);
-            PlayerData _playerData = JsonUtility.FromJson<PlayerData>(jsonPlayerData);
-          
-            if (_playerData.playerController != null)
-            {
-                _playerData.playerController.characterMovement.motor.SetPosition(_playerData.playerPosition);
-                _playerData.playerController.characterMovement.motor.RotateCharacter(_playerData.playerRotation);
-                _playerData.playerController.cameraController.targetLook = _playerData.cameraControllerRotation;
-            }
+            string jsonPlayerData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDATA);
+            SaveGameInfos playerData = JsonUtility.FromJson<SaveGameInfos>(jsonPlayerData);
+
+            return playerData;
+        }
+        else
+        {
+            NewSaveGame();
+            return save;
         }
     }
 
     public void SaveHotbarData(in SaveGameInfos infos)
     {
-        hotbarData.hotbar = infos.Hotbar;
-        hotbarData.slot = infos.Slot;
-        hotbarData.itens = infos.Itens;
+        saveGameInfos.Slot = infos.Slot;
+        saveGameInfos.Itens = infos.Itens;
     }
 
-    private void LoadHotbarData()
+    public SaveGameInfos LoadHotbarData()
     {
-        if (hotbarData == null) return;
-
-        if (File.Exists(Application.dataPath + FINALPATH + SAVEHOTBAR))
+       
+        if (File.Exists(Application.dataPath + FINALPATH + SAVEDATA))
         {
-            string jsonHotbarData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEHOTBAR);
-            HotbarData _hotbarData = JsonUtility.FromJson<HotbarData>(jsonHotbarData);
+            string jsonHotbarData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDATA);
+            SaveGameInfos hotbarData = JsonUtility.FromJson<SaveGameInfos>(jsonHotbarData);
 
-            if (_hotbarData.hotbar != null)
-            {
-                _hotbarData.hotbar.saveSlot = _hotbarData.slot;
-                _hotbarData.hotbar.itens = _hotbarData.itens;
-            }
+            return hotbarData;
+        }
+        else
+        {
+            NewSaveGame();
+            return save;
         }
     }
 
     public void SaveDaylightCycleData(in SaveGameInfos infos)
     {
-        daylightCycleData.daylightCycle = infos.DaylightCycle;
-        daylightCycleData.seconds = infos.Seconds;
+        saveGameInfos.Seconds = infos.Seconds;
     }
 
-    private void LoadDaylightCycleData()
+    public SaveGameInfos LoadDaylightCycleData()
     {
-        if (daylightCycleData == null) return;
-
-        if (File.Exists(Application.dataPath + FINALPATH + SAVEDAY))
+        if (File.Exists(Application.dataPath + FINALPATH + SAVEDATA))
         {
-            string jsonDaylightCycleData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDAY);
-            DaylightCycleData _daylightCycleData = JsonUtility.FromJson<DaylightCycleData>(jsonDaylightCycleData);
+            string jsonDaylightCycleData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDATA);
+            SaveGameInfos daylightCycleData = JsonUtility.FromJson<SaveGameInfos>(jsonDaylightCycleData);
 
-            if (_daylightCycleData.daylightCycle != null)
-            {
-                _daylightCycleData.daylightCycle.seconds = _daylightCycleData.seconds;
-            }
+            return daylightCycleData;
         }
+        else
+        {
+            NewSaveGame();
+            return save;
+        }
+    }
+
+    private void NewSaveGame()
+    {
+        save.PlayerPosition = Vector3.zero;
+        save.PlayerRotation = Quaternion.identity;
+        save.CameraControllerRotation = Vector3.zero;
+        save.Slot = 1;
+        save.Itens = null;
+        save.Seconds = 0;
     }
 }
