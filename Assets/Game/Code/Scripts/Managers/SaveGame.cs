@@ -46,7 +46,7 @@ public class SaveGame : MonoBehaviour
                     if (GameObject.Find("GameManager"))
                     {
                         GameObject obj = GameObject.Find("GameManager");
-                        obj.AddComponent<MixerManager>();
+                        obj.AddComponent<SaveGame>();
                         print("Adicione o Script SaveGame no GameManager");
                     }
                     else

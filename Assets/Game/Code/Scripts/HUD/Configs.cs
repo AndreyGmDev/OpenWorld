@@ -18,7 +18,7 @@ public class Configs : MonoBehaviour
 
     [Header("Video Settings")]
     [SerializeField] Dropdown ddpResolution; // Valor da resolução selecionada, não necessáriamente a que está aplicada no momento.
-    private int ddpResolutionRealValue; // Valor da resolução real. Só é alterado quando o botão Apply/Save for pressionado.
+    private int realResolutionValue; // Valor da resolução real. Só é alterado quando o botão Apply/Save for pressionado.
     [SerializeField] Dropdown ddpQuality; // Valor da qualidade selecionada.
     [SerializeField] Toggle vsync; // bool para o vsync ativo.
     [SerializeField] Toggle showFPS; // bool para o Show FPS ativo.
@@ -42,7 +42,7 @@ public class Configs : MonoBehaviour
         saveConfigs = SaveConfigs.Instance;
         mixerManager = MixerManager.Instance;
 
-        // Configs resolution.
+        // Configura a resolução.
         Resolution[] allResolutions = Screen.resolutions; // Cria um array com todas as resoluções.
         allResolutions = allResolutions.OrderByDescending(x => x.width).ToArray(); // Inverte a ordem da lista.
 
@@ -54,7 +54,7 @@ public class Configs : MonoBehaviour
 
         ddpResolution.AddOptions(resolutions); // Adiciona toas as opções possiveis na interface.
 
-        // Qualidade.
+        // Configura a Qualidade.
         quality = QualitySettings.names.ToList();
         quality = quality.OrderByDescending(x => x).ToList();
         ddpQuality.AddOptions(quality);
@@ -70,6 +70,11 @@ public class Configs : MonoBehaviour
         {
             fps.enabled = showFPS.isOn;
         }
+    }
+
+    private void OnDisable()
+    {
+        ddpResolution.value = realResolutionValue;
     }
 
     private void Start()
@@ -106,6 +111,11 @@ public class Configs : MonoBehaviour
         }
 
         // Video.
+        if (vsync != null)
+        {
+            vsync.onValueChanged.AddListener((_) => Save());
+        }
+
         if (showFPS != null)
         {
             if (fps != null)
@@ -131,13 +141,14 @@ public class Configs : MonoBehaviour
 
     private void ChangeVideoSettings()
     {
-        // Resolution.
-        string[] currentResolution = resolutions[ddpResolution.value].Split("X");
+        // Altera a resolução verdadeira para a resolução selecionada apenas quando o botão Apply/Save é pressionado.
+        realResolutionValue = ddpResolution.value; 
+
+        // Altera a resolução do jogo para a selecionada.
+        string[] currentResolution = resolutions[realResolutionValue].Split("X");
         int w = Convert.ToInt32(currentResolution[0].Trim());
         int h = Convert.ToInt32(currentResolution[0].Trim());
         Screen.SetResolution(w, h, true);
-
-        ddpResolutionRealValue = ddpResolution.value; // Seta o value da resolução quando o botão Apply/Save é pressionado.
 
         // Vsync
         QualitySettings.vSyncCount = vsync.isOn ? 1 : 0;
@@ -157,7 +168,7 @@ public class Configs : MonoBehaviour
             Music = musicSlider.value,
 
             // Video.
-            Resolution = ddpResolutionRealValue,
+            Resolution = realResolutionValue,
             Quality = ddpQuality.value,
             Vsync = vsync.isOn,
             ShowFPS = showFPS.isOn,
@@ -171,21 +182,21 @@ public class Configs : MonoBehaviour
     // Carrega o Load.
     private void Load()
     {
-        ConfigsData configsData = saveConfigs.Load();
+        SaveConfigsInfos configsInfos = saveConfigs.Load();
 
         // Audio.
-        volumeSlider.value = configsData.volume;
-        sfxSlider.value = configsData.sfx;
-        musicSlider.value = configsData.music;
+        volumeSlider.value = configsInfos.Volume;
+        sfxSlider.value = configsInfos.Sfx;
+        musicSlider.value = configsInfos.Music;
 
         // Video.
-        ddpResolution.value = configsData.ddpResolution;
-        ddpQuality.value = configsData.ddpQuality;
-        vsync.isOn = configsData.vsync;
-        showFPS.isOn = configsData.showFPS;
+        ddpResolution.value = configsInfos.Resolution;
+        ddpQuality.value = configsInfos.Quality;
+        vsync.isOn = configsInfos.Vsync;
+        showFPS.isOn = configsInfos.ShowFPS;
 
         // Controls.
-        normalSensitivity.value = configsData.normalSensitivity;
-        aimSensitivity.value = configsData.aimSensitivity;
+        normalSensitivity.value = configsInfos.NormalSensitivity;
+        aimSensitivity.value = configsInfos.AimSensitivity;
     }
 }

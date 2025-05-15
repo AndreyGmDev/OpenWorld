@@ -56,4 +56,29 @@ public class InputActionsManager : MonoBehaviour
         inputActions = new InputSystem_Actions();
         inputActions.Enable();
     }
+
+    public void EnableGameActions()
+    {
+        inputActions.Game.Enable();
+    }
+
+    public void EnableUIActions()
+    {
+        inputActions.UI.Enable();
+    }
+
+    public void DisableGameActions()
+    {
+        inputActions.Game.Disable();
+    }
+
+    public void DisableUIActions()
+    {
+        inputActions.UI.Disable();
+    }
+
+    public void DisableAllActions()
+    {
+        inputActions.Disable();
+    }
 }

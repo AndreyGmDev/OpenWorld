@@ -1020,6 +1020,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91f5f19d194842a4fb718dab04257ec4, type: 3}
+--- !u!1 &153863533 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 287767131786995797, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+  m_PrefabInstance: {fileID: 1272794701560097255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &153863534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153863533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c257fa04cf0e0644ba157fd8b9088aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nomeDaCena: 
+  tempoDeLoading: 2
+  telaDeLoading: {fileID: 0}
+  animator: {fileID: 0}
+  objetosParaDesativar: []
 --- !u!1 &156394561
 GameObject:
   m_ObjectHideFlags: 0
@@ -6869,18 +6891,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1874757495}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 79494049}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -8014,7 +8024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1786169599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8037,6 +8047,8 @@ MonoBehaviour:
   resumeButton: {fileID: 532942559}
   saveButton: {fileID: 656783252}
   exitButton: {fileID: 762806087}
+  exitButtonYes: {fileID: 689270430}
+  exitButtonNo: {fileID: 1437818913}
   settingsCanvas: {fileID: 286340252}
   resumeCanvas: {fileID: 1786169598}
   exitCanvas: {fileID: 1874757495}
@@ -8087,7 +8099,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786169598}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
@@ -9779,7 +9791,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 287767131786995797, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 153863534}
   m_SourcePrefab: {fileID: 100100000, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -49,8 +49,6 @@ public class DaylightCycle : MonoBehaviour
     {
         if (timeOfTheDay != null)
         {
-            Debug.Log(seconds);
-            Debug.Log(timeOfTheDay);
             timeOfTheDay.text = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm");
         }
     }

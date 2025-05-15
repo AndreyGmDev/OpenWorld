@@ -20,6 +20,8 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] Button resumeButton;
     [SerializeField] Button saveButton;
     [SerializeField] Button exitButton;
+    [SerializeField] Button exitButtonYes;
+    [SerializeField] Button exitButtonNo;
 
     [Header("Canvas")]
     [SerializeField] GameObject settingsCanvas;
@@ -37,11 +39,37 @@ public class PauseMenuController : MonoBehaviour
         ArrangeOptions();
         pauseCanvas.enabled = false; // Desativa o menu inicialmente
 
-        resumeButton.onClick.AddListener(DisablePauseCanvas);
 
-        settingsButton.onClick.AddListener(() => SetActive(settingsCanvas, true));
-        saveButton.onClick.AddListener(SaveGame.Instance.MakeSaves);
-        exitButton.onClick.AddListener(() => SetActive(exitCanvas, true));
+        // Ação dos botões do PauseCanvas.
+        if (resumeButton != null && resumeCanvas != null)
+        {
+            resumeButton.onClick.AddListener(DisablePauseCanvas);
+        }
+
+        if (settingsButton != null && settingsCanvas != null)
+        {
+            settingsButton.onClick.AddListener(() => settingsCanvas.SetActive(true));
+        }
+        
+        if (exitButton != null && exitCanvas != null)
+        {
+            exitButton.onClick.AddListener(() => exitCanvas.SetActive(true));
+        }
+        
+        if (exitButtonNo != null && exitCanvas != null)
+        {
+            exitButtonNo.onClick.AddListener(() => exitCanvas.SetActive(false));
+        }
+
+        if (exitButtonYes != null)
+        {
+            exitButtonYes.onClick.AddListener(() => StartCoroutine(LoadingManager.Instance.LoadAsyncScene("MainMenu")));
+        }
+
+        if (saveButton != null)
+        {
+            saveButton.onClick.AddListener(SaveGame.Instance.MakeSaves);
+        }
     }
     private void DisablePauseCanvas()
     {

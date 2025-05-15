@@ -4,19 +4,15 @@ public class Hotbar : MonoBehaviour
 {
     public GameObject[] itens;
 
-    private InputSystem_Actions inputActions;
+    private InputActionsManager input;
     private float slotAnt;
     private float slot = 1;
     [HideInInspector] public float saveSlot = 1;
 
-    private void Awake()
-    {
-        inputActions = new InputSystem_Actions();
-        inputActions.Enable();
-    }
-
     private void Start()
     {
+        input = InputActionsManager.Instance;
+
         Load();
         slot = saveSlot;
         ChangeSlot();
@@ -33,7 +29,7 @@ public class Hotbar : MonoBehaviour
             }
         }
 
-        slot = inputActions.Game.Slots.ReadValue<float>();
+        slot = input.inputActions.Game.Slots.ReadValue<float>();
         slot = Mathf.Clamp(slot, 0, n);
 
         if (slot != slotAnt)

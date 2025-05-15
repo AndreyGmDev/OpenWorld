@@ -18,24 +18,6 @@ public struct SaveConfigsInfos
     public float AimSensitivity;
 }
 
-public class ConfigsData
-{
-    // Audio.
-    public float volume;
-    public float sfx;
-    public float music;
-
-    // Video.
-    public int ddpResolution;
-    public int ddpQuality;
-    public bool vsync;
-    public bool showFPS;
-
-    // Controls.
-    public float normalSensitivity;
-    public float aimSensitivity;
-}
-
 public class SaveConfigs : MonoBehaviour
 {
     private static SaveConfigs saveConfigs;
@@ -104,40 +86,40 @@ public class SaveConfigs : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public ConfigsData Load()
+    public SaveConfigsInfos Load()
     {
-        ConfigsData configsData = new ConfigsData();
+        SaveConfigsInfos configsInfos = new SaveConfigsInfos();
 
         // Audio.
         if (PlayerPrefs.HasKey("volume"))
-            configsData.volume = PlayerPrefs.GetFloat("volume");
+            configsInfos.Volume = PlayerPrefs.GetFloat("volume");
 
         if (PlayerPrefs.HasKey("sfx"))
-            configsData.sfx = PlayerPrefs.GetFloat("sfx");
+            configsInfos.Sfx = PlayerPrefs.GetFloat("sfx");
 
         if (PlayerPrefs.HasKey("music"))
-            configsData.music = PlayerPrefs.GetFloat("music");
+            configsInfos.Music = PlayerPrefs.GetFloat("music");
 
         // Video.
         if (PlayerPrefs.HasKey("resolution"))
-            configsData.ddpResolution = PlayerPrefs.GetInt("resolution");
+            configsInfos.Resolution = PlayerPrefs.GetInt("resolution");
 
         if (PlayerPrefs.HasKey("quality"))
-            configsData.ddpQuality = PlayerPrefs.GetInt("quality");
+            configsInfos.Quality = PlayerPrefs.GetInt("quality");
 
         if (PlayerPrefs.HasKey("vsync"))
-            configsData.vsync = PlayerPrefs.GetInt("vsync") == 1 ? true : false;
+            configsInfos.Vsync = PlayerPrefs.GetInt("vsync") == 1 ? true : false;
 
         if (PlayerPrefs.HasKey("showFPS"))
-            configsData.showFPS = PlayerPrefs.GetInt("showFPS") == 1 ? true : false;
+            configsInfos.ShowFPS = PlayerPrefs.GetInt("showFPS") == 1 ? true : false;
 
         // Controls.
         if (PlayerPrefs.HasKey("normalSensitivity"))
-            configsData.normalSensitivity = PlayerPrefs.GetFloat("normalSensitivity");
+            configsInfos.NormalSensitivity = PlayerPrefs.GetFloat("normalSensitivity");
 
         if (PlayerPrefs.HasKey("aimSensitivity"))
-            configsData.aimSensitivity = PlayerPrefs.GetFloat("aimSensitivity");
+            configsInfos.AimSensitivity = PlayerPrefs.GetFloat("aimSensitivity");
 
-        return configsData;
+        return configsInfos;
     }
 }
