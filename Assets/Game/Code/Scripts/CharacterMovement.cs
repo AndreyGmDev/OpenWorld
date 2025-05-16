@@ -1,12 +1,15 @@
 using KinematicCharacterController;
+using NUnit.Framework.Internal;
 using UnityEngine;
 
 public struct CharacterMovementInput
 {
+    // PlayerController
     public Vector2 MoveInput;
     public bool WantsToJump;
     public bool WantsToCrouch;
 
+    // Camera.
     public Quaternion LookRotation;
     public bool IsAiming;
     public CameraController.Orientation NormalOrientation;
@@ -19,24 +22,24 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
     public KinematicCharacterMotor motor;
 
     [Header("Normal Movement")]
-    public float maxSpeed = 5;
-    public float acceleration = 50;
-    public float rotationSpeed = 15;
-    public float gravity = 30;
-    public float jumpHeight = 1.5f;
+    [SerializeField] float maxSpeed = 5;
+    [SerializeField] float acceleration = 50;
+    [SerializeField] float rotationSpeed = 15;
+    [SerializeField] float gravity = 30;
+    [SerializeField] float jumpHeight = 1.5f;
     [Range(0.01f, 0.3f)] public float jumpRequestDuration = 0.1f;
 
     [Header("Air Movement")]
-    public float airMaxSpeed = 3;
-    public float airAcceleration;
-    public float drag;
+    [SerializeField] float airMaxSpeed = 3;
+    [SerializeField] float airAcceleration;
+    [SerializeField] float drag;
 
     [Header("Crouch Movement")]
-    public float crouchMaxSpeed = 3;
-    public float crouchAcceleration = 20;
+    [SerializeField] float crouchMaxSpeed = 3;
+    [SerializeField] float crouchAcceleration = 20;
 
     [Header("Animations")]
-    public Animator animator;
+    [SerializeField] Animator animator;
 
     private Vector3 moveInput; // Valor dados pelos inputs de movimentação.
 
@@ -217,8 +220,20 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
             currentVelocity.y -= gravity * deltaTime;
         }
 
+        // Isso é uma ação chamada somente quando o Hook é usado.
+        UsingHook(ref currentVelocity, deltaTime);
+
         // Atualiza a animação.
         UpdateAnimation();
+    }
+
+    public void UsingHook(ref Vector3 currentVelocity, float deltaTime)
+    {
+        bool usingHook = false;
+        if (usingHook)
+        {
+            currentVelocity = new Vector3(1, 0, 0);
+        }
     }
 
     private static float ApplyDrag(float velocity, float drag, float deltaTime)

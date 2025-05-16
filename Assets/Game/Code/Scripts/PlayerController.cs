@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         Load();
     }
+
     private void Update()
     {
         // Inputs player.

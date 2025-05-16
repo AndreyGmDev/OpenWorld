@@ -45,14 +45,14 @@ public class LoadingManager : MonoBehaviour
     public string nomeDaCena;
 
     [Tooltip("Tempo mínimo para exibir a tela de loading (em segundos).")]
-    public float tempoDeLoading = 2f;
+    [SerializeField] float tempoDeLoading = 2f;
 
     [Header("Referências")]
     [Tooltip("GameObject da tela de carregamento.")]
-    public GameObject telaDeLoading;
+    [SerializeField] GameObject telaDeLoading;
 
     [Tooltip("Componente Animator responsável pela animação.")]
-    public Animator animator;
+    [SerializeField] Animator animator;
 
     [Tooltip("Lista de objetos a serem desativados ao pressionar Novo Jogo.")]
     public GameObject[] objetosParaDesativar;
@@ -127,6 +127,9 @@ public class LoadingManager : MonoBehaviour
 
     public IEnumerator LoadAsyncScene(string nameScene)
     {
+        // Desabilita o cursor.
+        Cursor.lockState = CursorLockMode.Locked;
+
         // Disabilita todos os inputs.
         InputActionsManager input = InputActionsManager.Instance;
         input.DisableAllActions();

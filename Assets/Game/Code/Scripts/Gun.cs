@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class Gun : MonoBehaviour
 {
@@ -102,10 +101,6 @@ public class Gun : MonoBehaviour
                 hittable.HitAddForce(directionShoot.forward);
             }
         }
-
-        // Visual in UnityEditor.
-        if (hit.point != null)
-            Debug.DrawLine(directionShoot.position, hit.point, Color.red, 1f);
 
         // Diminui uma munição da arma.
         currentAmmo--;
