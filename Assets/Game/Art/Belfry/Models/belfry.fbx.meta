@@ -3,7 +3,37 @@ guid: 55871378081c8414f8cc117b7b348b15
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: adornment
+    second: {fileID: 2100000, guid: 832793a43d5c74648a6a316b5b32a8bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: base
+    second: {fileID: 2100000, guid: 4ed6219b310bdaa48b1cc4b4ff541ba5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dark_door
+    second: {fileID: 2100000, guid: dc250dde996533045a88896f81fb97ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal
+    second: {fileID: 2100000, guid: a29397d739c02334b9f693a4adf6f5dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roof
+    second: {fileID: 2100000, guid: a0c06b269f62f974fb7a2433403e017e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellow_glass
+    second: {fileID: 2100000, guid: 6f65eff3172a13e40ba7d5ecb57801a6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
