@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionShoot: {x: 0, y: 0, z: 0}
+  hitSFX: {fileID: 8300000, guid: 85be0484868e95740b75b5aa5aba5e35, type: 3}
 --- !u!54 &4548736400427166412
 Rigidbody:
   m_ObjectHideFlags: 0

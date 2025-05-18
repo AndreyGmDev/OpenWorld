@@ -63,7 +63,7 @@ public class Slingshot : MonoBehaviour
 
     private void PickUpItem()
     {
-        if (currentAmmo == maxAmmo) return; // Retorna o código se a munição estiver cheia.
+        if (currentAmmo == maxAmmo) return; // Retorna o cï¿½digo se a muniï¿½ï¿½o estiver cheia.
 
         GameObject nearestItem = null;
         float nearestDistance = Mathf.Infinity;
@@ -92,10 +92,10 @@ public class Slingshot : MonoBehaviour
     {
         if (countDelayShoots <= 0)
         {
-            // Impede de atirar se não houver munição.
+            // Impede de atirar se nï¿½o houver muniï¿½ï¿½o.
             if (currentAmmo < 1) return;
 
-            // Enquanto segura, o tiro é carregado.
+            // Enquanto segura, o tiro ï¿½ carregado.
             if (input.inputActions.Game.Shoot.IsPressed())
             {
                 if (holdTime < holdFinalTime)
@@ -104,7 +104,7 @@ public class Slingshot : MonoBehaviour
                 }
             }
 
-            // Atira quando solta o botão de atirar.
+            // Atira quando solta o botï¿½o de atirar.
             if (input.inputActions.Game.Shoot.WasReleasedThisFrame())
             {
                 Shoot();
@@ -115,7 +115,7 @@ public class Slingshot : MonoBehaviour
             {
                 if (readySFX != null)
                 {
-                    SFXManager.Instance.PlaySoundFXClip(readySFX, transform, slingReadyVolume);
+                    AudioManager.Instance.PlaySoundFXClip(readySFX, transform, slingReadyVolume);
                 }
             }
         }
@@ -150,13 +150,13 @@ public class Slingshot : MonoBehaviour
         spawnedStone.GetComponent<SlingshotProject>().directionShoot = (mouseDirection - spawnTransform.position).normalized * currentForce;
 
         // Tocar SFX
-        SFXManager.Instance.Interrupt();
+        AudioManager.Instance.InterruptSFX();
         if (shootSFX != null)
         {
-            SFXManager.Instance.PlaySoundFXClip(shootSFX, transform, slingShootVolume);
+            AudioManager.Instance.PlaySoundFXClip(shootSFX, transform, slingShootVolume);
         }
 
-        // Diminui uma munição da arma.
+        // Diminui uma muniï¿½ï¿½o da arma.
         currentAmmo--; 
         holdTime = 0;
     }

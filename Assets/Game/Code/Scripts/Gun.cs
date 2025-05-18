@@ -68,7 +68,7 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        // Confere se ainda há munição na arma.
+        // Confere se ainda hï¿½ muniï¿½ï¿½o na arma.
         if (currentAmmo < 1) return;
 
         // Seta o delay para poder atirar novamente.
@@ -83,7 +83,7 @@ public class Gun : MonoBehaviour
 
         //SFX
         if (shootSFX != null)
-            SFXManager.Instance.PlaySoundFXClip(shootSFX, transform, 1f);
+            AudioManager.Instance.PlaySoundFXClip(shootSFX, transform, 1f);
 
         // Calcula a trajetoria do tiro.
         RaycastHit hit;
@@ -102,7 +102,7 @@ public class Gun : MonoBehaviour
             }
         }
 
-        // Diminui uma munição da arma.
+        // Diminui uma muniï¿½ï¿½o da arma.
         currentAmmo--;
     }
 
@@ -113,7 +113,7 @@ public class Gun : MonoBehaviour
         isReloading = true;
 
         if (reloadSFX != null)
-            SFXManager.Instance.PlaySoundFXClip(reloadSFX, transform, 1f);
+            AudioManager.Instance.PlaySoundFXClip(reloadSFX, transform, 1f);
 
         yield return new WaitForSeconds(reloadTime);
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4523444206827945135}
   - component: {fileID: 2240781032671861041}
   - component: {fileID: 1521874249624595673}
-  - component: {fileID: 4621518538221594875}
+  - component: {fileID: 7667542739836366936}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 4e4812533a69f45429eb0490760a363b, type: 2}
---- !u!114 &4621518538221594875
+--- !u!114 &7667542739836366936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,7 +95,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 287767131786995797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 173f04bd36a54ea4e988b78cf9cfc9be, type: 3}
+  m_Script: {fileID: 11500000, guid: 780d92f3a4b5689428d7101701f14da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sfxObject: {fileID: 4971946268018815030, guid: 75b667a2a2973cc42a955de71c5f12bf, type: 3}
+  daytimeMusic: {fileID: 8300000, guid: 550bcf6339b8812489d9797cb217930e, type: 3}
+  minTimeBetweenMusic: 300
+  maxTimeBetweenMusic: 900
+  fadeOutDuration: 5
+  musicVolume: 0.6
+  musicMixerGroup: {fileID: 8194356992512371669, guid: 4e4812533a69f45429eb0490760a363b, type: 2}

@@ -8,7 +8,7 @@ public class DaylightCycle : MonoBehaviour
     const float REAL_TIME_DAY_LENGTH = 86400;
 
     [SerializeField] Transform directionalLight;
-    [SerializeField, Tooltip("time in Seconds of the lenght of the day")] float cycleTime;
+    [SerializeField, Tooltip("Time in seconds of a day's length")] float cycleTime;
     [SerializeField] TextMeshProUGUI timeOfTheDay;
 
     [HideInInspector] public float seconds;
@@ -19,9 +19,7 @@ public class DaylightCycle : MonoBehaviour
     private void Start()
     {
         multiplier = REAL_TIME_DAY_LENGTH / cycleTime;
-
         saveGame = SaveGame.Instance;
-
         Load();
     }
 
@@ -39,6 +37,14 @@ public class DaylightCycle : MonoBehaviour
         Save();
     }
 
+    public bool IsDaytime()
+    {
+        // Convert seconds to hours (0-24)
+        float hours = (seconds / 3600f) % 24;
+        // Day = between 6 AM and 6 PM
+        return hours >= 6 && hours < 18;
+    }
+
     private void CycleChange()
     {
         float cycleRotation = Mathf.Lerp(-90, 270, seconds / REAL_TIME_DAY_LENGTH);
@@ -53,7 +59,7 @@ public class DaylightCycle : MonoBehaviour
         }
     }
 
-    // Passa as informações para o SaveGame.
+    // Passa as informaÃ§Ãµes para o SaveGame
     private void Save()
     {
         if (saveGame != null)
@@ -65,13 +71,12 @@ public class DaylightCycle : MonoBehaviour
         }
     }
 
-    // Carrega as informações do SaveGame.
+    // Carrega as informaÃ§Ãµes do SaveGame
     private void Load()
     {
         if (saveGame != null)
         {
             SaveGameInfos save = saveGame.LoadPlayerData();
-
             seconds = save.Seconds;
         }
     }
