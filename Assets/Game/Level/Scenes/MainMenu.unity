@@ -2656,7 +2656,6 @@ GameObject:
   - component: {fileID: 776100602}
   - component: {fileID: 776100601}
   - component: {fileID: 776100600}
-  - component: {fileID: 776100604}
   m_Layer: 5
   m_Name: yesButton
   m_TagString: Untagged
@@ -2799,24 +2798,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776100598}
   m_CullTransparentMesh: 1
---- !u!114 &776100604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776100598}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c257fa04cf0e0644ba157fd8b9088aaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nomeDaCena: OpenWorld
-  tempoDeLoading: 2
-  telaDeLoading: {fileID: 1726423661}
-  animator: {fileID: 552998778}
-  objetosParaDesativar:
-  - {fileID: 1361335201}
 --- !u!1 &784439693
 GameObject:
   m_ObjectHideFlags: 0
