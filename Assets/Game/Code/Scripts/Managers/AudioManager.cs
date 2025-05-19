@@ -10,8 +10,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("Configurações de Música")]
     [SerializeField] AudioClip daytimeMusic;
-    [SerializeField] float minTimeBetweenMusic = 300f; // 5 minutos
-    [SerializeField] float maxTimeBetweenMusic = 900f; // 15 minutos
+    [SerializeField, Tooltip("Time in Seconds")] float minTimeBetweenMusic = 300f; // 5 minutos
+    [SerializeField, Tooltip("Time in Seconds")] float maxTimeBetweenMusic = 900f; // 15 minutos
     [SerializeField] float fadeOutDuration = 5f;
     [SerializeField] float musicVolume = 0.6f;
     [SerializeField] AudioMixerGroup musicMixerGroup;
