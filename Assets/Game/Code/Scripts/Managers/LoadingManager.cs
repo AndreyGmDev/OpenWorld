@@ -68,6 +68,13 @@ public class LoadingManager : MonoBehaviour
         }
         else if (loadingManager != this)
         {
+
+            //Temporário
+            Cursor.visible = true;
+            Debug.Log(Cursor.visible);
+            Time.timeScale =  1;
+
+
             print("Procure esses objetos e retire o script LoadingManager até sobrar apenas um: " + gameObject.name + ", " + loadingManager.name);
             Destroy(gameObject);
         }

@@ -60,8 +60,9 @@ public class PauseMenuController : MonoBehaviour
             exitButtonNo.onClick.AddListener(() => exitCanvas.SetActive(false));
         }
 
-        if (exitButtonYes != null)
-        {
+        if (exitButtonYes != null) { 
+
+            
             exitButtonYes.onClick.AddListener(() => StartCoroutine(LoadingManager.Instance.LoadAsyncScene("MainMenu")));
         }
 
@@ -100,18 +101,6 @@ public class PauseMenuController : MonoBehaviour
         }
 
         if (!isPaused) return;
-
-        // Navegação pelo teclado
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            currentIndex = Mathf.Max(0, currentIndex - 1);
-            ArrangeOptions();
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            currentIndex = Mathf.Min(menuOptions.Count - 1, currentIndex + 1);
-            ArrangeOptions();
-        }
 
         // Navegação por arrasto do mouse
         if (Input.GetMouseButton(0))
