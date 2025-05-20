@@ -137,13 +137,6 @@ public class Slingshot : MonoBehaviour
         // Seta o delay para poder atirar novamente.
         countDelayShoots = delayShoots;
 
-        GameObject playerController = GameObject.Find("PlayerController");
-        CharacterMovement characterMovement = playerController.transform.GetChild(0).GetComponent<CharacterMovement>();
-        if (characterMovement != null)
-        {
-            characterMovement.motor.RotateCharacter(directionShoot.rotation);
-        }
-
         float currentForce = force * holdTime;
         var spawnedStone = Instantiate(stone,spawnTransform.position, Quaternion.identity);
         //spawnedStone.GetComponent<SlingshotProject>().directionShoot = directionShoot.forward * currentForce;

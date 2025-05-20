@@ -73,7 +73,6 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
     private bool isUsingHook; // Está usando o hook?
     private Vector3 whereIsGoing; // Para onde o player deve ir com o hook.
     private Vector3 target;
-    private float hookMaxSpeed;
 
 
     private void Awake()
@@ -109,8 +108,11 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
     {
         whereIsGoing = infos.WhereIsGoing;
         isUsingHook = infos.IsUsingHook;
-        hookMaxSpeed = infos.HookMaxSpeed;
-        target = whereIsGoing - transform.position;
+        target = (whereIsGoing - transform.position);
+        /*target.Normalize();
+        print(target);
+        target *= infos.HookMaxSpeed;
+        print(target);*/
     }
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
@@ -252,14 +254,13 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
         float distance = Vector3.Distance(whereIsGoing, transform.position);
         if (distance > 1.2f)
         {
-            target.Normalize();
-            target *= hookMaxSpeed;
-            currentVelocity = Vector3.MoveTowards(currentVelocity, target, 20 * deltaTime);
+            currentVelocity = target;
         }
         else
         {
             currentVelocity = Vector3.zero;
             isUsingHook = false;
+            InputActionsManager.Instance.EnableGameActions();
         }
     }
 

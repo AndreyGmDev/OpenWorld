@@ -155,12 +155,11 @@ MonoBehaviour:
   cameraTarget: {fileID: 8517245219740518387}
   normalTargetHeight: 1.21
   crouchTargetHeight: 0.73
-  XRotationRange: {x: -30, y: 60}
-  normalSensitivity: 1
-  aimSensitivity: 0.4
+  XRotationRange: {x: -35, y: 60}
   normalOrientation: 1
   aimingOrientation: 0
   isAiming: 0
+  targetLook: {x: 0, y: 0}
 --- !u!1 &2423275754944683646
 GameObject:
   m_ObjectHideFlags: 0
