@@ -78,7 +78,7 @@ public class Gun : MonoBehaviour
         CharacterMovement characterMovement = playerController.transform.GetChild(0).GetComponent<CharacterMovement>();
         if (characterMovement != null)
         {
-            characterMovement.SetUpdateRotation(directionShoot.rotation);
+            characterMovement.motor.RotateCharacter(directionShoot.rotation);
         }
 
         //SFX

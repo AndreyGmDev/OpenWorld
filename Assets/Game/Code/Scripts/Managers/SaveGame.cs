@@ -172,6 +172,6 @@ public class SaveGame : MonoBehaviour
         save.CameraControllerRotation = Vector3.zero;
         save.Slot = 1;
         save.Itens = null;
-        save.Seconds = 0;
+        save.Seconds = 28800; // 08:00 horas.
     }
 }

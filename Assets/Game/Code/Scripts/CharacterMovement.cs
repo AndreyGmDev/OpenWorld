@@ -1,7 +1,7 @@
 using KinematicCharacterController;
-using NUnit.Framework.Internal;
 using UnityEngine;
 
+// Inputs para movimentação do player.
 public struct CharacterMovementInput
 {
     // PlayerController
@@ -16,49 +16,65 @@ public struct CharacterMovementInput
     public CameraController.Orientation AimingOrientation;
 }
 
+// Ação de usar o Hook.
+public struct UsingHook
+{
+    public bool IsUsingHook; // Está usando o hook?
+    public Vector3 WhereIsGoing; // Para onde o player deve ir com o hook.
+    public float HookMaxSpeed; // Velocidade enquanto usa o hook.
+}
+
+
 [RequireComponent(typeof(KinematicCharacterMotor))]
 public class CharacterMovement : MonoBehaviour, ICharacterController
 {
     public KinematicCharacterMotor motor;
 
     [Header("Normal Movement")]
-    [SerializeField] float maxSpeed = 5;
-    [SerializeField] float acceleration = 50;
-    [SerializeField] float rotationSpeed = 15;
-    [SerializeField] float gravity = 30;
-    [SerializeField] float jumpHeight = 1.5f;
-    [Range(0.01f, 0.3f)] public float jumpRequestDuration = 0.1f;
+    [SerializeField, Tooltip("Velocidade máxima do player na terra")] float maxSpeed = 5;
+    [SerializeField, Tooltip("Aceleração do player na terra")] float acceleration = 50;
+    [SerializeField, Tooltip("Velocidade de rotação do player")] float rotationSpeed = 15;
+    [SerializeField, Tooltip("Força da gravidade")] float gravity = 30;
+    [SerializeField, Tooltip("Altura do pulo do player")] float jumpHeight = 1.5f;
+    [Range(0.01f, 0.3f), Tooltip("Atraso de tempo para o pulo ainda ser considerado")] public float jumpRequestDuration = 0.1f;
 
     [Header("Air Movement")]
-    [SerializeField] float airMaxSpeed = 3;
-    [SerializeField] float airAcceleration;
-    [SerializeField] float drag;
+    [SerializeField, Tooltip("Velocidade máxima do player no ar")] float airMaxSpeed = 3;
+    [SerializeField, Tooltip("Aceleração do player na ar")] float airAcceleration;
+    [SerializeField, Tooltip("Atrito do no ar")] float drag;
 
     [Header("Crouch Movement")]
-    [SerializeField] float crouchMaxSpeed = 3;
-    [SerializeField] float crouchAcceleration = 20;
+    [SerializeField, Tooltip("Velocidade máxima do player agachado")] float crouchMaxSpeed = 3;
+    [SerializeField, Tooltip("Aceleração do player agachado")] float crouchAcceleration = 20;
 
     [Header("Animations")]
     [SerializeField] Animator animator;
 
+    // PlayerController.
+    // Informações sobre o Walk.
     private Vector3 moveInput; // Valor dados pelos inputs de movimentação.
 
-    private float jumpRequestExpireTime;
+    // Informações sobre o Jump.
+    private float jumpSpeed => Mathf.Sqrt(2 * gravity * jumpHeight); // Velocidade do pulo.
+    private float jumpRequestExpireTime; //Atraso de tempo para o pulo ainda ser considerado
 
+    // Informações sobre o Crouch.
     private bool wantsToCrouch; // Apertando o input de crouch.
     [HideInInspector] public bool isCrouching; // Está no crouch?
     private Collider[] probedColliders = new Collider[8]; // Colisão que identifica se há algum objeto sobre o player enquanto ele está no crouch, se sim, player fica no crouch, se não, player levanta.
 
-    private bool isAiming; // Player está mirando?
+    // Informações sobre a Camera.
     private Quaternion lookRotation; // Rotação da câmera.
+    private bool isAiming; // Player está mirando?
     private CameraController.Orientation normalOrientation; // Modo de orientação do player normal.
     private CameraController.Orientation aimingOrientation; // Modo de orientação do player enquanto está mirando.
 
-    // Responsável por alterar a rotação do player quando chamada a função SetUpdateRotation().
-    private Quaternion setRotation; // Rotação indicada pela função.
-    private bool rotate; // O player é rotacionado 1 vez a cada vez que a função for chamada.
+    // Informações sobre o UsingHook.
+    private bool isUsingHook; // Está usando o hook?
+    private Vector3 whereIsGoing; // Para onde o player deve ir com o hook.
+    private Vector3 target;
+    private float hookMaxSpeed;
 
-    public float jumpSpeed => Mathf.Sqrt(2 * gravity * jumpHeight);
 
     private void Awake()
     {
@@ -87,26 +103,18 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
         lookRotation = input.LookRotation;
         normalOrientation = input.NormalOrientation;
         aimingOrientation = input.AimingOrientation;
-
     }
 
-    // Seta o player para uma rotação especifica.
-    public void SetUpdateRotation(Quaternion currentRotation)
+    public void HookActions(in UsingHook infos)
     {
-        setRotation = currentRotation;
-        rotate = true;
+        whereIsGoing = infos.WhereIsGoing;
+        isUsingHook = infos.IsUsingHook;
+        hookMaxSpeed = infos.HookMaxSpeed;
+        target = whereIsGoing - transform.position;
     }
 
     public void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
-        if (rotate)
-        {
-            currentRotation = setRotation;
-            currentRotation.x = 0;
-            currentRotation.z = 0;
-            rotate = false;
-        }
-        
         if (isAiming)
         {
             // Rotação quando o player estiver mirando.
@@ -159,6 +167,22 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
+        if (isUsingHook)
+        {
+            // Isso é uma ação chamada somente quando o Hook é usado.
+            UsingHook(ref currentVelocity, deltaTime);   
+        }
+        else
+        {
+            Movement(ref currentVelocity, deltaTime);
+        }
+
+        // Atualiza a animação.
+        UpdateAnimation();
+    }
+
+    private void Movement(ref Vector3 currentVelocity, float deltaTime)
+    {
         // Confere se o player está no chão.
         if (motor.GroundingStatus.IsStableOnGround)
         {
@@ -201,17 +225,17 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
             }
 
             // Faz o personagem pular, se ele não estiver agachado.
-            if (Time.time < jumpRequestExpireTime && !wantsToCrouch)
+            if (Time.time < jumpRequestExpireTime && !isCrouching)
             {
                 currentVelocity.y = jumpSpeed;
                 jumpRequestExpireTime = 0;
                 motor.ForceUnground();
             }
         }
-        else // Se o player não estiver no chão.
+        else // Se o player estiver no ar.
         {
-            Vector2 targetVelocityXZ = new Vector2(moveInput.x,moveInput.z) * airMaxSpeed;
-            Vector2 currentVelocityXZ = new Vector2(currentVelocity.x,currentVelocity.z);
+            Vector2 targetVelocityXZ = new Vector2(moveInput.x, moveInput.z) * airMaxSpeed;
+            Vector2 currentVelocityXZ = new Vector2(currentVelocity.x, currentVelocity.z);
 
             currentVelocityXZ = Vector2.MoveTowards(currentVelocityXZ, targetVelocityXZ, airAcceleration * deltaTime);
 
@@ -219,20 +243,23 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
             currentVelocity.z = ApplyDrag(currentVelocityXZ.y, drag, deltaTime);
             currentVelocity.y -= gravity * deltaTime;
         }
-
-        // Isso é uma ação chamada somente quando o Hook é usado.
-        UsingHook(ref currentVelocity, deltaTime);
-
-        // Atualiza a animação.
-        UpdateAnimation();
     }
 
-    public void UsingHook(ref Vector3 currentVelocity, float deltaTime)
+    private void UsingHook(ref Vector3 currentVelocity, float deltaTime)
     {
-        bool usingHook = false;
-        if (usingHook)
+        motor.ForceUnground();
+
+        float distance = Vector3.Distance(whereIsGoing, transform.position);
+        if (distance > 1.2f)
         {
-            currentVelocity = new Vector3(1, 0, 0);
+            target.Normalize();
+            target *= hookMaxSpeed;
+            currentVelocity = Vector3.MoveTowards(currentVelocity, target, 20 * deltaTime);
+        }
+        else
+        {
+            currentVelocity = Vector3.zero;
+            isUsingHook = false;
         }
     }
 
@@ -266,6 +293,18 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
                 animator.SetBool("isCrouching", false);
             }
         }
+
+        // Troca de estados.
+        /*if (isUsingHook)
+        {
+            animator.SetLayerWeight(0, 0);
+            animator.SetLayerWeight(1, 1);
+        }
+        else
+        {
+            animator.SetLayerWeight(0, 1);
+            animator.SetLayerWeight(1, 0);
+        }*/
     }
 
     #region not implemented

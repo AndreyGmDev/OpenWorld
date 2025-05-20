@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        //Load();
+        Load();
     }
 
     private void Update()
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Carrega as informações do SaveGame.
-    /*private void Load()
+    private void Load()
     {
         if (saveGame != null)
         {
@@ -121,5 +121,5 @@ public class PlayerController : MonoBehaviour
             characterMovement.motor.RotateCharacter(save.PlayerRotation);
             cameraController.targetLook = save.CameraControllerRotation;
         }
-    }*/
+    }
 }
