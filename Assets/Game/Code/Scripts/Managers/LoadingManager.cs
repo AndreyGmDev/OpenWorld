@@ -61,6 +61,11 @@ public class LoadingManager : MonoBehaviour
     // Carrega as informações do save nos determinados locais.
     private void Awake()
     {
+        //Temporário
+        Cursor.lockState = CursorLockMode.None;
+        Debug.Log(Cursor.visible);
+        Time.timeScale = 1;
+
         // Permite somente uma instância de LoadingManager na cêna.
         if (loadingManager == null)
         {
@@ -68,13 +73,6 @@ public class LoadingManager : MonoBehaviour
         }
         else if (loadingManager != this)
         {
-
-            //Temporário
-            Cursor.visible = true;
-            Debug.Log(Cursor.visible);
-            Time.timeScale =  1;
-
-
             print("Procure esses objetos e retire o script LoadingManager até sobrar apenas um: " + gameObject.name + ", " + loadingManager.name);
             Destroy(gameObject);
         }

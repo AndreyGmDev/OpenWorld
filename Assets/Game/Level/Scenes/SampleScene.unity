@@ -4282,18 +4282,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8426032721110057960, guid: 749891557e966e3499697df131c7718d, type: 3}
-      propertyPath: itens.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8426032721110057960, guid: 749891557e966e3499697df131c7718d, type: 3}
-      propertyPath: 'itens.Array.data[2]'
-      value: 
-      objectReference: {fileID: 1502840862}
-    - target: {fileID: 8426032721110057960, guid: 749891557e966e3499697df131c7718d, type: 3}
-      propertyPath: 'itens.Array.data[3]'
-      value: 
-      objectReference: {fileID: 1502840862}
     - target: {fileID: 8608771062078424533, guid: 749891557e966e3499697df131c7718d, type: 3}
       propertyPath: aimingZoom
       value: 4
@@ -7139,11 +7127,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1502840862 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3604144517464728994, guid: 749891557e966e3499697df131c7718d, type: 3}
-  m_PrefabInstance: {fileID: 961519050}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1518189137
 GameObject:
   m_ObjectHideFlags: 0

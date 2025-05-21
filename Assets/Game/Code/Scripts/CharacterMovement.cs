@@ -276,6 +276,8 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
 
         if (motor.GroundingStatus.IsStableOnGround)
         {
+            animator.SetBool("isJumping", false);
+
             if (moveInput.magnitude != 0)
             {
                 animator.SetBool("isWalking", true);
@@ -293,10 +295,16 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
             {
                 animator.SetBool("isCrouching", false);
             }
+
+            
+        }
+        else
+        {
+            animator.SetBool("isJumping", true);
         }
 
         // Troca de estados.
-        /*if (isUsingHook)
+        if (isUsingHook)
         {
             animator.SetLayerWeight(0, 0);
             animator.SetLayerWeight(1, 1);
@@ -305,7 +313,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
         {
             animator.SetLayerWeight(0, 1);
             animator.SetLayerWeight(1, 0);
-        }*/
+        }
     }
 
     #region not implemented
