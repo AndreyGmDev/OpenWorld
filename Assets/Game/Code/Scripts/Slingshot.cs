@@ -7,7 +7,6 @@ public class Slingshot : MonoBehaviour
 
     [Header("Vectors")]
     [SerializeField] Transform spawnTransform;
-    [SerializeField] Transform directionShoot;
     private Vector3 mouseDirection;
 
     [Header("GunInfos")]
@@ -49,16 +48,15 @@ public class Slingshot : MonoBehaviour
 
     private void Raycast()
     {
-        RaycastHit hit;
-        Physics.Raycast(directionShoot.position, directionShoot.forward, out hit, Mathf.Infinity);
+        LayerMask layer = LayerMask.GetMask("Default") | LayerMask.GetMask("Ground");
+        Vector2 screenCenterPoint = new Vector2(Screen.width / 2, Screen.height / 2);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+
+        Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layer);
         if (hit.point != Vector3.zero)
         {
             mouseDirection = hit.point;
         }
-
-        // Visual in UnityEditor.
-        if (hit.point != null)
-            Debug.DrawLine(directionShoot.position, hit.point, Color.red);
     }
 
     private void PickUpItem()
@@ -139,7 +137,7 @@ public class Slingshot : MonoBehaviour
 
         float currentForce = force * holdTime;
         var spawnedStone = Instantiate(stone,spawnTransform.position, Quaternion.identity);
-        //spawnedStone.GetComponent<SlingshotProject>().directionShoot = directionShoot.forward * currentForce;
+
         spawnedStone.GetComponent<SlingshotProject>().directionShoot = (mouseDirection - spawnTransform.position).normalized * currentForce;
 
         // Tocar SFX
