@@ -1741,28 +1741,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &268386856 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 287767131786995797, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
-  m_PrefabInstance: {fileID: 2051042659}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &268386857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268386856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c257fa04cf0e0644ba157fd8b9088aaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nomeDaCena: 
-  tempoDeLoading: 4
-  telaDeLoading: {fileID: 1977114993}
-  animator: {fileID: 1977114995}
-  objetosParaDesativar: []
 --- !u!4 &272579255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2512086669106988864, guid: 749891557e966e3499697df131c7718d, type: 3}
@@ -11282,14 +11260,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8426032721110057960, guid: 749891557e966e3499697df131c7718d, type: 3}
-      propertyPath: itens.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8426032721110057960, guid: 749891557e966e3499697df131c7718d, type: 3}
-      propertyPath: 'itens.Array.data[3]'
-      value: 
-      objectReference: {fileID: 1632506251}
     - target: {fileID: 8608771062078424533, guid: 749891557e966e3499697df131c7718d, type: 3}
       propertyPath: aimSensitivity
       value: 0.3
@@ -13356,11 +13326,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623686979}
   m_Mesh: {fileID: -4597272770680340238, guid: 8b5aff6949c7e2d43989808da1e4175f, type: 3}
---- !u!1 &1632506251 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3604144517464728994, guid: 749891557e966e3499697df131c7718d, type: 3}
-  m_PrefabInstance: {fileID: 1409344703}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1641364656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17618,6 +17583,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1977114995}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: telaDeLoading
+      value: 
+      objectReference: {fileID: 1977114993}
     - target: {fileID: 6504738768027931084, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.962284
@@ -17661,10 +17634,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 287767131786995797, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 268386857}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
 --- !u!1 &2087906608
 GameObject:
