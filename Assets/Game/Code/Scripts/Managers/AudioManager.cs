@@ -54,7 +54,7 @@ public class AudioManager : MonoBehaviour
         if (audioManager == null)
         {
             audioManager = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (audioManager != this)
         {
@@ -78,7 +78,7 @@ public class AudioManager : MonoBehaviour
         daylightCycle = FindFirstObjectByType<DaylightCycle>();
         if (daylightCycle == null)
         {
-            Debug.LogError("DaylightCycle não encontrado na cena!");
+            Debug.Log("DaylightCycle não encontrado na cena!");
             enabled = false;
             return;
         }

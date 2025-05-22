@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2240781032671861041}
   - component: {fileID: 1521874249624595673}
   - component: {fileID: 7667542739836366936}
+  - component: {fileID: 5107615883194796815}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -105,3 +106,20 @@ MonoBehaviour:
   fadeOutDuration: 5
   musicVolume: 0.6
   musicMixerGroup: {fileID: 8194356992512371669, guid: 4e4812533a69f45429eb0490760a363b, type: 2}
+--- !u!114 &5107615883194796815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287767131786995797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c257fa04cf0e0644ba157fd8b9088aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nomeDaCena: 
+  tempoDeLoading: 4
+  telaDeLoading: {fileID: 0}
+  animator: {fileID: 0}
+  objetosParaDesativar: []

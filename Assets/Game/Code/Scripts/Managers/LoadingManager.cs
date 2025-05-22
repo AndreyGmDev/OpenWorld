@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,8 +64,6 @@ public class LoadingManager : MonoBehaviour
     {
         //Temporário
         Cursor.lockState = CursorLockMode.None;
-        Debug.Log(Cursor.visible);
-        Time.timeScale = 1;
 
         // Permite somente uma instância de LoadingManager na cêna.
         if (loadingManager == null)
@@ -81,6 +80,8 @@ public class LoadingManager : MonoBehaviour
     // Função chamada pelo botão "Novo Jogo"
     public void NovoJogo()
     {
+        File.Delete(Application.dataPath + "/Saves" + "/game_state.txt");
+
         // Desativa os objetos especificados
         foreach (GameObject objeto in objetosParaDesativar)
         {
@@ -97,6 +98,13 @@ public class LoadingManager : MonoBehaviour
     // Coroutine para carregar a cena de forma assíncrona
     private IEnumerator CarregarCenaAsync()
     {
+        // Desabilita o cursor.
+        Cursor.lockState = CursorLockMode.Locked;
+
+        // Disabilita todos os inputs.
+        InputActionsManager input = InputActionsManager.Instance;
+        input.DisableAllActions();
+
         // Ativa a tela de loading
         telaDeLoading.SetActive(true);
 
@@ -107,7 +115,7 @@ public class LoadingManager : MonoBehaviour
         }
 
         // Aguarda o tempo mínimo de exibição da tela de loading
-        float tempoInicial = Time.time;
+        float tempoInicial = Time.unscaledTime;
 
         // Inicia o carregamento assíncrono da cena
         AsyncOperation operacao = SceneManager.LoadSceneAsync(nomeDaCena);
@@ -117,10 +125,10 @@ public class LoadingManager : MonoBehaviour
         while (!operacao.isDone)
         {
             // Checa se o carregamento chegou a 90% (padrão para pronto, mas ainda não ativado)
-            if (operacao.progress >= 0.9f && Time.time >= tempoInicial + tempoDeLoading)
+            if (operacao.progress >= 0.9f && Time.unscaledTime >= tempoInicial + tempoDeLoading)
             {
                 // Certifique-se de que os shaders estejam compilados
-                Shader.WarmupAllShaders();
+                //Shader.WarmupAllShaders();
 
                 // Permite a ativação da cena
                 operacao.allowSceneActivation = true;
@@ -129,6 +137,8 @@ public class LoadingManager : MonoBehaviour
             yield return null;
         }
     }
+
+
 
     public IEnumerator LoadAsyncScene(string nameScene)
     {

@@ -570,17 +570,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 9138545392743380925}
-  maxSpeed: 3
-  acceleration: 30
+  maxSpeed: 10
+  acceleration: 1000
   rotationSpeed: 15
   gravity: 30
   jumpHeight: 1.5
   jumpRequestDuration: 0.075
-  airMaxSpeed: 2
-  airAcceleration: 10
+  airMaxSpeed: 7
+  airAcceleration: 35
   drag: 1
-  crouchMaxSpeed: 2
-  crouchAcceleration: 20
+  crouchMaxSpeed: 7
+  crouchAcceleration: 70
   animator: {fileID: 0}
   isCrouching: 0
 --- !u!1 &5321267976274009127

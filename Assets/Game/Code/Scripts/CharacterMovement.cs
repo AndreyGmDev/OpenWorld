@@ -180,7 +180,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
         }
 
         // Atualiza a animação.
-        UpdateAnimation();
+        UpdateAnimation(currentVelocity.y);
     }
 
     private void Movement(ref Vector3 currentVelocity, float deltaTime)
@@ -270,38 +270,28 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
     }
 
     // Função responsável por calcular as animações.
-    private void UpdateAnimation()
+    private void UpdateAnimation(float currentVelocityY)
     {
         if (animator == null) return;
 
-        if (motor.GroundingStatus.IsStableOnGround)
+        if (moveInput.magnitude != 0)
         {
-            animator.SetBool("isJumping", false);
-
-            if (moveInput.magnitude != 0)
-            {
-                animator.SetBool("isWalking", true);
-            }
-            else
-            {
-                animator.SetBool("isWalking", false);
-            }
-
-            if (wantsToCrouch)
-            {
-                animator.SetBool("isCrouching", true);
-            }
-            else if (!isCrouching)
-            {
-                animator.SetBool("isCrouching", false);
-            }
-
-            
+            animator.SetBool("isWalking", true);
         }
         else
         {
-            animator.SetBool("isJumping", true);
+            animator.SetBool("isWalking", false);
         }
+
+        if (wantsToCrouch)
+        {
+            animator.SetBool("isCrouching", true);
+        }
+        else if (!isCrouching)
+        {
+            animator.SetBool("isCrouching", false);
+        }
+
 
         // Troca de estados.
         if (isUsingHook)
@@ -314,6 +304,28 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
             animator.SetLayerWeight(0, 1);
             animator.SetLayerWeight(1, 0);
         }
+
+        /*if (motor.GroundingStatus.IsStableOnGround)
+        {
+            //animator.SetBool("isJumping", false);
+
+            
+
+            *//*if (currentVelocityY > 8f)
+            {
+                animator.SetBool("isJumping", true);
+            }*//*
+        }
+        else
+        {
+            *//*animator.SetFloat("velocityY", currentVelocityY);
+
+            Physics.Raycast(transform.position, -transform.up, out RaycastHit hit ,Mathf.Infinity); 
+            animator.SetFloat("height", hit.distance);
+
+            Debug.DrawLine(transform.position, hit.point);*//*
+        }*/
+
     }
 
     #region not implemented
