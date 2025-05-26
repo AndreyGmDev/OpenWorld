@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a81cce62cdcaf34cb4e9ff083e3e683, type: 3}
-  m_Name: Test
+  m_Name: Dialogue_Test
   m_EditorClassIdentifier: 
   dialogueGroups:
   - flag: 0
     dialogueLines:
     - characterName: Teste
-      characterImage: {fileID: 21300000, guid: 434d02618caab3c469b30501cd57124d, type: 3}
+      characterImage: {fileID: 21300000, guid: 2bb1a4e930f52b141a1faa889fdc5359, type: 3}
       dialogueText: teste
     - characterName: teste2
       characterImage: {fileID: 21300000, guid: 74a93ab92517d0446a22d10bc6618807, type: 3}
-      dialogueText: AAAAAAAAAAAAAAAAA<color=#FF0000><size=200%>testou </size></color>
+      dialogueText: AAAAAAAAAAAAAAAAA<color=#ff00ff><b><size=200%>testou </size></b></color>

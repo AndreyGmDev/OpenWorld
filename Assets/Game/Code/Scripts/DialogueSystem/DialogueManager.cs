@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
