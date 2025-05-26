@@ -15,9 +15,42 @@ MonoBehaviour:
   dialogueGroups:
   - flag: 0
     dialogueLines:
-    - characterName: Teste
-      characterImage: {fileID: 21300000, guid: 2bb1a4e930f52b141a1faa889fdc5359, type: 3}
-      dialogueText: teste
-    - characterName: teste2
-      characterImage: {fileID: 21300000, guid: 74a93ab92517d0446a22d10bc6618807, type: 3}
-      dialogueText: AAAAAAAAAAAAAAAAA<color=#ff00ff><b><size=200%>testou </size></b></color>
+    - characterName: Makoto
+      characterImage: {fileID: 21300000, guid: 321c69a203744d542b36e5fef74c3c54, type: 3}
+      dialogueText: Eiiiii, Rodriguinho!!!!!!!
+    - characterName: Makoto
+      characterImage: {fileID: 21300000, guid: 1bf938eecec1f794c8966d222212ef5a, type: 3}
+      dialogueText: Vai tomar no seu cu
+  - flag: 1
+    dialogueLines:
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: 01e75125a69053d4eb750a2be444972b, type: 3}
+      dialogueText: ...
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: a8cc43273c9da4449bd48e03456cff3b, type: 3}
+      dialogueText: <b>bold</b>
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: ebc6afddb49ffd240ba24f77ee781085, type: 3}
+      dialogueText: <i>italic</i>
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: bfa23d70473d1634fb25dbdd77b93acd, type: 3}
+      dialogueText: <color=#FF0000>vermelho</color>, <color=#00FF00>verde</color>,
+        <color=#0000FF>azul</color>
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: 51105014fa723c342b9905def167a5cf, type: 3}
+      dialogueText: <size=50%>50%</size>, <size=100%>100%</size>, <size=150%>150%</size>,
+        <size=200%>200%</size>
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: 51105014fa723c342b9905def167a5cf, type: 3}
+      dialogueText: <align="center">Centro</align>
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: 51105014fa723c342b9905def167a5cf, type: 3}
+      dialogueText: '.
+
+        .
+
+        .
+
+        .
+
+'

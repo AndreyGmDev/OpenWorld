@@ -106,11 +106,39 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
 
-        // Desativa a UI de diálogo
-        dialogueUI.SetActive(false);
+        if (dialogueAnimator != null)
+        {
+            dialogueAnimator.SetTrigger("EndDialogue");
 
-        // Toca a animação de fim, se houver
-        dialogueAnimator?.SetTrigger("EndDialogue");
+            // Inicia a coroutine para aguardar a animação terminar
+            StartCoroutine(WaitForCloseAnimation());
+        }
+        else
+        {
+            // Se não houver animação, desativa a UI diretamente
+            dialogueUI.SetActive(false);
+        }
+    }
+
+    private IEnumerator WaitForCloseAnimation()
+    {
+        // Obtém o nome do estado que será tocado (nome da animação de fechamento)
+        string closingStateName = "Dialogue End"; // Substitua "Close" pelo nome real do estado de animação
+
+        // Aguarda até que o Animator entre no estado de fechamento
+        while (!dialogueAnimator.GetCurrentAnimatorStateInfo(0).IsName(closingStateName))
+        {
+            yield return null;
+        }
+
+        // Aguarda a animação terminar
+        while (dialogueAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+
+        // Desativa a UI após a animação terminar
+        dialogueUI.SetActive(false);
     }
 
     private void Update()
