@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Configurações de Música")]
     [SerializeField] AudioClip daytimeMusic;
+    [SerializeField] AudioClip nighttimeMusic;
     [SerializeField, Tooltip("Time in Seconds")] float minTimeBetweenMusic = 300f; // 5 minutos
     [SerializeField, Tooltip("Time in Seconds")] float maxTimeBetweenMusic = 900f; // 15 minutos
     [SerializeField] float fadeOutDuration = 5f;
@@ -21,6 +22,10 @@ public class AudioManager : MonoBehaviour
     private DaylightCycle daylightCycle;
 
     private static AudioManager audioManager;
+
+    bool isDay;
+    
+
     public static AudioManager Instance
     {
         get
@@ -86,6 +91,12 @@ public class AudioManager : MonoBehaviour
         ScheduleNextMusic();
     }
 
+    private void Start()
+    {
+        isDay = daylightCycle.IsDaytime();
+    }
+
+
     private void Update()
     {
         if (daylightCycle.IsDaytime())
@@ -96,9 +107,27 @@ public class AudioManager : MonoBehaviour
                 ScheduleNextMusic();
             }
         }
-        else if (musicSource.isPlaying)
+        
+        if (musicSource.isPlaying)
         {
-            StartCoroutine(FadeOutMusic());
+            if (daylightCycle != null)
+            {
+                if (daylightCycle.IsDaytime() != isDay)
+                {
+                    StartCoroutine(FadeOutMusic());
+                }
+
+                isDay = daylightCycle.IsDaytime();
+            }
+        }
+
+        else if (!daylightCycle.IsDaytime())
+        {
+            if (Time.time >= nextMusicTime && !musicSource.isPlaying)
+            {
+                PlayNighttimeMusic();
+                ScheduleNextMusic();
+            }
         }
     }
 
@@ -131,6 +160,15 @@ public class AudioManager : MonoBehaviour
         if (daytimeMusic != null)
         {
             musicSource.clip = daytimeMusic;
+            musicSource.Play();
+        }
+    }
+
+    private void PlayNighttimeMusic()
+    {
+        if (nighttimeMusic != null)
+        {
+            musicSource.clip = nighttimeMusic;
             musicSource.Play();
         }
     }
