@@ -13,5 +13,18 @@ public class DialogueTrigger : MonoBehaviour
             DialogueManager.Instance.StartDialogue(dialogueData, npcAnimator, flag);
         }
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            StartDialogue();
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
 }
 

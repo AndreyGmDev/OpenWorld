@@ -54,3 +54,8 @@ MonoBehaviour:
         .
 
 '
+  - flag: 3
+    dialogueLines:
+    - characterName: Lee Know
+      characterImage: {fileID: 21300000, guid: 5eef8a73e71885648b38fe6cf1fe57fc, type: 3}
+      dialogueText: vai toma no cu
