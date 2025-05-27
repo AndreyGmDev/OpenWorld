@@ -1,5 +1,6 @@
 using KinematicCharacterController;
 using UnityEngine;
+using UnityEngine.Windows;
 
 // Inputs para movimentação do player.
 public struct CharacterMovementInput
@@ -70,7 +71,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
     private CameraController.Orientation aimingOrientation; // Modo de orientação do player enquanto está mirando.
 
     // Informações sobre o UsingHook.
-    private bool isUsingHook; // Está usando o hook?
+    public bool isUsingHook; // Está usando o hook? Referência public usada no script Hook.
     private Vector3 whereIsGoing; // Para onde o player deve ir com o hook.
     private Vector3 target;
 
@@ -79,6 +80,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
     {
         motor.CharacterController = this;
     }
+
 
     public void SetInput(in CharacterMovementInput input)
     {
@@ -249,6 +251,12 @@ public class CharacterMovement : MonoBehaviour, ICharacterController
 
     private void UsingHook(ref Vector3 currentVelocity, float deltaTime)
     {
+        // Desativa os inputs de movimentação do player enquanto ele está usando o hook. Chamado a cada frame para evitar os inputs voltaram a partir de terceiros.
+        InputActionsManager input = InputActionsManager.Instance;
+
+        input.DisableGameActions();
+        input.inputActions.Game.Look.Enable();
+
         motor.ForceUnground();
 
         float distance = Vector3.Distance(whereIsGoing, transform.position);

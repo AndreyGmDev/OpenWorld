@@ -1,5 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
+using System.IO;
+using TMPro;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -31,11 +33,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] GameObject creditsPopUp;
     [SerializeField] GameObject exitPopUp;
 
-    InputActionsManager input;
-    void Start()
+    private void Start()
     {
-        //input = InputActionsManager.Instance;
-
         // Ação dos botões do MainMenuCanvas.
         // NewGame.
         if (newGameButton != null && newGamePopUp != null)
@@ -58,7 +57,19 @@ public class MainMenuController : MonoBehaviour
         // Continue.
         if (continueButton != null)
         {
-            continueButton.onClick.AddListener(() => StartCoroutine(LoadingManager.Instance.LoadAsyncScene("OpenWorld")));
+            // Se houver um save
+            if (!File.Exists(Application.dataPath + "/Saves/game_state.txt"))
+            {
+                continueButton.GetComponent<ButtonMouseEffects>().enabled = false;
+                continueButton.interactable = false;
+
+                Color disableColor = new Color(0.192f, 0.192f, 0.192f, 255);
+                continueButton.GetComponentInChildren<TextMeshProUGUI>().color = disableColor;
+            }
+            else
+            {
+                continueButton.onClick.AddListener(() => StartCoroutine(LoadingManager.Instance.LoadAsyncScene("OpenWorld")));
+            }
         }
 
         // Settings.
@@ -97,6 +108,5 @@ public class MainMenuController : MonoBehaviour
             exitButtonNo.onClick.AddListener(() => menuOptionsPopUp.SetActive(true)); // Ativa o MenuOptions.
             exitButtonNo.onClick.AddListener(() => exitPopUp.SetActive(false)); // Desativa o ExitGame.
         }
-
     }
 }

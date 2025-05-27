@@ -59,13 +59,11 @@ public class AudioManager : MonoBehaviour
         if (audioManager == null)
         {
             audioManager = this;
-            //DontDestroyOnLoad(gameObject);
         }
         else if (audioManager != this)
         {
-            Debug.LogWarning("Encontradas múltiplas instâncias do AudioManager. Destruindo a duplicata em: " + gameObject.name);
+            Debug.Log("Encontradas múltiplas instâncias do AudioManager. Destruindo a duplicata em: " + gameObject.name);
             Destroy(gameObject);
-            return;
         }
 
         // Setup
@@ -81,23 +79,30 @@ public class AudioManager : MonoBehaviour
 
         // Procura o DaylightCycle na cena
         daylightCycle = FindFirstObjectByType<DaylightCycle>();
-        if (daylightCycle == null)
+        if (daylightCycle != null)
         {
-            Debug.Log("DaylightCycle não encontrado na cena!");
-            enabled = false;
-            return;
+            ScheduleNextMusic();
         }
-
-        ScheduleNextMusic();
     }
 
     private void Start()
     {
-        isDay = daylightCycle.IsDaytime();
+        if (daylightCycle != null)
+        {
+            isDay = daylightCycle.IsDaytime();
+        }
     }
 
 
     private void Update()
+    {
+        if (daylightCycle != null)
+        {
+            DailyMusic();
+        }
+    }
+
+    private void DailyMusic()
     {
         if (daylightCycle.IsDaytime())
         {
@@ -107,7 +112,7 @@ public class AudioManager : MonoBehaviour
                 ScheduleNextMusic();
             }
         }
-        
+
         if (musicSource.isPlaying)
         {
             if (daylightCycle != null)

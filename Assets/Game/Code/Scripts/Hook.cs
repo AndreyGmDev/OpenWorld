@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class Hook : MonoBehaviour
 {
     [SerializeField, Tooltip("Velocidade do player usando o Hook")] float speed;
@@ -55,7 +56,7 @@ public class Hook : MonoBehaviour
             GameObject platform = TryShoot();
             if (platform)
             {
-                StartCoroutine(ThrowHook(platform.transform.position));
+                StartCoroutine(ThrowHook(platform.transform.position, currentHookTarget));
             }
         }
     }
@@ -77,21 +78,16 @@ public class Hook : MonoBehaviour
         return null;
     }
 
-    private IEnumerator ThrowHook(Vector3 isGoingTo)
+    private IEnumerator ThrowHook(Vector3 isGoingTo, GameObject currentHookTarget)
     {
-        // Desativa os inputs de movimentação do player.
-        input.DisableGameActions();
-        input.inputActions.Game.Look.Enable();
-
-        isGoingTo.y += directionDown;
         PlayerController player = FindFirstObjectByType<PlayerController>();
-
         // Calcula a rotação que o player deve seguir.
         Vector3 rotationEulerAngles = isGoingTo - player.characterMovement.transform.position;
         rotationEulerAngles.y = 0;
         rotationEulerAngles.Normalize();
         player.characterMovement.motor.RotateCharacter(Quaternion.LookRotation(rotationEulerAngles));
 
+        isGoingTo.y += directionDown;
         // Passa as informações para o CharacterMovement que é responsável pela movimentação do player.
         player.characterMovement.HookActions(new UsingHook
         {
@@ -106,15 +102,18 @@ public class Hook : MonoBehaviour
             lineRenderer.SetPosition(1, new Vector3(isGoingTo.x, isGoingTo.y - directionDown, isGoingTo.z));
         }
         
-        while (Vector3.Distance(isGoingTo, player.characterMovement.transform.position) > 1.2f)
+        // Enquanto o hook estiver sendo usado:
+        while (player.characterMovement.isUsingHook)
         {
-            if (lineRenderer != null)
-            {
-                lineRenderer.SetPosition(0, transform.position + Vector3.up * 0.9f);
-            }
-            
+            currentHookTarget.GetComponent<MeshRenderer>().enabled = true; // Ativa a border do HookTarget que está sendo usado.
+
+            lineRenderer.SetPosition(0, transform.position + Vector3.up * 0.9f); // Liga a linha do player até o HookTarget.
+
             yield return null;
         }
+
+        // Desativa a border do HookTarget que está sendo usado.
+        currentHookTarget.GetComponent<MeshRenderer>().enabled = false; 
 
         // Desativa a linha quando acaba de usar o Hook.
         lineRenderer.enabled = false;
