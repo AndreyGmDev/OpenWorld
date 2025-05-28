@@ -9,7 +9,7 @@ public class Visor : MonoBehaviour
     private bool isVisorEnabled;
     
     private MeshRenderer meshRenderer;
-    private Collider collider;
+    private Collider coll;
 
     private bool meshRendererEnabled;
     private bool colliderEnabled;
@@ -21,10 +21,10 @@ public class Visor : MonoBehaviour
         isVisorEnabled = GameObject.Find("Visor");
 
         meshRenderer = GetComponent<MeshRenderer>();
-        collider = GetComponent<Collider>();
+        coll = GetComponent<Collider>();
 
         meshRendererEnabled = meshRenderer != null ? GetComponent<MeshRenderer>().enabled : false;
-        colliderEnabled = collider != null ? GetComponent<Collider>().enabled : false;
+        colliderEnabled = coll != null ? GetComponent<Collider>().enabled : false;
 
         DoAction();
     }
@@ -49,7 +49,7 @@ public class Visor : MonoBehaviour
                     case VisorTypes.Type.Object:
 
                         if (meshRenderer) meshRenderer.enabled = elem.mode == VisorTypes.Mode.Active;
-                        if (collider) collider.enabled = elem.mode == VisorTypes.Mode.Active;
+                        if (coll) coll.enabled = elem.mode == VisorTypes.Mode.Active;
 
                         break;
 
@@ -60,7 +60,7 @@ public class Visor : MonoBehaviour
                         break;
                     case VisorTypes.Type.Collider:
 
-                        if (collider) collider.enabled = elem.mode == VisorTypes.Mode.Active;
+                        if (coll) coll.enabled = elem.mode == VisorTypes.Mode.Active;
 
                         break;
                 }
@@ -69,7 +69,7 @@ public class Visor : MonoBehaviour
         else
         {
             if (meshRenderer) meshRenderer.enabled = meshRendererEnabled;
-            if (collider) collider.enabled = colliderEnabled;
+            if (coll) coll.enabled = colliderEnabled;
         }
     }
 }
