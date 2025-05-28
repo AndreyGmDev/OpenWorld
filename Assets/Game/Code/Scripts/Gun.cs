@@ -83,7 +83,7 @@ public class Gun : MonoBehaviour
 
         //SFX
         if (shootSFX != null)
-            AudioManager.Instance.PlaySoundFXClip(shootSFX, transform, 1f);
+            AudioManager.Instance.PlaySoundFXClip(shootSFX, transform, 1f, true);
 
         // Calcula a trajetoria do tiro.
         RaycastHit hit;
@@ -113,7 +113,7 @@ public class Gun : MonoBehaviour
         isReloading = true;
 
         if (reloadSFX != null)
-            AudioManager.Instance.PlaySoundFXClip(reloadSFX, transform, 1f);
+            AudioManager.Instance.PlaySoundFXClip(reloadSFX, transform, 1f, false);
 
         yield return new WaitForSeconds(reloadTime);
 

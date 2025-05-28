@@ -113,7 +113,7 @@ public class Slingshot : MonoBehaviour
             {
                 if (readySFX != null)
                 {
-                    AudioManager.Instance.PlaySoundFXClip(readySFX, transform, slingReadyVolume);
+                    AudioManager.Instance.PlaySoundFXClip(readySFX, transform, slingReadyVolume, false);
                 }
             }
         }
@@ -144,7 +144,7 @@ public class Slingshot : MonoBehaviour
         AudioManager.Instance.InterruptSFX();
         if (shootSFX != null)
         {
-            AudioManager.Instance.PlaySoundFXClip(shootSFX, transform, slingShootVolume);
+            AudioManager.Instance.PlaySoundFXClip(shootSFX, transform, slingShootVolume, false);
         }
 
         // Diminui uma muni��o da arma.

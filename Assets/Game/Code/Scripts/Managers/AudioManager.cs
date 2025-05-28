@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Audio;
+using System.ComponentModel;
 
 public class AudioManager : MonoBehaviour
 {
@@ -136,11 +137,12 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, bool is3D)
     {
         currentSFX = Instantiate(sfxObject, spawnTransform.position, Quaternion.identity);
         currentSFX.clip = audioClip;
         currentSFX.volume = volume;
+        currentSFX.spatialBlend = is3D ? 1f : 0f;
         currentSFX.Play();
 
         float clipLength = currentSFX.clip.length;

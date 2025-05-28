@@ -23,7 +23,7 @@ public class SlingshotProject : MonoBehaviour
             hasHit = true;
             if (hitSFX != null)
             {
-                AudioManager.Instance.PlaySoundFXClip(hitSFX, transform, hitVolume);
+                AudioManager.Instance.PlaySoundFXClip(hitSFX, transform, hitVolume, true);
             }
         }
     }
