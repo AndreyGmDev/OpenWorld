@@ -43,10 +43,24 @@ public class MainMenuController : MonoBehaviour
 
     float vol = 1;
     AudioManager audioManager;
+
     private void Start()
     {
         audioManager = AudioManager.Instance;
-        // AÁ„o dos botıes do MainMenuCanvas.
+
+        // Setup hover sound effects for all buttons
+        SetupButtonHoverSFX(newGameButton);
+        SetupButtonHoverSFX(newGameButtonYes);
+        SetupButtonHoverSFX(newGameButtonNo);
+        SetupButtonHoverSFX(continueButton);
+        SetupButtonHoverSFX(settingsButton);
+        SetupButtonHoverSFX(creditsButton);
+        SetupButtonHoverSFX(backCreditsButton);
+        SetupButtonHoverSFX(exitButton);
+        SetupButtonHoverSFX(exitButtonYes);
+        SetupButtonHoverSFX(exitButtonNo);
+
+        // A√ß√£o dos bot√µes do MainMenuCanvas.
         // NewGame.
         if (newGameButton != null && newGamePopUp != null)
         {
@@ -98,7 +112,7 @@ public class MainMenuController : MonoBehaviour
         // Credits.
         if (creditsButton != null && creditsPopUp != null)
         {
-            creditsButton.onClick.AddListener(() => creditsPopUp.SetActive(true)); // Abre os crÈditos.
+            creditsButton.onClick.AddListener(() => creditsPopUp.SetActive(true)); // Abre os crÔøΩditos.
             creditsButton.onClick.AddListener(() => menuOptionsPopUp.SetActive(false)); // Desativa o MenuOptions.
             creditsButton.onClick.AddListener(() => AudioManager.Instance.PlaySoundFXClip(clickSFX, transform, vol, false));
         }
@@ -106,7 +120,7 @@ public class MainMenuController : MonoBehaviour
         if (backCreditsButton != null && creditsPopUp != null)
         {
             backCreditsButton.onClick.AddListener(() => menuOptionsPopUp.SetActive(true)); // Ativa o MenuOptions.
-            backCreditsButton.onClick.AddListener(() => creditsPopUp.SetActive(false)); // Desativa os crÈditos.
+            backCreditsButton.onClick.AddListener(() => creditsPopUp.SetActive(false)); // Desativa os crÔøΩditos.
             backCreditsButton.onClick.AddListener(() => AudioManager.Instance.PlaySoundFXClip(clickSFX, transform, vol, false));
         }
 
@@ -129,5 +143,31 @@ public class MainMenuController : MonoBehaviour
             exitButtonNo.onClick.AddListener(() => exitPopUp.SetActive(false)); // Desativa o ExitGame.
             exitButtonNo.onClick.AddListener(() => AudioManager.Instance.PlaySoundFXClip(clickSFX, transform, vol, false));
         }
+    }
+    
+    /// <param name="button">O bot√£o para adicionar o hoverSFX</param>
+    private void SetupButtonHoverSFX(Button button)
+    {
+        if (button == null || hoverSFX == null) return;
+
+        // Pega ou adiciona o componente EventTrigger
+        EventTrigger eventTrigger = button.GetComponent<EventTrigger>();
+        if (eventTrigger == null)
+        {
+            eventTrigger = button.gameObject.AddComponent<EventTrigger>();
+        }
+
+        // Cria o evento de hover
+        EventTrigger.Entry hoverEnter = new EventTrigger.Entry();
+        hoverEnter.eventID = EventTriggerType.PointerEnter;
+        hoverEnter.callback.AddListener((eventData) => {
+            if (button.interactable && audioManager != null)
+            {
+                audioManager.PlaySoundFXClip(hoverSFX, transform, vol, false);
+            }
+        });
+
+        // Adiciona o evento ao trigger
+        eventTrigger.triggers.Add(hoverEnter);
     }
 }

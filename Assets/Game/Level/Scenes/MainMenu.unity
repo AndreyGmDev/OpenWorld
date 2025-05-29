@@ -1965,8 +1965,9 @@ MonoBehaviour:
   settingsPopUp: {fileID: 912216252}
   creditsPopUp: {fileID: 157372341}
   exitPopUp: {fileID: 1502820469}
-  hoverSFX: {fileID: 8300000, guid: 4d6dcac8cf614694b99adfcd3c15fe51, type: 3}
-  clickSFX: {fileID: 8300000, guid: 4ca69ba4759d9eb4db9ee41112a8deb8, type: 3}
+  hoverSFX: {fileID: 8300000, guid: 4559c27eed995354c938bd238638a932, type: 3}
+  clickSFX: {fileID: 8300000, guid: 0141a76ba9cab484395991fd4bb2c415, type: 3}
+  bigClickSFX: {fileID: 8300000, guid: eb1e093c05a218242aaf7ff2542f5559, type: 3}
 --- !u!1 &600335548
 GameObject:
   m_ObjectHideFlags: 0
