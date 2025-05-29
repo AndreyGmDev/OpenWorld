@@ -19,10 +19,8 @@ public struct SaveGameInfos
 public class SaveGame : MonoBehaviour
 {
     // Nomes dos arquivos que serão salvos as informações
-    const string FINALPATH  = "/Saves";
-    const string SAVEDATA = "/game_state.txt";
-    //const string SAVEPLAYER = "/player_state.txt";
-    //const string SAVEDAY    = "/day_state.txt";
+    private const string FINALPATH  = "/Saves";
+    private const string SAVEDATA = "/game_state.txt";
 
     [SerializeField, Tooltip("Delay between each game save")] float delaySaveGame = 30;
 
@@ -51,7 +49,7 @@ public class SaveGame : MonoBehaviour
                     }
                     else
                     {
-                        GameObject obj = new GameObject("GameManager");
+                        GameObject obj = new("GameManager");
                         saveGame = obj.AddComponent<SaveGame>();
                         print("Crie um GameManager e adicione o Script SaveGame no GameManager");
                     }
@@ -84,7 +82,6 @@ public class SaveGame : MonoBehaviour
     }
 
     SaveGameInfos saveGameInfos;
-    SaveGameInfos save = new SaveGameInfos();
     public void MakeSaves()
     {
         string jsonPlayerData = JsonUtility.ToJson(saveGameInfos);
@@ -97,7 +94,7 @@ public class SaveGame : MonoBehaviour
         File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonDaylightCycleData);
     }
 
-    // Recebe o SavePlayerTransform do PlayerController.
+    // Save do Player - Script PlayerController.
     public void SavePlayerData(in SaveGameInfos infos)
     {
         saveGameInfos.PlayerPosition = infos.PlayerPosition;
@@ -105,73 +102,47 @@ public class SaveGame : MonoBehaviour
         saveGameInfos.CameraControllerRotation = infos.CameraControllerRotation;
     }
 
-    public SaveGameInfos LoadPlayerData()
-    {
-        if (File.Exists(Application.dataPath + FINALPATH + SAVEDATA))
-        {
-            string jsonPlayerData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDATA);
-            SaveGameInfos playerData = JsonUtility.FromJson<SaveGameInfos>(jsonPlayerData);
-
-            return playerData;
-        }
-        else
-        {
-            NewSaveGame();
-            return save;
-        }
-    }
-
+    // Save da Hotbar - Scrip PlayerController.
     public void SaveHotbarData(in SaveGameInfos infos)
     {
         saveGameInfos.Slot = infos.Slot;
         saveGameInfos.Itens = infos.Itens;
     }
 
-    public SaveGameInfos LoadHotbarData()
-    {
-       
-        if (File.Exists(Application.dataPath + FINALPATH + SAVEDATA))
-        {
-            string jsonHotbarData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDATA);
-            SaveGameInfos hotbarData = JsonUtility.FromJson<SaveGameInfos>(jsonHotbarData);
-
-            return hotbarData;
-        }
-        else
-        {
-            NewSaveGame();
-            return save;
-        }
-    }
-
+    // Save do DaylightCycle - Script DaylightCycle.
     public void SaveDaylightCycleData(in SaveGameInfos infos)
     {
         saveGameInfos.Seconds = infos.Seconds;
     }
 
-    public SaveGameInfos LoadDaylightCycleData()
+    // Função para o carregar o jogo.
+    public SaveGameInfos LoadData()
     {
         if (File.Exists(Application.dataPath + FINALPATH + SAVEDATA))
         {
-            string jsonDaylightCycleData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDATA);
-            SaveGameInfos daylightCycleData = JsonUtility.FromJson<SaveGameInfos>(jsonDaylightCycleData);
+            string jsonData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDATA);
+            SaveGameInfos data = JsonUtility.FromJson<SaveGameInfos>(jsonData);
 
-            return daylightCycleData;
+            return data;
         }
         else
         {
-            NewSaveGame();
-            return save;
+            return NewSaveGame();
         }
     }
 
-    private void NewSaveGame()
+    // Função para criar um novo save.
+    private SaveGameInfos NewSaveGame()
     {
-        save.PlayerPosition = Vector3.zero;
-        save.PlayerRotation = Quaternion.identity;
-        save.CameraControllerRotation = Vector3.zero;
-        save.Slot = 1;
-        save.Itens = null;
-        save.Seconds = 28800; // 08:00 horas.
+        SaveGameInfos save = new()
+        {
+            PlayerPosition = Vector3.zero,
+            PlayerRotation = Quaternion.identity,
+            CameraControllerRotation = Vector3.zero,
+            Slot = 0,
+            Itens = new GameObject[4],
+            Seconds = 28800 // 08:00 horas.
+        };
+        return save;
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -67,11 +66,19 @@ public class PlayerController : MonoBehaviour
     {
         bool mouseRightClick = input.inputActions.Game.Aiming.IsPressed();
         bool mouseLeftClick = input.inputActions.Game.Shoot.IsPressed();
-        int slot = Convert.ToInt32(hotbar.saveSlot - 1);
-        slot = Mathf.Clamp(slot, 0, hotbar.itens.Length);
 
-        ItemConditions itemCondition = hotbar.itens[slot].GetComponent<ItemConditions>();
-        if (itemCondition != null)
+        int slot = Mathf.RoundToInt(hotbar.saveSlot - 1);
+
+        if (slot >= 0)
+        {
+            slot = Mathf.Clamp(slot, 0, hotbar.itens.Length);
+        }
+        else
+        {
+            return;
+        }
+
+        if (hotbar.itens[slot].TryGetComponent<ItemConditions>(out var itemCondition))
         {
             bool rightClick = false;
             bool leftClick = false;
@@ -115,7 +122,7 @@ public class PlayerController : MonoBehaviour
     {
         if (saveGame != null)
         {
-            SaveGameInfos save = saveGame.LoadPlayerData();
+            SaveGameInfos save = saveGame.LoadData();
 
             characterMovement.motor.SetPosition(save.PlayerPosition);
             characterMovement.motor.RotateCharacter(save.PlayerRotation);

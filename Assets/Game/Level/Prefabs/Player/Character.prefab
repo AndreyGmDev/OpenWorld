@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7861505667313701654
 Transform:
   m_ObjectHideFlags: 0
@@ -303,7 +303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8369961415893208433
 Transform:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3332141271808188802
 Transform:
   m_ObjectHideFlags: 0
@@ -583,6 +583,7 @@ MonoBehaviour:
   crouchAcceleration: 70
   animator: {fileID: 0}
   isCrouching: 0
+  isUsingHook: 0
 --- !u!1 &5321267976274009127
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4261231954537696306
 Transform:
   m_ObjectHideFlags: 0

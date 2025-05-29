@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Hotbar : MonoBehaviour
 {
-    public GameObject[] itens;
+    public GameObject[] itens = new GameObject[4];
 
     private InputActionsManager input;
     private float slotAnt;
@@ -20,24 +20,18 @@ public class Hotbar : MonoBehaviour
 
     private void Update()
     {
-        int n = 0;
-        foreach (var item in itens)
-        {
-            if (item != null)
-            {
-                n++;
-            }
-        }
+        slot = input.inputActions.Game.Slots.ReadValue<float>(); // Captura o slot de acordo com o input pressionado.
 
-        slot = input.inputActions.Game.Slots.ReadValue<float>();
-        slot = Mathf.Clamp(slot, 0, n);
+        if (slot > 0)
+        {
+            slot = itens[Mathf.RoundToInt(slot - 1)] != null ? slot : slotAnt; // Se houver algum item mantem no novo slot, se não houver, volta para o slot anterior.
+        }
 
         if (slot != slotAnt)
         {
             ChangeSlot();
+            slotAnt = slot;
         }
-
-        slotAnt = slot;
     }
 
     private void ChangeSlot()
@@ -54,13 +48,7 @@ public class Hotbar : MonoBehaviour
         }
 
         // Ativa o item selecionado.
-        for (int i = 0; i < itens.Length; i++)
-        {
-            if (slot == i + 1)
-            {
-                itens[i].SetActive(true);
-            }
-        }
+        itens[Mathf.RoundToInt(slot - 1)].SetActive(true);
     }
 
     // Carrega as informações do SaveGame.
@@ -70,9 +58,10 @@ public class Hotbar : MonoBehaviour
 
         if (saveGame != null)
         {
-            SaveGameInfos save = saveGame.LoadPlayerData();
+            SaveGameInfos save = saveGame.LoadData();
 
             saveSlot = save.Slot;
+            itens = save.Itens;
         }
     }
 }

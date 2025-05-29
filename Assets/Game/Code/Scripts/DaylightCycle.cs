@@ -1,5 +1,4 @@
 using System;
-using KinematicCharacterController.Walkthrough.ClimbingLadders;
 using TMPro;
 using UnityEngine;
 
@@ -37,20 +36,14 @@ public class DaylightCycle : MonoBehaviour
         Save();
     }
 
-    public bool IsDaytime()
-    {
-        // Convert seconds to hours (0-24)
-        float hours = (seconds / 3600f) % 24;
-        // Day = between 6 AM and 6 PM
-        return hours >= 6 && hours < 18;
-    }
-
+    // Atualiza o ciclo do dia.
     private void CycleChange()
     {
         float cycleRotation = Mathf.Lerp(-90, 270, seconds / REAL_TIME_DAY_LENGTH);
         directionalLight.rotation = Quaternion.Euler(cycleRotation , 0 , 0);
     }
 
+    // Mostra o horário na interface.
     private void InterfaceTime()
     {
         if (timeOfTheDay != null)
@@ -76,8 +69,17 @@ public class DaylightCycle : MonoBehaviour
     {
         if (saveGame != null)
         {
-            SaveGameInfos save = saveGame.LoadPlayerData();
+            SaveGameInfos save = saveGame.LoadData();
             seconds = save.Seconds;
         }
+    }
+
+    // Retorna true se estiver de dia e false se estiver de noite.
+    public bool IsDaytime()
+    {
+        // Convert seconds to hours (0-24)
+        float hours = (seconds / 3600f) % 24;
+        // Day = between 6 AM and 6 PM
+        return hours >= 6 && hours < 18;
     }
 }
