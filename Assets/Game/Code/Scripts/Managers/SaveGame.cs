@@ -136,7 +136,7 @@ public class SaveGame : MonoBehaviour
     {
         SaveGameInfos save = new()
         {
-            PlayerPosition = Vector3.zero,
+            PlayerPosition = new Vector3(81, 12.2770004f, 145.5f),
             PlayerRotation = Quaternion.identity,
             CameraControllerRotation = Vector3.zero,
             Slot = 0,

@@ -33,6 +33,9 @@ public class PauseMenuController : MonoBehaviour
     InputActionsManager input;
     void Start()
     {
+        // Garante que as cenas irão iniciar normalmente.
+        Time.timeScale = 1;
+
         input = InputActionsManager.Instance;
 
         ArrangeOptions();

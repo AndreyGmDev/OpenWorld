@@ -5,7 +5,7 @@ public class EditorScreenShots : MonoBehaviour
 {
 
 }
-
+/*
 [CustomEditor(typeof(EditorScreenShots))]
 public class EditorScreenShotsEditor : Editor
 {
@@ -29,4 +29,4 @@ public class EditorScreenShotsEditor : Editor
         ScreenCapture.CaptureScreenshot(path + textureName + counter + ".png");
         counter++;
     }
-}
+}*/
