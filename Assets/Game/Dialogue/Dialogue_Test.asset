@@ -17,10 +17,10 @@ MonoBehaviour:
     dialogueLines:
     - characterName: Makoto
       characterImage: {fileID: 21300000, guid: 321c69a203744d542b36e5fef74c3c54, type: 3}
-      dialogueText: Eiiiii, Rodriguinho!!!!!!!
+      dialogueText: uepa
     - characterName: Makoto
       characterImage: {fileID: 21300000, guid: 1bf938eecec1f794c8966d222212ef5a, type: 3}
-      dialogueText: Vai tomar no seu cu
+      dialogueText: ratinho
   - flag: 1
     dialogueLines:
     - characterName: 
@@ -54,6 +54,12 @@ MonoBehaviour:
         .
 
 '
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: 5eef8a73e71885648b38fe6cf1fe57fc, type: 3}
+      dialogueText: lee know
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: 021905a5afb15694fb32137c98159cdd, type: 3}
+      dialogueText: han
   - flag: 3
     dialogueLines:
     - characterName: Lee Know

@@ -38,6 +38,8 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(DialogueData dialogueData, Animator npcAnimator, int flag)
     {
         Cursor.lockState = CursorLockMode.None;
+        InputActionsManager.Instance.DisableGameActions();
+
         if (isDialogueActive)
         {
             Debug.LogWarning("Um diálogo já está em andamento.");
@@ -106,6 +108,8 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        InputActionsManager.Instance.EnableGameActions();
+
         isDialogueActive = false;
 
         if (dialogueAnimator != null)

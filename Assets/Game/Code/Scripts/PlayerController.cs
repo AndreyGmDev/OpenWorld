@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     public CharacterMovement characterMovement;
     public CameraController cameraController;
     public Hotbar hotbar;
-    private SaveGame saveGame;
+    public SaveGame saveGame;
     private InputActionsManager input;
 
     //private InputSystem_Actions inputActions;
