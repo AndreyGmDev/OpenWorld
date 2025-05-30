@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2bc54bbb36486419d31f8fe3ce2d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFollowCamera: {fileID: 0}
+  playerFollowCamera: {fileID: 4316212624500190774}
   playerAimCamera: {fileID: 8788763076598321496}
   characterMovement: {fileID: 0}
   cameraTarget: {fileID: 8517245219740518387}
@@ -160,77 +160,6 @@ MonoBehaviour:
   aimingOrientation: 0
   isAiming: 0
   targetLook: {x: 0, y: 0}
---- !u!1 &2423275754944683646
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4083442843150617689}
-  - component: {fileID: 6210496198425710965}
-  - component: {fileID: 2895985890979623624}
-  m_Layer: 0
-  m_Name: cm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4083442843150617689
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2423275754944683646}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.21, y: -1.21, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7509956509763343308}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6210496198425710965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2423275754944683646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2895985890979623624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2423275754944683646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625c14eee3ad46c99df7c7c891ef668a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damping: {x: 0, y: 0.1, z: 0.5}
-  ShoulderOffset: {x: 0.5, y: 0, z: 0}
-  VerticalArmLength: 0.4
-  CameraSide: 1
-  CameraDistance: 5
-  AvoidObstacles:
-    Enabled: 1
-    CollisionFilter:
-      serializedVersion: 2
-      m_Bits: 128
-    IgnoreTag: Player
-    CameraRadius: 0.2
-    DampingIntoCollision: 0
-    DampingFromCollision: 0
 --- !u!1 &7025072107554624557
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +172,7 @@ GameObject:
   - component: {fileID: 2964740281422598669}
   - component: {fileID: 4316212624500190774}
   m_Layer: 0
-  m_Name: VirtualCamera
+  m_Name: PlayerNormalCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,11 +187,10 @@ Transform:
   m_GameObject: {fileID: 7025072107554624557}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1.61, z: -5}
+  m_LocalPosition: {x: 0.7, y: 1.46, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4083442843150617689}
+  m_Children: []
   m_Father: {fileID: 4831328184652618666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2964740281422598669
