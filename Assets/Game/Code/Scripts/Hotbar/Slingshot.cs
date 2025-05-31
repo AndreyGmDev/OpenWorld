@@ -123,7 +123,7 @@ public class Slingshot : MonoBehaviour
             countDelayShoots -= Time.deltaTime;
         }
 
-        if (input.inputActions.Game.PickUp.WasPressedThisFrame())
+        if (input.inputActions.Game.Interaction.WasPressedThisFrame())
         {
             PickUpItem();
         }

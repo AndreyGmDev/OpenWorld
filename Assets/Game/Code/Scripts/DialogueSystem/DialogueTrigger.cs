@@ -6,6 +6,13 @@ public class DialogueTrigger : MonoBehaviour
     public Animator npcAnimator;
     public int flag; // Flag para escolher o grupo de diálogos
 
+    private InputActionsManager input; // InputManager do jogo.
+
+    private void Start()
+    {
+        input = InputActionsManager.Instance;
+    }
+
     public void StartDialogue()
     {
         if (DialogueManager.Instance != null && dialogueData != null)
@@ -16,7 +23,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (input.inputActions.Game.Interaction.WasPressedThisFrame()) // Se apertar a letra 'F' Gabriel!
         {
             //StartDialogue();
         }
