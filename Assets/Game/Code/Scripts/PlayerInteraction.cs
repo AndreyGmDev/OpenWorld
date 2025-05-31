@@ -3,13 +3,14 @@ using UnityEngine;
 [RequireComponent (typeof(SphereCollider))]
 public class PlayerInteraction : MonoBehaviour
 {
-    public LayerMask layerMask;
-    public SphereCollider coll;
-    public GameObject nextInteraction = null;
-    public GameObject lastInteraction = null;
+    private LayerMask layerMask;
+    private SphereCollider coll;
+    private GameObject nextInteraction = null;
+
+    /*public GameObject lastInteraction = null;
     public GameObject interactPrompt;
     public bool hasInteracted = false;
-    private DialogueTrigger currentTrigger;
+    private DialogueTrigger currentTrigger;*/
 
     private void Start()
     {
@@ -35,8 +36,8 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         nextInteraction = _nextInteraction;
-
-        if (nextInteraction != null)
+        print(nextInteraction);
+        /*if (nextInteraction != null)
         {
             DialogueTrigger trigger = nextInteraction.GetComponent<DialogueTrigger>();
             if (trigger != null)
@@ -75,20 +76,22 @@ public class PlayerInteraction : MonoBehaviour
             }
 
             
-        }
+        }*/
     }
 
     // Retorna a interação mais próxima para os outros scripts.
     public GameObject NextInteraction()
     {
-        
-        if (currentTrigger != null)
+
+        /*if (currentTrigger != null)
         {
             hasInteracted = true;
             interactPrompt.SetActive(true);
             //lastInteraction.GetComponent<Outline>().enabled = false;
             currentTrigger.StartDialogue(); // Chama o diálogo da placa
-        }
+        }*/
+        print(nextInteraction.gameObject);
+
         return nextInteraction;
     }
 }
