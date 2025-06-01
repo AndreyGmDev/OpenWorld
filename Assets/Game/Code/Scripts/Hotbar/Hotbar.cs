@@ -1,8 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hotbar : MonoBehaviour
 {
     public GameObject[] itens = new GameObject[4];
+
+    //HUD
+
+    public RectTransform[] slotTransforms = new RectTransform[4]; 
+    public Image[] slotImages = new Image[4]; 
+    public Color selectedColor = Color.yellow; 
+    public Color defaultColor = Color.white; 
 
     private InputActionsManager input;
     private float slotAnt;
@@ -13,7 +21,7 @@ public class Hotbar : MonoBehaviour
     {
         input = InputActionsManager.Instance;
 
-        Load();
+        //Load();
         slot = saveSlot;
         ChangeSlot();
     }
@@ -24,7 +32,7 @@ public class Hotbar : MonoBehaviour
 
         if (slot > 0)
         {
-            slot = itens[Mathf.RoundToInt(slot - 1)] != null ? slot : slotAnt; // Se houver algum item mantem no novo slot, se não houver, volta para o slot anterior.
+            slot = itens[Mathf.RoundToInt(slot - 1)] != null ? slot : slotAnt; // Se houver algum item mantem no novo slot, se nï¿½o houver, volta para o slot anterior.
         }
 
         if (slot != slotAnt)
@@ -32,6 +40,7 @@ public class Hotbar : MonoBehaviour
             ChangeSlot();
             slotAnt = slot;
         }
+
     }
 
     private void ChangeSlot()
@@ -49,9 +58,30 @@ public class Hotbar : MonoBehaviour
 
         // Ativa o item selecionado.
         itens[Mathf.RoundToInt(slot - 1)].SetActive(true);
+
+        UpdateHUD();
     }
 
-    // Carrega as informações do SaveGame.
+    private void UpdateHUD()
+    {
+        for (int i = 0; i < slotImages.Length; i++)
+        {
+            if (i == Mathf.RoundToInt(slot - 1))
+            {
+                // Slot selecionado
+                slotImages[i].color = selectedColor;
+                slotImages[i].transform.localScale = Vector3.one * 1.2f; // Aumenta o tamanho
+            }
+            else
+            {
+                // Slots nÃ£o selecionados
+                slotImages[i].color = defaultColor;
+                slotImages[i].transform.localScale = Vector3.one; // Reseta o tamanho
+            }
+        }
+    }
+
+    // Carrega as informaï¿½ï¿½es do SaveGame.
     private void Load()
     {
         SaveGame saveGame = SaveGame.Instance;
