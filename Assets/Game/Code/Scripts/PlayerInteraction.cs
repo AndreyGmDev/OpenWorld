@@ -36,7 +36,6 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         nextInteraction = _nextInteraction;
-        print(nextInteraction);
         /*if (nextInteraction != null)
         {
             DialogueTrigger trigger = nextInteraction.GetComponent<DialogueTrigger>();
@@ -90,7 +89,6 @@ public class PlayerInteraction : MonoBehaviour
             //lastInteraction.GetComponent<Outline>().enabled = false;
             currentTrigger.StartDialogue(); // Chama o diálogo da placa
         }*/
-        print(nextInteraction.gameObject);
 
         return nextInteraction;
     }
