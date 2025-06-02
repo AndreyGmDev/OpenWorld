@@ -8,9 +8,11 @@ public class Hotbar : MonoBehaviour
     //HUD
 
     public RectTransform[] slotTransforms = new RectTransform[4]; 
-    public Image[] slotImages = new Image[4]; 
+    public Image[] slotImages = new Image[4];
+    public GameObject[] slotSelection = new GameObject[4];
     public Color selectedColor = Color.yellow; 
-    public Color defaultColor = Color.white; 
+    public Color defaultColor = Color.white;
+    public float ogSize = 0.5f;
 
     private InputActionsManager input;
     private float slotAnt;
@@ -24,6 +26,7 @@ public class Hotbar : MonoBehaviour
         //Load();
         slot = saveSlot;
         ChangeSlot();
+        UpdateHUD();
     }
 
     private void Update()
@@ -69,14 +72,16 @@ public class Hotbar : MonoBehaviour
             if (i == Mathf.RoundToInt(slot - 1))
             {
                 // Slot selecionado
+                slotSelection[i].SetActive(true);
                 slotImages[i].color = selectedColor;
-                slotImages[i].transform.localScale = Vector3.one * 1.2f; // Aumenta o tamanho
+                //slotImages[i].transform.localScale = new Vector3(ogSize, ogSize, ogSize) * 1.0f; // Aumenta o tamanho
             }
             else
             {
                 // Slots não selecionados
+                slotSelection[i].SetActive(false);
                 slotImages[i].color = defaultColor;
-                slotImages[i].transform.localScale = Vector3.one; // Reseta o tamanho
+                //slotImages[i].transform.localScale = new Vector3(ogSize, ogSize, ogSize); // Reseta o tamanho
             }
         }
     }
