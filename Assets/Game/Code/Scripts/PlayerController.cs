@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public CharacterMovement characterMovement;
-    public CameraController cameraController;
     public Hotbar hotbar;
-    public SaveGame saveGame;
+    public CharacterMovement characterMovement;
+
+    [SerializeField] CameraController cameraController;
+    
     private InputActionsManager input;
+    private SaveGame saveGame;
 
     //private InputSystem_Actions inputActions;
     Vector2 moveInput = Vector2.zero;
@@ -64,37 +66,49 @@ public class PlayerController : MonoBehaviour
 
     private void AllowIncrementZoomCamera()
     {
+        // Confere se o botão esquerdo e direito do mouse são pressionados.
         bool mouseRightClick = input.inputActions.Game.Aiming.IsPressed();
         bool mouseLeftClick = input.inputActions.Game.Shoot.IsPressed();
 
+        // Pega o item que o player está segurando no momento.
         int slot = Mathf.RoundToInt(hotbar.saveSlot - 1);
 
-        if (slot >= 0)
+        /*if (slot >= 0)
         {
             slot = Mathf.Clamp(slot, 0, hotbar.itens.Length);
-        }
-        else
+        }*/
+        if (slot < 0)
         {
+            // Se não houver nenhum item ativado, então o player não estará mirando.
+            cameraController.IncrementZoomCamera(false);
             return;
         }
 
         if (hotbar.itens[slot].TryGetComponent<ItemConditions>(out var itemCondition))
         {
+            // Por padrão o item não pode mirar com nenhum dos botões do mouse.
             bool rightClick = false;
             bool leftClick = false;
 
+            // Confere se o item ativado permite mirar com o botão direito.
             if (itemCondition.CheckRightClickAim())
             {
                 rightClick = mouseRightClick;
             }
             
-
+            // Confere se o item ativado permite mirar com o botão esquerdo.
             if (itemCondition.CheckLeftClickAim())
             {
                 leftClick = mouseLeftClick;
             }
 
+            // O player estará mirando se estiver segunrando pelo menos um dos botões do mouse (direito ou esquerdo).
             cameraController.IncrementZoomCamera(rightClick || leftClick);
+        }
+        else
+        {
+            // Se o item que o player usando não tiver esse script, então o player não estará mirando.
+            cameraController.IncrementZoomCamera(false);
         }
     }
 

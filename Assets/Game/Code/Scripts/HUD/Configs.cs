@@ -74,6 +74,7 @@ public class Configs : MonoBehaviour
 
     private void OnDisable()
     {
+        // Se o menu de configurações for desabilitado sem ser salvo, a interface de resolução reseta para a resolução em que estava anteriormente.
         ddpResolution.value = realResolutionValue;
     }
 
@@ -113,6 +114,7 @@ public class Configs : MonoBehaviour
         // Video.
         if (vsync != null)
         {
+            vsync.onValueChanged.AddListener((_) => QualitySettings.vSyncCount = vsync.isOn ? 1 : 0);
             vsync.onValueChanged.AddListener((_) => Save());
         }
 
@@ -149,9 +151,6 @@ public class Configs : MonoBehaviour
         int w = Convert.ToInt32(currentResolution[0].Trim());
         int h = Convert.ToInt32(currentResolution[0].Trim());
         Screen.SetResolution(w, h, true);
-
-        // Vsync
-        QualitySettings.vSyncCount = vsync.isOn ? 1 : 0;
        
         //Application.targetFrameRate = 9;
     }

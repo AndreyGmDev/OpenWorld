@@ -83,25 +83,16 @@ public class BelfryOne_SecondRoom : MonoBehaviour
             int temp = order[i];
             order[i] = order[j];
             order[j] = temp;
-
-            /*GameObject temp2 = visualOrder[i];
-            visualOrder[i].transform.localPosition = visualOrder[j].transform.localPosition;
-            visualOrder[j].transform.localPosition = temp2.transform.localPosition;*/
         }
 
         for (int i = 0; i < visualOrder.Length; i++)
         {
-            visualOrder[i].transform.position = computers[order[i] - 1].transform.position - (computers[order[i] - 1].transform.forward * 0.1f);
+            visualOrder[i].transform.position = computers[order[i] - 1].transform.position;
         }
 
         foreach (var item in computers)
         {
             item.GetComponent<MeshRenderer>().enabled = false;
-        }
-
-        foreach (var item in order)
-        {
-            print(item);
         }
     }
 }
