@@ -281,6 +281,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 22.933113, y: 29.99414, z: 1.7017049e-38}
   m_Center: {x: 0.00024414062, y: -0.0000038146973, z: 0}
+--- !u!1 &254397417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8282483335707266293, guid: 058fa8160e040164aa2136aad78e4907, type: 3}
+  m_PrefabInstance: {fileID: 1067812155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &254397419 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6514486224190167502, guid: 058fa8160e040164aa2136aad78e4907, type: 3}
+  m_PrefabInstance: {fileID: 1067812155}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &286114970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 23bb18492f13c98499c5ae50ea088fa8, type: 3}
@@ -1618,6 +1628,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 254397419}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: telaDeLoading
+      value: 
+      objectReference: {fileID: 254397417}
     - target: {fileID: 6504738768027931084, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.962284
