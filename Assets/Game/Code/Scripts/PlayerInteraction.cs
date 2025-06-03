@@ -7,10 +7,8 @@ public class PlayerInteraction : MonoBehaviour
     private SphereCollider coll;
     private GameObject nextInteraction = null;
 
-    /*public GameObject lastInteraction = null;
     public GameObject interactPrompt;
     public bool hasInteracted = false;
-    private DialogueTrigger currentTrigger;*/
 
     private void Start()
     {
@@ -34,62 +32,67 @@ public class PlayerInteraction : MonoBehaviour
                 _nextInteraction = interaction.gameObject;
             }
         }
+        
+        if (_nextInteraction != null && _nextInteraction != nextInteraction)
+        {
+            hasInteracted = false;
+        }
 
         nextInteraction = _nextInteraction;
-        /*if (nextInteraction != null)
+
+        if (nextInteraction != null)
         {
-            DialogueTrigger trigger = nextInteraction.GetComponent<DialogueTrigger>();
-            if (trigger != null)
-            {
-                currentTrigger = trigger; // Armazena a referência ao trigger
-            }
-
-            
-
             if (hasInteracted == false)
             {
-                interactPrompt.SetActive(true);
-                nextInteraction.GetComponent<Outline>().enabled = true;
+                if (interactPrompt != null)
+                {
+                    interactPrompt.SetActive(true);
+                }
+
+                if (nextInteraction.GetComponent<Outline>())
+                {
+                    nextInteraction.GetComponent<Outline>().enabled = true;
+                }
             }
-            else if (hasInteracted == true){
-                interactPrompt.SetActive(false);
-                //nextInteraction.GetComponent<Outline>().enabled = false;
+            else if (hasInteracted == true)
+            {
+
+                if (interactPrompt != null)
+                {
+                    interactPrompt.SetActive(false);
+                }
+
+                if (nextInteraction.GetComponent<Outline>())
+                {
+                    nextInteraction.GetComponent<Outline>().enabled = false;
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                NextInteraction();
+                hasInteracted = true;
             }
-
-            lastInteraction = nextInteraction;
-            
         }
-        else {
-            lastInteraction.GetComponent<Outline>().enabled = false;
-            interactPrompt.SetActive(false);
-            hasInteracted = false;
-
-            if (lastInteraction.GetComponent<DialogueTrigger>() == currentTrigger)
+        else
+        {
+            if (interactPrompt != null)
             {
-                currentTrigger = null;
+                interactPrompt.SetActive(false);
             }
 
-            
-        }*/
+            hasInteracted = false;
+        }
     }
 
     // Retorna a interação mais próxima para os outros scripts.
     public GameObject NextInteraction()
     {
-
-        /*if (currentTrigger != null)
-        {
-            hasInteracted = true;
-            interactPrompt.SetActive(true);
-            //lastInteraction.GetComponent<Outline>().enabled = false;
-            currentTrigger.StartDialogue(); // Chama o diálogo da placa
-        }*/
-
         return nextInteraction;
     }
+
+    public void HasInteracted(bool isInteracted) 
+    {
+        hasInteracted = isInteracted;
+    }
+
 }

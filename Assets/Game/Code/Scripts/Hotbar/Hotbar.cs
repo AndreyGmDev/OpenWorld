@@ -1,9 +1,10 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Hotbar : MonoBehaviour
 {
-    public GameObject[] itens = new GameObject[4];
+    public GameObject[] itens = new GameObject[3];
 
     //HUD
 
@@ -67,11 +68,14 @@ public class Hotbar : MonoBehaviour
 
     private void UpdateHUD()
     {
+        if (slotSelection.Any(x => x == null)) return;
+
         for (int i = 0; i < slotImages.Length; i++)
         {
             if (i == Mathf.RoundToInt(slot - 1))
             {
                 // Slot selecionado
+
                 slotSelection[i].SetActive(true);
                 slotImages[i].color = selectedColor;
                 //slotImages[i].transform.localScale = new Vector3(ogSize, ogSize, ogSize) * 1.0f; // Aumenta o tamanho
@@ -84,6 +88,7 @@ public class Hotbar : MonoBehaviour
                 //slotImages[i].transform.localScale = new Vector3(ogSize, ogSize, ogSize); // Reseta o tamanho
             }
         }
+
     }
 
     // Carrega as informa��es do SaveGame.

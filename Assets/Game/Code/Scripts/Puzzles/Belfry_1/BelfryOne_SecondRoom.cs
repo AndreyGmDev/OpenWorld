@@ -27,7 +27,7 @@ public class BelfryOne_SecondRoom : MonoBehaviour
             if (item != null)
             {
                 if (item == playerInteraction.NextInteraction())
-                { 
+                {
                     if (input.inputActions.Game.Interaction.WasPressedThisFrame())
                     {
                         if (!item.GetComponent<MeshRenderer>().enabled)
@@ -36,6 +36,14 @@ public class BelfryOne_SecondRoom : MonoBehaviour
                             TryOrder();
                         }
                     }
+                }
+                else
+                {
+                    if (item.TryGetComponent<Outline>(out var outline))
+                    {
+                        outline.enabled = false;
+                    }
+                    
                 }
             }
         }
@@ -47,8 +55,6 @@ public class BelfryOne_SecondRoom : MonoBehaviour
         {
             orderIsWrong = true;
         }
-
-        print(orderIsWrong);
 
         attempt++;
 
