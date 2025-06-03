@@ -110,6 +110,9 @@ public class DialogueManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         InputActionsManager.Instance.EnableGameActions();
 
+        PlayerInteraction playerInteraction = FindAnyObjectByType<PlayerInteraction>();
+        playerInteraction.HasInteracted(false);
+
         isDialogueActive = false;
 
         if (dialogueAnimator != null)

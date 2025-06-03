@@ -296,7 +296,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8369961415893208433}
-  - component: {fileID: 9164831336785366191}
   m_Layer: 0
   m_Name: Visor
   m_TagString: Untagged
@@ -319,20 +318,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3936767498843696303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9164831336785366191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2472990250725820308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f26ed171a24c35d45a8f5b31451e193a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rightClickAim: 0
-  leftClickAim: 1
 --- !u!1 &2802905309499608189
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,9 +368,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itens:
   - {fileID: 2472990250725820308}
-  - {fileID: 9145528108519141874}
   - {fileID: 3190103312414735721}
   - {fileID: 1077206618470905913}
+  - {fileID: 0}
+  slotTransforms:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  slotImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  slotSelection:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  ogSize: 0.5
   saveSlot: 0
 --- !u!1 &3190103312414735721
 GameObject:

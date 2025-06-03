@@ -13,7 +13,7 @@ public class DialogueTrigger : MonoBehaviour
         input = InputActionsManager.Instance;
     }
 
-    public void StartDialogue()
+    private void StartDialogue()
     {
         if (DialogueManager.Instance != null && dialogueData != null)
         {
@@ -23,15 +23,28 @@ public class DialogueTrigger : MonoBehaviour
 
     public void Update()
     {
-        if (input.inputActions.Game.Interaction.WasPressedThisFrame()) // Se apertar a letra 'F' Gabriel!
-        {
-            //StartDialogue();
-        }
-
         if (Input.GetKeyDown(KeyCode.U))
         {
             Cursor.lockState = CursorLockMode.None;
         }
+
+        PlayerInteraction playerInteraction = FindAnyObjectByType<PlayerInteraction>();
+        GameObject nextInteraction = playerInteraction.NextInteraction();
+
+        if (nextInteraction == gameObject)
+        {
+            if (input.inputActions.Game.Interaction.WasPressedThisFrame()) // Se apertar a letra 'F' Gabriel!
+            {
+                StartDialogue();      
+            }
+        }
+        else
+        {
+            GetComponent<Outline>().enabled = false;
+        }
     }
+
+
+
 }
 
