@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class BelfryOne_SecondRoom : MonoBehaviour
 {
-    [SerializeField, Tooltip("Os objetos dem estar na layer InteractableObjects e precisam ter suas MeshRenderer desativadas para serem ativadas quando o player interagir com cada objeto.")] GameObject[] computers = new GameObject[4]; // Os 4 computadores na cena.
+    [SerializeField, Tooltip("Os objetos dem estar na layer InteractableObjects.")] GameObject[] computers = new GameObject[4]; // Os 4 computadores na cena.
+    [SerializeField, Tooltip("Precisam ter suas MeshRenderer desativadas para serem ativadas quando o player interagir com cada computador.")] GameObject[] screenComputers = new GameObject[4]; // As 4 telas de computadores na cena.
     [SerializeField] GameObject[] visualOrder = new GameObject[4];
     [SerializeField] GameObject door;
 
@@ -22,28 +23,28 @@ public class BelfryOne_SecondRoom : MonoBehaviour
 
     private void Update()
     {
-        foreach (var item in computers)
+        for (int i = 0; i < computers.Length; i++)
         {
-            if (item != null)
+            if (computers[i] != null && screenComputers[i])
             {
-                if (item == playerInteraction.NextInteraction())
+                if (computers[i] == playerInteraction.NextInteraction())
                 {
                     if (input.inputActions.Game.Interaction.WasPressedThisFrame())
                     {
-                        if (!item.GetComponent<MeshRenderer>().enabled)
+                        if (!screenComputers[i].GetComponent<MeshRenderer>().enabled)
                         {
-                            item.GetComponent<MeshRenderer>().enabled = true;
+                            screenComputers[i].GetComponent<MeshRenderer>().enabled = true;
                             TryOrder();
                         }
                     }
                 }
                 else
                 {
-                    if (item.TryGetComponent<Outline>(out var outline))
+                    if (computers[i].TryGetComponent<Outline>(out var outline))
                     {
                         outline.enabled = false;
                     }
-                    
+
                 }
             }
         }
@@ -51,7 +52,7 @@ public class BelfryOne_SecondRoom : MonoBehaviour
 
     private void TryOrder()
     {
-        if (computers[order[attempt] - 1].GetComponent<MeshRenderer>().enabled == false)
+        if (screenComputers[order[attempt] - 1].GetComponent<MeshRenderer>().enabled == false)
         {
             orderIsWrong = true;
         }
@@ -86,19 +87,22 @@ public class BelfryOne_SecondRoom : MonoBehaviour
             int j = Random.Range(0, order.Length);
 
             // Embaralha os arrays.
-            int temp = order[i];
-            order[i] = order[j];
-            order[j] = temp;
+            (order[j], order[i]) = (order[i], order[j]);
         }
 
         for (int i = 0; i < visualOrder.Length; i++)
         {
-            visualOrder[i].transform.position = computers[order[i] - 1].transform.position;
+            // Coloca a ordem correta visível para o player.
+            visualOrder[i].transform.position = screenComputers[order[i] - 1].transform.position;
         }
 
-        foreach (var item in computers)
+        foreach (var screen in screenComputers)
         {
-            item.GetComponent<MeshRenderer>().enabled = false;
+            // Desabilita a tela de cada computador.
+            screen.GetComponent<MeshRenderer>().enabled = false;
         }
+
+        // Faz com que o player ainda não tenha interagido com nenhum objeto(Isso é mais para o visual, código no PlayerInteraction).
+        playerInteraction.HasInteracted(false);
     }
 }
