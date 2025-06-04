@@ -80,10 +80,11 @@ public class LoadingManager : MonoBehaviour
     // Função chamada pelo botão "Novo Jogo"
     public void NovoJogo()
     {
-        if (!Directory.Exists(SaveGame.Instance.SAVEPATH)) { 
+        if (!Directory.Exists(SaveGame.Instance.SAVEPATH)) 
+        { 
             Directory.CreateDirectory(SaveGame.Instance.SAVEPATH);
-        
         }
+        
         File.Delete(SaveGame.Instance.SAVEPATH + SaveGame.Instance.SAVEDATA);
 
         // Desativa os objetos especificados
@@ -143,8 +144,12 @@ public class LoadingManager : MonoBehaviour
     }
 
 
+    public void LoadAsyncScene(string nameScene)
+    {
+        StartCoroutine(LoadScene(nameScene));
+    }
 
-    public IEnumerator LoadAsyncScene(string nameScene)
+    public IEnumerator LoadScene(string nameScene)
     {
         // Desabilita o cursor.
         Cursor.lockState = CursorLockMode.Locked;

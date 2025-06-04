@@ -96,7 +96,7 @@ public class MainMenuController : MonoBehaviour
             }
             else
             {
-                continueButton.onClick.AddListener(() => StartCoroutine(LoadingManager.Instance.LoadAsyncScene("OpenWorld")));
+                continueButton.onClick.AddListener(() => LoadingManager.Instance.LoadAsyncScene("OpenWorld"));
                 continueButton.onClick.AddListener(() => audioManager.PlaySoundFXClip(bigClickSFX, transform, VOL, false));
             }
         }

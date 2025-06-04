@@ -63,10 +63,9 @@ public class PauseMenuController : MonoBehaviour
             exitButtonNo.onClick.AddListener(() => exitCanvas.SetActive(false));
         }
 
-        if (exitButtonYes != null) { 
-
-            
-            exitButtonYes.onClick.AddListener(() => StartCoroutine(LoadingManager.Instance.LoadAsyncScene("MainMenu")));
+        if (exitButtonYes != null) 
+        { 
+            exitButtonYes.onClick.AddListener(() => LoadingManager.Instance.LoadAsyncScene("MainMenu"));
         }
 
         if (saveButton != null)

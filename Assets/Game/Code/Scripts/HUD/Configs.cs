@@ -24,8 +24,8 @@ public class Configs : MonoBehaviour
     [SerializeField] Toggle showFPS; // bool para o Show FPS ativo.
     [SerializeField] TextMeshProUGUI fps; // Onde mostra o FPS.
 
-    private List<string> resolutions = new List<string>(); // Lista com todas as resoluções possiveis a serem selecionadas.
-    private List<string> quality = new List<string>(); // Lista com todas as qualidades possiveis a serem selecionadas.
+    private List<string> resolutions = new(); // Lista com todas as resoluções possiveis a serem selecionadas.
+    private List<string> quality = new(); // Lista com todas as qualidades possiveis a serem selecionadas.
 
     [Header("Controls Settings")]
     [SerializeField] Slider normalSensitivity; // Sensibilidade do player sem mirar.

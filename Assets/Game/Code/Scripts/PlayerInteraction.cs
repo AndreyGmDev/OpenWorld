@@ -3,12 +3,12 @@ using UnityEngine;
 [RequireComponent (typeof(SphereCollider))]
 public class PlayerInteraction : MonoBehaviour
 {
+    public GameObject interactPrompt;
+
     private LayerMask layerMask;
     private SphereCollider coll;
     private GameObject nextInteraction = null;
-
-    public GameObject interactPrompt;
-    public bool hasInteracted = false;
+    private bool hasInteracted = false;
 
     private void Start()
     {
@@ -18,14 +18,17 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        float nextDistance = Mathf.Infinity;
-        GameObject _nextInteraction = null;
+        float nextDistance = Mathf.Infinity; // Distancia mais próxima
+        GameObject _nextInteraction = null; // Objeto mais próximo para interagir.
 
-        Collider[] allInteractions = Physics.OverlapSphere(transform.position + coll.center, coll.radius ,layerMask);
+        // Pega todos os colliders que estão interagindo com o player.
+        Collider[] allInteractions = Physics.OverlapSphere(transform.position + coll.center, coll.radius, layerMask);
         foreach (var interaction in allInteractions)
         {
+            // Calcula a distancia entre cada collider e o player.
             float distance = Vector3.Distance(interaction.transform.position, transform.position);
 
+            // Confere qual é a menor distancia entre cada collider e o player.
             if (distance < nextDistance)
             {
                 nextDistance = distance;
@@ -33,53 +36,66 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
         
+        // Se Trocar o objeto de interação.
         if (_nextInteraction != null && _nextInteraction != nextInteraction)
         {
-            hasInteracted = false;
+            hasInteracted = false; // Nenhuma interação foi realizada ainda.
         }
 
+        // Seta o objeto que está mais próximo do player.
         nextInteraction = _nextInteraction;
 
+        // Encontrou um objeto para interagir.
         if (nextInteraction != null)
         {
+            // Se ainda não interagiu.
             if (hasInteracted == false)
             {
+                // Ativa a tela de interação.
                 if (interactPrompt != null)
                 {
                     interactPrompt.SetActive(true);
                 }
 
-                if (nextInteraction.GetComponent<Outline>())
+                // Ativa a outline do objeto que está sendo interagido.
+                if (nextInteraction.TryGetComponent<Outline>(out var outline))
                 {
-                    nextInteraction.GetComponent<Outline>().enabled = true;
+                    outline.enabled = true;
                 }
             }
-            else if (hasInteracted == true)
+            // Depois de interagir.
+            else
             {
-
+                // Deativa a tela de interação.
                 if (interactPrompt != null)
                 {
                     interactPrompt.SetActive(false);
                 }
 
-                if (nextInteraction.GetComponent<Outline>())
+                // Deativa a outline do objeto interagido.
+                if (nextInteraction.TryGetComponent<Outline>(out var outline))
                 {
-                    nextInteraction.GetComponent<Outline>().enabled = false;
+                    outline.enabled = false;
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.F))
+            // Se tiver um objeto para interagir e apertar 'F' a interação foi realizada.
+            InputActionsManager input = InputActionsManager.Instance;
+            if (input.inputActions.Game.Interaction.WasPressedThisFrame())
             {
                 hasInteracted = true;
             }
         }
+        // Sem objeto para interagir.
         else
         {
+            // Deativa a tela de interação.
             if (interactPrompt != null)
             {
                 interactPrompt.SetActive(false);
             }
 
+            // Nenhuma interação foi realizada ainda.
             hasInteracted = false;
         }
     }
