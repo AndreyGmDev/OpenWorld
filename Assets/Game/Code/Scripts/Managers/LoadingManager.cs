@@ -80,7 +80,7 @@ public class LoadingManager : MonoBehaviour
     // Função chamada pelo botão "Novo Jogo"
     public void NovoJogo()
     {
-        File.Delete(Application.dataPath + "/Saves" + "/game_state.txt");
+        File.Delete(SaveGame.Instance.SAVEPATH + SaveGame.Instance.SAVEDATA);
 
         // Desativa os objetos especificados
         foreach (GameObject objeto in objetosParaDesativar)

@@ -19,8 +19,9 @@ public struct SaveGameInfos
 public class SaveGame : MonoBehaviour
 {
     // Nomes dos arquivos que serão salvos as informações
-    private const string FINALPATH  = "/Saves";
-    private const string SAVEDATA = "/game_state.txt";
+    // Caminho personalizado: Pasta "MeusSaves" dentro de "Meus Documentos"
+    public readonly string SAVEPATH = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Saves");
+    public readonly string SAVEDATA = "/game_state.txt";
 
     [SerializeField, Tooltip("Delay between each game save")] float delaySaveGame = 30;
 
@@ -84,14 +85,19 @@ public class SaveGame : MonoBehaviour
     SaveGameInfos saveGameInfos;
     public void MakeSaves()
     {
-        string jsonPlayerData = JsonUtility.ToJson(saveGameInfos);
-        File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonPlayerData);
+        if (!Directory.Exists(SAVEPATH))
+        {
+            Directory.CreateDirectory(SAVEPATH);
+        }
 
-        string jsonHotbarData = JsonUtility.ToJson(saveGameInfos);
+        string jsonPlayerData = JsonUtility.ToJson(saveGameInfos);
+        File.WriteAllText(SAVEPATH + SAVEDATA, jsonPlayerData);
+
+        /*string jsonHotbarData = JsonUtility.ToJson(saveGameInfos);
         File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonHotbarData);
 
         string jsonDaylightCycleData = JsonUtility.ToJson(saveGameInfos);
-        File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonDaylightCycleData);
+        File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonDaylightCycleData);*/
     }
 
     // Save do Player - Script PlayerController.
@@ -118,9 +124,9 @@ public class SaveGame : MonoBehaviour
     // Função para o carregar o jogo.
     public SaveGameInfos LoadData()
     {
-        if (File.Exists(Application.dataPath + FINALPATH + SAVEDATA))
+        if (File.Exists(Application.dataPath + SAVEPATH + SAVEDATA))
         {
-            string jsonData = File.ReadAllText(Application.dataPath + FINALPATH + SAVEDATA);
+            string jsonData = File.ReadAllText(Application.dataPath + SAVEPATH + SAVEDATA);
             SaveGameInfos data = JsonUtility.FromJson<SaveGameInfos>(jsonData);
 
             return data;

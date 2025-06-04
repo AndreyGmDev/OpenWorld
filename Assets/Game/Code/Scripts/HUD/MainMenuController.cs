@@ -85,7 +85,7 @@ public class MainMenuController : MonoBehaviour
         if (continueButton != null)
         {
             // Se houver um save
-            if (!File.Exists(Application.dataPath + "/Saves/game_state.txt"))
+            if (!File.Exists(SaveGame.Instance.SAVEPATH + SaveGame.Instance.SAVEDATA))
             {
                 continueButton.GetComponent<ButtonMouseEffects>().enabled = false;
                 continueButton.interactable = false;
