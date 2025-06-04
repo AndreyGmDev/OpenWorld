@@ -2,18 +2,16 @@ using UnityEngine;
 
 public class UIRotate : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 100f; // Velocidade de rotação em graus por segundo
+    public RectTransform uiElement; // O elemento de UI que será rotacionado.
+    public float rotationSpeed = 100f; // Velocidade da rotação (graus por segundo).
+    public bool counterClockwise = true; // Define se a rotação será no sentido anti-horário.
 
-    void Start()
-    {
-        Cursor.visible = true;
-    }
     void Update()
     {
-        // Calcula o ângulo de rotação baseado no tempo e velocidade
-        float rotationAmount = rotationSpeed * Time.deltaTime;
+        // Calcula a direção da rotação com base na configuração.
+        float direction = counterClockwise ? 1f : -1f;
 
-        // Aplica a rotação no eixo Z
-        transform.Rotate(0f, 0f, rotationAmount);
+        // Aplica a rotação ao elemento.
+        uiElement.Rotate(0f, 0f, direction * rotationSpeed * Time.deltaTime);
     }
 }

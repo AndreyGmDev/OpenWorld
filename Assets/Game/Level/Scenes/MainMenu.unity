@@ -4554,7 +4554,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef0648602351244daae0f89732e81f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiElement: {fileID: 994193432}
   rotationSpeed: 112.1
+  counterClockwise: 1
 --- !u!114 &994193436
 MonoBehaviour:
   m_ObjectHideFlags: 0
