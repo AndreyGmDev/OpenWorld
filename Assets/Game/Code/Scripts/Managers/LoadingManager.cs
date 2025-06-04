@@ -80,6 +80,10 @@ public class LoadingManager : MonoBehaviour
     // Função chamada pelo botão "Novo Jogo"
     public void NovoJogo()
     {
+        if (!Directory.Exists(SaveGame.Instance.SAVEPATH)) { 
+            Directory.CreateDirectory(SaveGame.Instance.SAVEPATH);
+        
+        }
         File.Delete(SaveGame.Instance.SAVEPATH + SaveGame.Instance.SAVEDATA);
 
         // Desativa os objetos especificados

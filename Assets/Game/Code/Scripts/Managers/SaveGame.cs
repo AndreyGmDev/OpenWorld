@@ -124,9 +124,9 @@ public class SaveGame : MonoBehaviour
     // Função para o carregar o jogo.
     public SaveGameInfos LoadData()
     {
-        if (File.Exists(Application.dataPath + SAVEPATH + SAVEDATA))
+        if (File.Exists(SAVEPATH + SAVEDATA))
         {
-            string jsonData = File.ReadAllText(Application.dataPath + SAVEPATH + SAVEDATA);
+            string jsonData = File.ReadAllText(SAVEPATH + SAVEDATA);
             SaveGameInfos data = JsonUtility.FromJson<SaveGameInfos>(jsonData);
 
             return data;
