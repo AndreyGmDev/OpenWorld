@@ -48,12 +48,12 @@ public class Slingshot : MonoBehaviour
 
     private void Raycast()
     {
-        LayerMask layer = LayerMask.GetMask("Default") | LayerMask.GetMask("Ground");
+        LayerMask layer = LayerMask.GetMask("Ground") | LayerMask.GetMask("Default");
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2, Screen.height / 2);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
         Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layer);
-        if (hit.point != Vector3.zero)
+        if (hit.collider)
         {
             mouseDirection = hit.point;
         }
