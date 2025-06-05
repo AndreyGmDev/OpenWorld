@@ -96,6 +96,7 @@ public class MainMenuController : MonoBehaviour
             }
             else
             {
+                continueButton.onClick.AddListener(() => SaveGame.Instance.saveBetweenScenes.CanLoadSaveGame(true)); // Permite carregar o save game na próxima fase a ser carregada.
                 continueButton.onClick.AddListener(() => LoadingManager.Instance.LoadAsyncScene("OpenWorld"));
                 continueButton.onClick.AddListener(() => audioManager.PlaySoundFXClip(bigClickSFX, transform, VOL, false));
             }

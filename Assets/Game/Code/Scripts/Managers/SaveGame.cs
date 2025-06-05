@@ -19,11 +19,16 @@ public struct SaveGameInfos
 public class SaveGame : MonoBehaviour
 {
     // Nomes dos arquivos que serão salvos as informações
-    // Caminho personalizado: Pasta "MeusSaves" dentro de "Meus Documentos"
+    // Caminho personalizado: Pasta "Saves" dentro de "Meus Documentos"
     public readonly string SAVEPATH = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "Saves");
     public readonly string SAVEDATA = "/game_state.txt";
 
-    [SerializeField, Tooltip("Delay between each game save")] float delaySaveGame = 30;
+    [Header("References")]
+    public SaveBetweenScenes saveBetweenScenes;
+
+    [Header("SaveGame")]
+    [SerializeField, Tooltip("Delay between each game save. If delay is 0, the save will not be performed")] float delaySaveGame = 30;
+    private SaveGameInfos saveGameInfos;
 
     // Inicia o Singleton do SaveSame.
     private static SaveGame saveGame;
@@ -79,10 +84,18 @@ public class SaveGame : MonoBehaviour
     private void Start()
     {
         // Faz o save de tempos em tempos.
-        InvokeRepeating(nameof(MakeSaves), delaySaveGame, delaySaveGame);
+        if (delaySaveGame > 0)
+        {
+            InvokeRepeating(nameof(MakeSaves), delaySaveGame, delaySaveGame);
+        }
     }
 
-    SaveGameInfos saveGameInfos;
+    private void Update()
+    {
+        // Passa todas as informações que normalmente são salvas no jogo para o SaveBetweenScenes.
+        saveBetweenScenes.saveGameInfos = saveGameInfos;
+    }
+
     public void MakeSaves()
     {
         if (!Directory.Exists(SAVEPATH))
@@ -92,12 +105,6 @@ public class SaveGame : MonoBehaviour
 
         string jsonPlayerData = JsonUtility.ToJson(saveGameInfos);
         File.WriteAllText(SAVEPATH + SAVEDATA, jsonPlayerData);
-
-        /*string jsonHotbarData = JsonUtility.ToJson(saveGameInfos);
-        File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonHotbarData);
-
-        string jsonDaylightCycleData = JsonUtility.ToJson(saveGameInfos);
-        File.WriteAllText(Application.dataPath + FINALPATH + SAVEDATA, jsonDaylightCycleData);*/
     }
 
     // Save do Player - Script PlayerController.
@@ -124,13 +131,25 @@ public class SaveGame : MonoBehaviour
     // Função para o carregar o jogo.
     public SaveGameInfos LoadData()
     {
+        // Se um save existir.
         if (File.Exists(SAVEPATH + SAVEDATA))
         {
-            string jsonData = File.ReadAllText(SAVEPATH + SAVEDATA);
-            SaveGameInfos data = JsonUtility.FromJson<SaveGameInfos>(jsonData);
+            // Confere se é para carregar o save game.
+            if (saveBetweenScenes.loadSaveGame)
+            {
+                string jsonData = File.ReadAllText(SAVEPATH + SAVEDATA);
+                SaveGameInfos data = JsonUtility.FromJson<SaveGameInfos>(jsonData);
 
-            return data;
+                saveBetweenScenes.CanLoadSaveGame(false); // Desativa para não carregar mais o load game nas próximas fases.
+                return data;
+            }
+            // Se não for para carregar o save game, carrega save between scenes.
+            else
+            {
+                return saveBetweenScenes.newSaveGameInfos;
+            }
         }
+        // Se não houver um save.
         else
         {
             return NewSaveGame();

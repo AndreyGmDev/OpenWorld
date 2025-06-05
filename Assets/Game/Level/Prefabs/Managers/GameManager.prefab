@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5f20e29252e734f939758c36c2360e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveBetweenScenes: {fileID: 11400000, guid: 2630da2a7b729604ea766e2b6a30081e, type: 2}
   delaySaveGame: 120
 --- !u!114 &4523444206827945135
 MonoBehaviour:
@@ -101,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxObject: {fileID: 4971946268018815030, guid: 75b667a2a2973cc42a955de71c5f12bf, type: 3}
   daytimeMusic: {fileID: 8300000, guid: 550bcf6339b8812489d9797cb217930e, type: 3}
+  nighttimeMusic: {fileID: 0}
   minTimeBetweenMusic: 300
   maxTimeBetweenMusic: 900
   fadeOutDuration: 5

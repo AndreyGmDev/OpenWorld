@@ -4,14 +4,13 @@ public class PlayerController : MonoBehaviour
 {
     public Hotbar hotbar;
     public CharacterMovement characterMovement;
-
-    [SerializeField] CameraController cameraController;
+    public CameraController cameraController;
     
     private InputActionsManager input;
     private SaveGame saveGame;
 
     //private InputSystem_Actions inputActions;
-    Vector2 moveInput = Vector2.zero;
+    private Vector2 moveInput = Vector2.zero;
     private void Awake()
     {
         // Inicializando o NewInputSystem.
