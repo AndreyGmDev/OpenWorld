@@ -1,5 +1,8 @@
+using System.Collections;
+using System.ComponentModel;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public struct SaveGameInfos
 {
@@ -86,7 +89,7 @@ public class SaveGame : MonoBehaviour
         // Faz o save de tempos em tempos.
         if (delaySaveGame > 0)
         {
-            InvokeRepeating(nameof(MakeSaves), delaySaveGame, delaySaveGame);
+            StartCoroutine(MakeSaves(5, true));
         }
     }
 
@@ -96,15 +99,75 @@ public class SaveGame : MonoBehaviour
         saveBetweenScenes.saveGameInfos = saveGameInfos;
     }
 
-    public void MakeSaves()
+    // Confere todas as condições para saber se o save do game pode ser feito.
+    public bool CanMakeSaves()
     {
-        if (!Directory.Exists(SAVEPATH))
+        bool condition = true;
+
+        // 1° Condição - A cena carregada é Ilha.
+
+        if (!(SceneManager.GetActiveScene().name == "OpenWorld"))
         {
-            Directory.CreateDirectory(SAVEPATH);
+            condition &= false;
         }
 
-        string jsonPlayerData = JsonUtility.ToJson(saveGameInfos);
-        File.WriteAllText(SAVEPATH + SAVEDATA, jsonPlayerData);
+        // Final da 1° condição.
+
+        // 2° Condição - A cena carregada é Ilha.
+
+        if (!(SceneManager.GetActiveScene().name == "OpenWorld"))
+        {
+            condition &= false;
+        }
+
+        // Final da 2° condição.
+
+        // Se nenhuma das condições forem atendidas, return false.
+        return condition;
+    }
+
+    public IEnumerator MakeSaves(float delay, bool makeSaveAgain)
+    {
+        // delay - Tempo para nova tentativa de fazer o save, caso não possa realiza-lo no momento.
+        // makeSaveAgain - Confere se essa coroutine será chamada novamente. Serve para o botão de save que chamará a função uma única vez a cada clique.
+
+        // Confere se é para fazer o save instantaneamente.
+        if (makeSaveAgain)
+        {
+            // Espera o tempo para tentar fazer o save.
+            yield return new WaitForSeconds(delaySaveGame);
+        }
+
+        // Confere se pode fazer o save.
+        if (CanMakeSaves())
+        {
+            // Faz o Save.
+            if (!Directory.Exists(SAVEPATH))
+            {
+                Directory.CreateDirectory(SAVEPATH);
+            }
+
+            string jsonPlayerData = JsonUtility.ToJson(saveGameInfos);
+            File.WriteAllText(SAVEPATH + SAVEDATA, jsonPlayerData);
+
+            // Se for para fazer o save novamente.
+            if (makeSaveAgain)
+            {
+                // Inicia o novo save.
+                StartCoroutine(MakeSaves(delay, true));
+            }
+        }
+        // Se não puder fazer o save e se for para tentar fazer o save novamente.
+        else if (makeSaveAgain)
+        {
+            // Espero o delay para a nova tentativa de save.
+            yield return new WaitForSeconds(delay);
+
+            // Faz a nova tentativa de save.
+            StartCoroutine(MakeSaves(delay, true));
+        }
+
+        yield return null;
     }
 
     // Save do Player - Script PlayerController.
@@ -131,29 +194,31 @@ public class SaveGame : MonoBehaviour
     // Função para o carregar o jogo.
     public SaveGameInfos LoadData()
     {
-        // Se um save existir.
-        if (File.Exists(SAVEPATH + SAVEDATA))
+        // Confere se é para carregar o save game.
+        if (saveBetweenScenes.loadSaveGame)
         {
-            // Confere se é para carregar o save game.
-            if (saveBetweenScenes.loadSaveGame)
+            saveBetweenScenes.CanLoadSaveGame(false); // Desativa para não carregar mais o load game nas próximas fases.
+
+            // Se um save existir, carrega o save.
+            if (File.Exists(SAVEPATH + SAVEDATA))
             {
                 string jsonData = File.ReadAllText(SAVEPATH + SAVEDATA);
                 SaveGameInfos data = JsonUtility.FromJson<SaveGameInfos>(jsonData);
 
-                saveBetweenScenes.CanLoadSaveGame(false); // Desativa para não carregar mais o load game nas próximas fases.
                 return data;
             }
-            // Se não for para carregar o save game, carrega save between scenes.
+            // Se não houver um save, chama a função NewSaveGame.
             else
             {
-                return saveBetweenScenes.newSaveGameInfos;
+                return NewSaveGame();
             }
         }
-        // Se não houver um save.
+        // Se não for para carregar o save game, carrega save between scenes.
         else
         {
-            return NewSaveGame();
+            return saveBetweenScenes.newSaveGameInfos;
         }
+        
     }
 
     // Função para criar um novo save.

@@ -28,15 +28,17 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] GameObject exitCanvas;
 
     private int currentIndex = 0;
-    private bool isPaused = false;
+    private bool isPaused;
 
-    InputActionsManager input;
+    private InputActionsManager input;
+    private SaveGame saveGame;
     void Start()
     {
         // Garante que as cenas irão iniciar normalmente.
         Time.timeScale = 1;
 
         input = InputActionsManager.Instance;
+        saveGame = SaveGame.Instance;
 
         ArrangeOptions();
         pauseCanvas.enabled = false; // Desativa o menu inicialmente
@@ -70,13 +72,17 @@ public class PauseMenuController : MonoBehaviour
 
         if (saveButton != null)
         {
-            saveButton.onClick.AddListener(SaveGame.Instance.MakeSaves);
+            saveButton.onClick.AddListener(() => StartCoroutine(saveGame.MakeSaves(0, false)));
         }
     }
     private void DisablePauseCanvas()
     {
-        isPaused = !isPaused;
-        pauseCanvas.enabled = isPaused;
+        // Habilita ou desabilita o botão de save game.
+        saveButton.interactable = saveGame.CanMakeSaves();
+        saveButton.GetComponent<ButtonMouseEffects>().enabled = saveButton.interactable;
+
+        pauseCanvas.enabled = !pauseCanvas.enabled;
+        isPaused = pauseCanvas.enabled;
         Time.timeScale = isPaused ? 0 : 1;
         Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
 

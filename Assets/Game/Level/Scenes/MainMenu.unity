@@ -4416,6 +4416,34 @@ PrefabInstance:
       propertyPath: 'objetosParaDesativar.Array.data[1]'
       value: 
       objectReference: {fileID: 1970092973}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: 'objetosParaDesativar.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1868339031}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: 'objetosParaDesativar.Array.data[3]'
+      value: 
+      objectReference: {fileID: 4240213}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: 'objetosParaDesativar.Array.data[4]'
+      value: 
+      objectReference: {fileID: 689986399}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: 'objetosParaDesativar.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1422132509}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: 'objetosParaDesativar.Array.data[6]'
+      value: 
+      objectReference: {fileID: 1487665579}
+    - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: 'objetosParaDesativar.Array.data[7]'
+      value: 
+      objectReference: {fileID: 1487665579}
+    - target: {fileID: 6367620829642616566, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
+      propertyPath: delaySaveGame
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6504738768027931084, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.962284

@@ -70,6 +70,7 @@ public class MainMenuController : MonoBehaviour
         
         if (newGameButtonYes != null)
         {
+            newGameButtonYes.onClick.AddListener(() => SaveGame.Instance.saveBetweenScenes.CanLoadSaveGame(true)); // Permite carregar o save game na próxima fase a ser carregada.
             newGameButtonYes.onClick.AddListener(() => LoadingManager.Instance.NovoJogo()); // Inicia um novo jogo.
             newGameButtonYes.onClick.AddListener(() => audioManager.PlaySoundFXClip(bigClickSFX, transform, VOL, false)); // SFX
         }

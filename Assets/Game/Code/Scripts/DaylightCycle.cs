@@ -39,8 +39,11 @@ public class DaylightCycle : MonoBehaviour
     // Atualiza o ciclo do dia.
     private void CycleChange()
     {
-        float cycleRotation = Mathf.Lerp(-90, 270, seconds / REAL_TIME_DAY_LENGTH);
-        directionalLight.rotation = Quaternion.Euler(cycleRotation , 0 , 0);
+        if (directionalLight != null)
+        {
+            float cycleRotation = Mathf.Lerp(-90, 270, seconds / REAL_TIME_DAY_LENGTH);
+            directionalLight.rotation = Quaternion.Euler(cycleRotation , 0 , 0);
+        }
     }
 
     // Mostra o horário na interface.
