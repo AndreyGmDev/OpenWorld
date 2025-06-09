@@ -9,18 +9,21 @@ public class BelfryTwo_SecondRoom : MonoBehaviour
     [SerializeField] GameObject platformLever;
     [SerializeField] Vector3 platformLeverFinalPosition;
     [SerializeField] float durationPlatformLever;
+    private float delayLever;
 
     [Header("Target 1")]
     [SerializeField] GameObject target1;
     [SerializeField] GameObject platformTarget1;
     [SerializeField] Vector3 platformTarget1FinalPosition;
-    [SerializeField] float durationTarget1Lever;
+    [SerializeField] float durationPlatformTarget1;
+    private float delayTarget1;
 
     [Header("Target 2")]
     [SerializeField] GameObject target2;
     [SerializeField] GameObject platformTarget2;
     [SerializeField] Vector3 platformTarget2FinalPosition;
-    [SerializeField] float durationTarget2Lever;
+    [SerializeField] float durationPlatformTarget2;
+    private float delayTarget2;
 
     [Header("Time")]
     [SerializeField, Tooltip("Time until the platform reaches FinalPosition")] float time = 1;
@@ -36,22 +39,35 @@ public class BelfryTwo_SecondRoom : MonoBehaviour
     {   
         if (lever == playerInteraction.NextInteraction() && input.inputActions.Game.Interaction.WasPressedThisFrame())
         {
-            StartCoroutine(Platform(platformLever, platformLeverFinalPosition, 5));
+            delayLever -= Time.deltaTime; // Delay para poder usar a lever novamente.
+
+            if (delayLever <= 0)
+            {
+                StartCoroutine(Platform(platformLever, platformLeverFinalPosition, durationPlatformLever));
+                delayLever = durationPlatformLever;
+            }
+
         }
 
         if (target1.TryGetComponent<Target>(out var script))
         {
-            if (script.WasCollided())
+            delayTarget1 -= Time.deltaTime; // Delay para poder usar o alvo novamente.
+
+            if (script.WasCollided() && delayTarget1 <= 0)
             {
-                StartCoroutine(Platform(platformTarget1, platformTarget1FinalPosition, 5));
+                StartCoroutine(Platform(platformTarget1, platformTarget1FinalPosition, durationPlatformTarget1));
+                delayTarget1 = durationPlatformTarget1;
             }
         }
 
         if (target2.TryGetComponent<Target>(out var script2))
         {
-            if (script2.WasCollided())
+            delayTarget2 -= Time.deltaTime; // Delay para poder usar o alvo novamente.
+
+            if (script2.WasCollided() && delayTarget2 <= 0)
             {
-                StartCoroutine(Platform(platformTarget2, platformTarget2FinalPosition, 5));
+                StartCoroutine(Platform(platformTarget2, platformTarget2FinalPosition, durationPlatformTarget2));
+                delayTarget2 = durationPlatformTarget2;
             }
         }
     }
@@ -77,7 +93,7 @@ public class BelfryTwo_SecondRoom : MonoBehaviour
 
         yield return new WaitForSeconds(durationPlatform);
 
-        while (Vector3.Distance(finalPosition, platform.transform.position) > 0.1)
+        while (Vector3.Distance(startPosition, platform.transform.position) > 0.1)
         {
             // Movimenta a plataforma para o 'FinalPosition'.
             platform.transform.position = Vector3.MoveTowards(platform.transform.position, startPosition, speed * Time.deltaTime);

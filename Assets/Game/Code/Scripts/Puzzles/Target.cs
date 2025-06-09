@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Target : MonoBehaviour
@@ -11,11 +13,6 @@ public class Target : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (resetCollision)
-        {
-            wasCollided = false;
-        }
-
         if (collision.collider.CompareTag(collisionTag))
         {
             wasCollided = true;
@@ -23,6 +20,18 @@ public class Target : MonoBehaviour
     }
     public bool WasCollided()
     {
+        if (resetCollision)
+        {
+            StartCoroutine(nameof(WaitNextFrame));
+        }
+
         return wasCollided;
+    }
+
+    IEnumerator WaitNextFrame()
+    {
+        yield return new WaitForNextFrameUnit();
+
+        wasCollided = false;
     }
 }
