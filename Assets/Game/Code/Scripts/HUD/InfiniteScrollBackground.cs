@@ -5,6 +5,7 @@ public class InfiniteScrollBackground : MonoBehaviour
 {
     [SerializeField] private RawImage backgroundImage; // Referência ao RawImage do background
     [SerializeField] private float scrollSpeed = 0.1f; // Velocidade de scroll
+    [SerializeField] private float scrollSpeedY = 0;
 
     private Vector2 offset = Vector2.zero;
 
@@ -12,6 +13,7 @@ public class InfiniteScrollBackground : MonoBehaviour
     {
         // Atualiza o offset baseado no tempo e na velocidade
         offset.x += scrollSpeed * Time.deltaTime;
+        offset.y += scrollSpeedY * Time.deltaTime;
 
         // Aplica o offset no material do RawImage
         backgroundImage.uvRect = new Rect(offset.x, offset.y, backgroundImage.uvRect.width, backgroundImage.uvRect.height);
