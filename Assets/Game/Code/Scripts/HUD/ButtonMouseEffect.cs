@@ -21,6 +21,7 @@ public class ButtonMouseEffects : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     private void Start()
     {
+        buttonText.color = originalColor;
         // Inicializa o RectTransform do botão e do objeto de seleção
         buttonRectTransform = GetComponent<RectTransform>();
 
@@ -29,6 +30,12 @@ public class ButtonMouseEffects : MonoBehaviour, IPointerEnterHandler, IPointerE
             selectionRectTransform = selectionHighlight.GetComponent<RectTransform>();
             selectionHighlight.SetActive(false); // Esconde o objeto de seleção inicialmente
         }
+    }
+
+    public void HideSelection() {
+
+        selectionHighlight.SetActive(false);
+        buttonText.color = originalColor;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -94,8 +101,10 @@ public class ButtonMouseEffects : MonoBehaviour, IPointerEnterHandler, IPointerE
             // Alterna entre a cor original e a cor de oscilação
             if (buttonText != null)
             {
-                float t = (Mathf.Sin(Time.time * textOscillationSpeed) + 1) / 2; // Oscilação suave entre 0 e 1
-                buttonText.color = Color.Lerp(originalColor, textOscillationColor, t);
+                //float t = (Mathf.Sin(Time.time * textOscillationSpeed) + 1) / 2; // Oscilação suave entre 0 e 1
+                //buttonText.color = Color.Lerp(originalColor, textOscillationColor, t);
+
+                buttonText.color = textOscillationColor;
             }
 
             yield return null; // Espera até o próximo frame
