@@ -11,6 +11,8 @@ public class Visor : MonoBehaviour
     private MeshRenderer meshRenderer;
     private Collider coll;
 
+    public GameObject VisorUI;
+
     private bool meshRendererEnabled;
     private bool colliderEnabled;
 
@@ -19,6 +21,10 @@ public class Visor : MonoBehaviour
         if (Action.Count > 3) Action.RemoveRange(3 , Action.Count - 3);
 
         isVisorEnabled = GameObject.Find("Visor");
+
+        if (VisorUI != null) {
+            VisorUI.SetActive(true);
+        }
 
         meshRenderer = GetComponent<MeshRenderer>();
         coll = GetComponent<Collider>();

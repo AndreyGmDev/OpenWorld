@@ -13,7 +13,7 @@ public class VisorUI : MonoBehaviour
     private const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private float timer = 0f;
 
-    //pOSIÇÃO
+    [Header("Posição do Jogador")]
     public Transform targetObject;
 
     [Header("TextMeshes para exibir as coordenadas")]

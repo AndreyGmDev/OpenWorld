@@ -20,6 +20,9 @@ public class Hotbar : MonoBehaviour
     private float slot = 1;
     [HideInInspector] public float saveSlot = 1;
 
+    private bool isVisorEnabled;
+    public GameObject VisorUI;
+
     private void Start()
     {
         input = InputActionsManager.Instance;
@@ -32,6 +35,22 @@ public class Hotbar : MonoBehaviour
 
     private void Update()
     {
+        isVisorEnabled = GameObject.Find("Visor");
+
+        if (isVisorEnabled)
+        {
+            if (VisorUI != null)
+            {
+                VisorUI.SetActive(true);
+            }
+        }
+        else {
+            if (VisorUI != null)
+            {
+                VisorUI.SetActive(false);
+            }
+        }
+
         slot = input.inputActions.Game.Slots.ReadValue<float>(); // Captura o slot de acordo com o input pressionado.
 
         if (slot > 0)
@@ -58,6 +77,10 @@ public class Hotbar : MonoBehaviour
         {
             if (itens[i] != null)
                 itens[i].SetActive(false);
+
+           
+
+
         }
 
         // Ativa o item selecionado.
