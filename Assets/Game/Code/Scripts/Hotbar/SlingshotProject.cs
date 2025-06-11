@@ -8,7 +8,6 @@ public class SlingshotProject : MonoBehaviour
     [Header("SFX")]
     [SerializeField] AudioClip hitSFX;
     private float hitVolume = 0.6f;
-    private bool hasHit = false;
 
     private void Start()
     {
@@ -18,13 +17,11 @@ public class SlingshotProject : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!hasHit)
+        if (hitSFX != null)
         {
-            hasHit = true;
-            if (hitSFX != null)
-            {
-                AudioManager.Instance.PlaySoundFXClip(hitSFX, transform, hitVolume, true);
-            }
+            AudioManager.Instance.PlaySoundFXClip(hitSFX, transform, hitVolume, true);
         }
+
+        Destroy(gameObject);
     }
 }

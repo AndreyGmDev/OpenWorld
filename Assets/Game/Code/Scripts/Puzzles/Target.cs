@@ -11,6 +11,13 @@ public class Target : MonoBehaviour
 
     private bool wasCollided;
 
+    private void LateUpdate()
+    {
+        if (resetCollision)
+        {
+            wasCollided = false;
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag(collisionTag))
@@ -18,20 +25,9 @@ public class Target : MonoBehaviour
             wasCollided = true;
         }
     }
+
     public bool WasCollided()
     {
-        if (resetCollision)
-        {
-            StartCoroutine(nameof(WaitNextFrame));
-        }
-
         return wasCollided;
-    }
-
-    IEnumerator WaitNextFrame()
-    {
-        yield return new WaitForNextFrameUnit();
-
-        wasCollided = false;
     }
 }
