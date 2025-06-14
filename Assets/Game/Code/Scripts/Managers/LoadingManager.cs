@@ -103,6 +103,11 @@ public class LoadingManager : MonoBehaviour
     // Coroutine para carregar a cena de forma assíncrona
     private IEnumerator CarregarCenaAsync()
     {
+        Time.timeScale = 1;
+
+        PauseMenuController pauseMenuController = FindAnyObjectByType<PauseMenuController>();
+        //pauseMenuController.isPaused(0);
+
         // Desabilita o cursor.
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -147,6 +152,8 @@ public class LoadingManager : MonoBehaviour
     public void LoadAsyncScene(string nameScene)
     {
         StartCoroutine(LoadScene(nameScene));
+
+        Time.timeScale = 1;
     }
 
     public IEnumerator LoadScene(string nameScene)
@@ -187,6 +194,7 @@ public class LoadingManager : MonoBehaviour
                 //Shader.WarmupAllShaders();
 
                 // Permite a ativação da cena
+                Time.timeScale = 1;
                 operation.allowSceneActivation = true;
             }
 

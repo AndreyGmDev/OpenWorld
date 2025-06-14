@@ -8,7 +8,7 @@ public class Hotbar : MonoBehaviour
 
     //HUD
 
-    public RectTransform[] slotTransforms = new RectTransform[4]; 
+    //public RectTransform[] slotTransforms = new RectTransform[4]; 
     public Image[] slotImages = new Image[4];
     public GameObject[] slotSelection = new GameObject[4];
     public Color selectedColor = Color.yellow; 

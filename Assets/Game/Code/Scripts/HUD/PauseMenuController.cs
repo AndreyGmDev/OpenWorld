@@ -28,7 +28,7 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] GameObject exitCanvas;
 
     private int currentIndex = 0;
-    private bool isPaused;
+    public bool isPaused;
 
     private InputActionsManager input;
     private SaveGame saveGame;
