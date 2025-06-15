@@ -74,4 +74,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Assets/Saves/game_state.txt
 Assets/Saves/game_state.txt.meta
-/Assets/Plugins/TextMesh Pro/Resources
+/Assets/Plugins/TextMesh Pro
