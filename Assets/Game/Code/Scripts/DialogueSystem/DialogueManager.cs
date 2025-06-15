@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    private const int VOL = 1; // Volume constant
+
     public static DialogueManager Instance;
 
     [Header("UI Elements")]
@@ -18,9 +20,15 @@ public class DialogueManager : MonoBehaviour
     [Header("Animation Settings")]
     public Animator dialogueAnimator;
 
+    [Header("SFX")]
+    [SerializeField] AudioClip blipSFX; // Som quando o di√°logo aparece
+    [SerializeField] AudioClip clickSFX; // Som quando o di√°logo avan√ßa/termina
+
     private List<DialogueData.DialogueLine> currentDialogue;
     private int currentIndex;
     private bool isDialogueActive;
+
+    private AudioManager audioManager;
 
     private void Awake()
     {
@@ -35,6 +43,12 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Inicializa a refer√™ncia do AudioManager.
+        audioManager = AudioManager.Instance;
+    }
+
     public void StartDialogue(DialogueData dialogueData, Animator npcAnimator, int flag)
     {
         Cursor.lockState = CursorLockMode.None;
@@ -42,16 +56,16 @@ public class DialogueManager : MonoBehaviour
 
         if (isDialogueActive)
         {
-            Debug.LogWarning("Um di·logo j· est· em andamento.");
+            Debug.LogWarning("Um di√°logo j√° est√° em andamento.");
             return;
         }
 
-        // Busca o grupo de di·logo correspondente ‡ flag
+        // Busca o grupo de di√°logo correspondente √† flag
         var dialogueGroup = dialogueData.dialogueGroups.Find(group => group.flag == flag);
 
         if (dialogueGroup == null || dialogueGroup.dialogueLines.Count == 0)
         {
-            Debug.LogWarning($"Nenhum di·logo encontrado para a flag {flag}");
+            Debug.LogWarning($"Nenhum di√°logo encontrado para a flag {flag}");
             return;
         }
 
@@ -60,13 +74,13 @@ public class DialogueManager : MonoBehaviour
 
         isDialogueActive = true;
 
-        // Ativa a animaÁ„o inicial do NPC, se houver
+        // Ativa a anima√ß√£o inicial do NPC, se houver
         npcAnimator?.SetTrigger("StartDialogue");
 
-        // Ativa a UI de di·logo
+        // Ativa a UI de di√°logo
         dialogueUI.SetActive(true);
 
-        // Inicia o di·logo
+        // Inicia o di√°logo
         DisplayNextLine();
     }
 
@@ -78,6 +92,13 @@ public class DialogueManager : MonoBehaviour
             characterNameText.text = line.characterName;
             characterImage.sprite = line.characterImage;
             StartCoroutine(FadeInDialogueText(line.dialogueText));
+            
+            // Toca o som quando uma linha aparece
+            if (audioManager != null && blipSFX != null)
+            {
+                audioManager.PlaySoundFXClip(blipSFX, transform, VOL, false);
+            }
+            
             currentIndex++;
         }
         else
@@ -92,7 +113,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = text;
         dialogueText.alpha = 0;
 
-        float fadeDuration = 0.5f; // DuraÁ„o do fade-in
+        float fadeDuration = 0.5f; // Dura√ß√£o do fade-in
         float elapsedTime = 0;
 
         while (elapsedTime < fadeDuration)
@@ -115,38 +136,44 @@ public class DialogueManager : MonoBehaviour
 
         isDialogueActive = false;
 
+        // Toca o som quando o di√°logo termina
+        if (audioManager != null && clickSFX != null)
+        {
+            audioManager.PlaySoundFXClip(clickSFX, transform, VOL, false);
+        }
+
         if (dialogueAnimator != null)
         {
             dialogueAnimator.SetTrigger("EndDialogue");
 
-            // Inicia a coroutine para aguardar a animaÁ„o terminar
+            // Inicia a coroutine para aguardar a anima√ß√£o terminar
             StartCoroutine(WaitForCloseAnimation());
         }
         else
         {
-            // Se n„o houver animaÁ„o, desativa a UI diretamente
+            // Se n√£o houver anima√ß√£o, desativa a UI diretamente
             dialogueUI.SetActive(false);
         }
     }
 
     private IEnumerator WaitForCloseAnimation()
     {
-        // ObtÈm o nome do estado que ser· tocado (nome da animaÁ„o de fechamento)
-        string closingStateName = "Dialogue End"; // Substitua "Close" pelo nome real do estado de animaÁ„o
+        // Obt√©m o nome do estado que ser√° tocado (nome da anima√ß√£o de fechamento)
+        string closingStateName = "Dialogue End"; // Substitua "Close" pelo nome real do estado de anima√ß√£o
 
-        // Aguarda atÈ que o Animator entre no estado de fechamento
+        // Aguarda at√© que o Animator entre no estado de fechamento
         while (!dialogueAnimator.GetCurrentAnimatorStateInfo(0).IsName(closingStateName))
         {
             yield return null;
         }
 
-        // Aguarda a animaÁ„o terminar
+        // Aguarda a anima√ß√£o terminar
         while (dialogueAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
         {
             yield return null;
         }
 
-        // Desativa a UI apÛs a animaÁ„o terminar
+        // Desativa a UI ap√≥s a anima√ß√£o terminar
         dialogueUI.SetActive(false);
     }
 
@@ -154,6 +181,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (isDialogueActive && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
+            // Toca o som quando o di√°logo avan√ßa
+            if (audioManager != null && clickSFX != null)
+            {
+                audioManager.PlaySoundFXClip(clickSFX, transform, VOL, false);
+            }
+            
             DisplayNextLine();
         }
     }

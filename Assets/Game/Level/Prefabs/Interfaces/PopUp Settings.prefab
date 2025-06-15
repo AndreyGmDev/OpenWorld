@@ -328,6 +328,9 @@ MonoBehaviour:
   fps: {fileID: 8576565271092643389}
   normalSensitivity: {fileID: 529364011254775063}
   aimSensitivity: {fileID: 553819956239563453}
+  hoverSFX: {fileID: 8300000, guid: 4559c27eed995354c938bd238638a932, type: 3}
+  clickSFX: {fileID: 8300000, guid: 0141a76ba9cab484395991fd4bb2c415, type: 3}
+  sliderSFX: {fileID: 8300000, guid: 4559c27eed995354c938bd238638a932, type: 3}
 --- !u!1 &321321693787518072
 GameObject:
   m_ObjectHideFlags: 0
