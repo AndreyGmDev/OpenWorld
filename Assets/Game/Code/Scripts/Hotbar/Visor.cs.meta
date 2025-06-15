@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: 07c05cba2dfc7904eb2fa69089576e5e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - visorOnSFX: {fileID: 8300000, guid: 3d52e744f06cb604cbb8c96f400ad3d0, type: 3}
+  - visorOffSFX: {fileID: 8300000, guid: 009f8244926e37e4db698cf8cc150e21, type: 3}
+  - VisorUI: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -102,12 +102,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxObject: {fileID: 4971946268018815030, guid: 75b667a2a2973cc42a955de71c5f12bf, type: 3}
   daytimeMusic: {fileID: 8300000, guid: 550bcf6339b8812489d9797cb217930e, type: 3}
-  nighttimeMusic: {fileID: 0}
-  minTimeBetweenMusic: 300
-  maxTimeBetweenMusic: 900
+  nighttimeMusic: {fileID: 8300000, guid: c0ccae748c04ec84ca10ca036f9fda85, type: 3}
+  pauseMusic: {fileID: 8300000, guid: 43b29f3fe5dc22f498788065d2f15ea6, type: 3}
+  minTimeBetweenMusic: 120
+  maxTimeBetweenMusic: 200
   fadeOutDuration: 5
   musicVolume: 0.6
   musicMixerGroup: {fileID: 8194356992512371669, guid: 4e4812533a69f45429eb0490760a363b, type: 2}
+  windSound: {fileID: 8300000, guid: 241162d07b2b83b40b8794c294a83db6, type: 3}
+  windVolume: 0.4
+  windFadeDuration: 2
+  windPlayDuration: 180
+  windMixerGroup: {fileID: 8194356992512371669, guid: 4e4812533a69f45429eb0490760a363b, type: 2}
 --- !u!114 &5107615883194796815
 MonoBehaviour:
   m_ObjectHideFlags: 0

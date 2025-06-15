@@ -3977,6 +3977,8 @@ MonoBehaviour:
   settingsCanvas: {fileID: 0}
   resumeCanvas: {fileID: 6542570295743982723}
   exitCanvas: {fileID: 112939808404224775}
+  hoverSFX: {fileID: 8300000, guid: 4559c27eed995354c938bd238638a932, type: 3}
+  clickSFX: {fileID: 8300000, guid: 0141a76ba9cab484395991fd4bb2c415, type: 3}
   isPaused: 0
 --- !u!1 &6879714735367153584
 GameObject:

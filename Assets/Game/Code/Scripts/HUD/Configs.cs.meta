@@ -1,2 +1,26 @@
 fileFormatVersion: 2
 guid: 7a8ba38ab8b17c34aa1c5e85ca8ab8bf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - save: {instanceID: 0}
+  - back: {instanceID: 0}
+  - volumeSlider: {instanceID: 0}
+  - sfxSlider: {instanceID: 0}
+  - musicSlider: {instanceID: 0}
+  - ddpResolution: {instanceID: 0}
+  - ddpQuality: {instanceID: 0}
+  - vsync: {instanceID: 0}
+  - showFPS: {instanceID: 0}
+  - fps: {instanceID: 0}
+  - normalSensitivity: {instanceID: 0}
+  - aimSensitivity: {instanceID: 0}
+  - hoverSFX: {fileID: 8300000, guid: 4559c27eed995354c938bd238638a932, type: 3}
+  - clickSFX: {fileID: 8300000, guid: eb1e093c05a218242aaf7ff2542f5559, type: 3}
+  - sliderSFX: {fileID: 8300000, guid: 0141a76ba9cab484395991fd4bb2c415, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

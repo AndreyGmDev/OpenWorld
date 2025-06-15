@@ -4,9 +4,12 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Configs : MonoBehaviour
 {
+    private const int VOL = 1; // Volume.
+
     [Header("Buttons")]
     [SerializeField] Button save;
     [SerializeField] Button back;
@@ -17,23 +20,29 @@ public class Configs : MonoBehaviour
     [SerializeField] Slider musicSlider;
 
     [Header("Video Settings")]
-    [SerializeField] Dropdown ddpResolution; // Valor da resoluÁ„o selecionada, n„o necess·riamente a que est· aplicada no momento.
-    private int realResolutionValue; // Valor da resoluÁ„o real. SÛ È alterado quando o bot„o Apply/Save for pressionado.
+    [SerializeField] Dropdown ddpResolution; // Valor da resolu√ß√£o selecionada, n√£o necess√°riamente a que est√° aplicada no momento.
+    private int realResolutionValue; // Valor da resolu√ß√£o real. S√≥ √© alterado quando o bot√£o Apply/Save for pressionado.
     [SerializeField] Dropdown ddpQuality; // Valor da qualidade selecionada.
     [SerializeField] Toggle vsync; // bool para o vsync ativo.
     [SerializeField] Toggle showFPS; // bool para o Show FPS ativo.
     [SerializeField] TextMeshProUGUI fps; // Onde mostra o FPS.
 
-    private List<string> resolutions = new(); // Lista com todas as resoluÁıes possiveis a serem selecionadas.
+    private List<string> resolutions = new(); // Lista com todas as resolu√ß√µes possiveis a serem selecionadas.
     private List<string> quality = new(); // Lista com todas as qualidades possiveis a serem selecionadas.
 
     [Header("Controls Settings")]
     [SerializeField] Slider normalSensitivity; // Sensibilidade do player sem mirar.
     [SerializeField] Slider aimSensitivity; // Sensibilidade do player mirarando.
 
+    [Header("SFX")]
+    [SerializeField] AudioClip hoverSFX;
+    [SerializeField] AudioClip clickSFX;
+    [SerializeField] AudioClip sliderSFX;
+
     // Managers
     private SaveConfigs saveConfigs; // Manager do SaveConfigs.
     private MixerManager mixerManager; // Manager do Mixer.
+    private AudioManager audioManager; // Manager do Audio.
 
 
     private void Awake()
@@ -41,18 +50,19 @@ public class Configs : MonoBehaviour
         // Carrega os managers.
         saveConfigs = SaveConfigs.Instance;
         mixerManager = MixerManager.Instance;
+        audioManager = AudioManager.Instance;
 
-        // Configura a resoluÁ„o.
-        Resolution[] allResolutions = Screen.resolutions; // Cria um array com todas as resoluÁıes.
+        // Configura a resolu√ß√£o.
+        Resolution[] allResolutions = Screen.resolutions; // Cria um array com todas as resolu√ß√µes.
         allResolutions = allResolutions.OrderByDescending(x => x.width).ToArray(); // Inverte a ordem da lista.
 
-        // Formata e adiciona todas as resoluÁıes na lista.
+        // Formata e adiciona todas as resolu√ß√µes na lista.
         foreach (var resolution in allResolutions)
         {
             resolutions.Add(string.Format("{0} X {1}", resolution.width, resolution.height));
         }
 
-        ddpResolution.AddOptions(resolutions); // Adiciona toas as opÁıes possiveis na interface.
+        ddpResolution.AddOptions(resolutions); // Adiciona todas as op√ß√µes possiveis na interface.
 
         // Configura a Qualidade.
         quality = QualitySettings.names.ToList();
@@ -74,22 +84,32 @@ public class Configs : MonoBehaviour
 
     private void OnDisable()
     {
-        // Se o menu de configuraÁıes for desabilitado sem ser salvo, a interface de resoluÁ„o reseta para a resoluÁ„o em que estava anteriormente.
+        // Se o menu de configura√ß√µes for desabilitado sem ser salvo, a interface de resolu√ß√£o reseta para a resolu√ß√£o em que estava anteriormente.
         ddpResolution.value = realResolutionValue;
     }
 
     private void Start()
     {
+        // Setup hover sound effects for all buttons
+        SetupButtonHoverSFX(save);
+        SetupButtonHoverSFX(back);
+        
+        // Setup sound effects for dropdowns
+        SetupDropdownSFX(ddpResolution);
+        SetupDropdownSFX(ddpQuality);
+
         if (save != null)
         {
             save.onClick.AddListener(ChangeVideoSettings);
             save.onClick.AddListener(Save);
             save.onClick.AddListener(() => gameObject.SetActive(false));
+            save.onClick.AddListener(() => audioManager.PlaySoundFXClip(clickSFX, transform, VOL, false)); // SFX
         }
 
         if (back != null)
         {
             back.onClick.AddListener(() => gameObject.SetActive(false));
+            back.onClick.AddListener(() => audioManager.PlaySoundFXClip(clickSFX, transform, VOL, false)); // SFX
         }
 
         // Audio.
@@ -97,18 +117,21 @@ public class Configs : MonoBehaviour
         {
             volumeSlider.onValueChanged.AddListener(mixerManager.SetMasterVolume);
             volumeSlider.onValueChanged.AddListener((_) => Save());
+            volumeSlider.onValueChanged.AddListener((_) => audioManager.PlaySoundFXClip(sliderSFX, transform, VOL, false)); // SFX
         }
         
         if (sfxSlider != null)
         {
             sfxSlider.onValueChanged.AddListener(mixerManager.SetSFXVolume);
             sfxSlider.onValueChanged.AddListener((_) => Save());
+            sfxSlider.onValueChanged.AddListener((_) => audioManager.PlaySoundFXClip(sliderSFX, transform, VOL, false)); // SFX
         }
         
         if (musicSlider != null)
         {
             musicSlider.onValueChanged.AddListener(mixerManager.SetMusicVolume);
             musicSlider.onValueChanged.AddListener((_) => Save());
+            musicSlider.onValueChanged.AddListener((_) => audioManager.PlaySoundFXClip(sliderSFX, transform, VOL, false)); // SFX
         }
 
         // Video.
@@ -116,6 +139,7 @@ public class Configs : MonoBehaviour
         {
             vsync.onValueChanged.AddListener((_) => QualitySettings.vSyncCount = vsync.isOn ? 1 : 0);
             vsync.onValueChanged.AddListener((_) => Save());
+            vsync.onValueChanged.AddListener((_) => audioManager.PlaySoundFXClip(clickSFX, transform, VOL, false)); // SFX
         }
 
         if (showFPS != null)
@@ -125,6 +149,7 @@ public class Configs : MonoBehaviour
                 showFPS.onValueChanged.AddListener((_) => fps.enabled = showFPS.isOn);
             }
             showFPS.onValueChanged.AddListener((_) => Save());
+            showFPS.onValueChanged.AddListener((_) => audioManager.PlaySoundFXClip(clickSFX, transform, VOL, false)); // SFX
         }
 
         // Controls.
@@ -132,21 +157,23 @@ public class Configs : MonoBehaviour
         {
             normalSensitivity.onValueChanged.AddListener(CameraController.SetNormalSensitivity);
             normalSensitivity.onValueChanged.AddListener((_) => Save());
+            normalSensitivity.onValueChanged.AddListener((_) => audioManager.PlaySoundFXClip(sliderSFX, transform, VOL, false)); // SFX
         }
 
         if (aimSensitivity != null)
         {
             aimSensitivity.onValueChanged.AddListener(CameraController.SetAimSensitivity);
             aimSensitivity.onValueChanged.AddListener((_) => Save());
+            aimSensitivity.onValueChanged.AddListener((_) => audioManager.PlaySoundFXClip(sliderSFX, transform, VOL, false)); // SFX
         } 
     }
 
     private void ChangeVideoSettings()
     {
-        // Altera a resoluÁ„o verdadeira para a resoluÁ„o selecionada apenas quando o bot„o Apply/Save È pressionado.
+        // Altera a resolu√ß√£o verdadeira para a resolu√ß√£o selecionada apenas quando o bot√£o Apply/Save √© pressionado.
         realResolutionValue = ddpResolution.value; 
 
-        // Altera a resoluÁ„o do jogo para a selecionada.
+        // Altera a resolu√ß√£o do jogo para a selecionada.
         string[] currentResolution = resolutions[realResolutionValue].Split("X");
         int w = Convert.ToInt32(currentResolution[0].Trim());
         int h = Convert.ToInt32(currentResolution[0].Trim());
@@ -156,7 +183,7 @@ public class Configs : MonoBehaviour
     }
 
     
-    // Chama o cÛdigo de Save no SaveConfigs e passa as vari·veis.
+    // Chama o c√≥digo de Save no SaveConfigs e passa as vari√°veis.
     private void Save()
     {
         saveConfigs.Save(new SaveConfigsInfos
@@ -197,5 +224,58 @@ public class Configs : MonoBehaviour
         // Controls.
         normalSensitivity.value = configsInfos.NormalSensitivity;
         aimSensitivity.value = configsInfos.AimSensitivity;
+    }
+
+    /// <summary>
+    /// O bot√£o para adicionar o hoverSFX
+    /// </summary>
+    /// <param name="button"></param>
+    private void SetupButtonHoverSFX(Button button)
+    {
+        if (button == null || hoverSFX == null) return;
+
+        // Pega ou adiciona o componente EventTrigger
+        EventTrigger eventTrigger = button.GetComponent<EventTrigger>();
+        if (!eventTrigger)
+        {
+            eventTrigger = button.gameObject.AddComponent<EventTrigger>();
+        }
+
+        // Cria o evento de hover
+        EventTrigger.Entry hoverEnter = new()
+        {
+            eventID = EventTriggerType.PointerEnter // Seta o tipo de evento(PointerEnter).
+        };
+        
+        // Toca o som quando a condi√ß√£o do evento √© atendida.
+        hoverEnter.callback.AddListener((eventData) => {
+            if (button.interactable && audioManager != null)
+            {
+                audioManager.PlaySoundFXClip(hoverSFX, transform, VOL, false);
+            }
+        });
+
+        // Adiciona o evento ao trigger
+        eventTrigger.triggers.Add(hoverEnter);
+    }
+
+    /// <summary>
+    /// Configura os efeitos sonoros para dropdowns
+    /// </summary>
+    /// <param name="dropdown"></param>
+    private void SetupDropdownSFX(Dropdown dropdown)
+    {
+        if (dropdown == null) return;
+
+        // Adiciona som de click quando o dropdown √© aberto/fechado
+        dropdown.onValueChanged.AddListener((_) => {
+            if (audioManager != null && clickSFX != null)
+            {
+                audioManager.PlaySoundFXClip(clickSFX, transform, VOL, false);
+            }
+        });
+
+        // Setup hover sound for the dropdown button
+        SetupButtonHoverSFX(dropdown.GetComponent<Button>());
     }
 }

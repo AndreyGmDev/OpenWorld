@@ -15,6 +15,10 @@ public class Hotbar : MonoBehaviour
     public Color defaultColor = Color.white;
     public float ogSize = 0.5f;
 
+    [Header("Visor Sound Effects")]
+    [SerializeField] public AudioClip visorOnSFX;
+    [SerializeField] public AudioClip visorOffSFX;
+
     private InputActionsManager input;
     private float slotAnt;
     private float slot = 1;
@@ -55,7 +59,7 @@ public class Hotbar : MonoBehaviour
 
         if (slot > 0)
         {
-            slot = itens[Mathf.RoundToInt(slot - 1)] != null ? slot : slotAnt; // Se houver algum item mantem no novo slot, se n�o houver, volta para o slot anterior.
+            slot = itens[Mathf.RoundToInt(slot - 1)] != null ? slot : slotAnt; // Se houver algum item mantem no novo slot, se não houver, volta para o slot anterior.
         }
 
         if (slot != slotAnt)
@@ -114,7 +118,7 @@ public class Hotbar : MonoBehaviour
 
     }
 
-    // Carrega as informa��es do SaveGame.
+    // Carrega as informações do SaveGame.
     private void Load()
     {
         SaveGame saveGame = SaveGame.Instance;

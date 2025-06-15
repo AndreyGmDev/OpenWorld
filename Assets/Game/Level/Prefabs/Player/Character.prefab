@@ -371,10 +371,6 @@ MonoBehaviour:
   - {fileID: 3190103312414735721}
   - {fileID: 1077206618470905913}
   - {fileID: 0}
-  slotTransforms:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   slotImages:
   - {fileID: 0}
   - {fileID: 0}
@@ -387,7 +383,10 @@ MonoBehaviour:
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   ogSize: 0.5
+  visorOnSFX: {fileID: 8300000, guid: 3d52e744f06cb604cbb8c96f400ad3d0, type: 3}
+  visorOffSFX: {fileID: 8300000, guid: 4b11c8e2074680048b18d4b2f1c749fd, type: 3}
   saveSlot: 0
+  VisorUI: {fileID: 0}
 --- !u!1 &3190103312414735721
 GameObject:
   m_ObjectHideFlags: 0

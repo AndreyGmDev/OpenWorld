@@ -12,6 +12,7 @@ public class Visor : MonoBehaviour
     private Collider coll;
 
     public GameObject VisorUI;
+    private Hotbar hotbar;
 
     private bool meshRendererEnabled;
     private bool colliderEnabled;
@@ -26,6 +27,9 @@ public class Visor : MonoBehaviour
             VisorUI.SetActive(true);
         }
 
+        // Get reference to Hotbar component
+        hotbar = FindObjectOfType<Hotbar>();
+
         meshRenderer = GetComponent<MeshRenderer>();
         coll = GetComponent<Collider>();
 
@@ -36,7 +40,7 @@ public class Visor : MonoBehaviour
     }
     void Update()
     {
-        // Só realiza a ação a cada vez que o visor for ativado ou desativado. Melhor pra otimização.
+        // SÃ³ realiza a aÃ§Ã£o a cada vez que o visor for ativado ou desativado. Melhor pra otimizaÃ§Ã£o.
         if (GameObject.Find("Visor") != isVisorEnabled)
         {
             DoAction();
@@ -46,7 +50,23 @@ public class Visor : MonoBehaviour
 
     private void DoAction()
     {
-        if (GameObject.Find("Visor") != null)
+        bool visorActive = GameObject.Find("Visor") != null;
+        
+        // Play sound effects based on visor state using audio clips from Hotbar
+        if (visorActive && !isVisorEnabled)
+        {
+            // Visor is being turned on
+            if (hotbar != null && hotbar.visorOnSFX != null)
+                AudioManager.Instance.PlaySoundFXClip(hotbar.visorOnSFX, transform, 1f, false);
+        }
+        else if (!visorActive && isVisorEnabled)
+        {
+            // Visor is being turned off
+            if (hotbar != null && hotbar.visorOffSFX != null)
+                AudioManager.Instance.PlaySoundFXClip(hotbar.visorOffSFX, transform, 1f, false);
+        }
+
+        if (visorActive)
         {
             foreach (VisorTypes elem in Action)
             {
@@ -88,5 +108,5 @@ public class VisorTypes
     [Tooltip("Which component will be enabled or disabled when the viewport is enabled. The Object option means (Mesh and Collider)")] public Type type;
 
     public enum Mode { Active, Inactive };
-    [Tooltip("The component will enabled or disabled when the visor is enable")] public Mode mode;
+    [Tooltip("The component will enabled or disabled when the visor is enabled")] public Mode mode;
 }
