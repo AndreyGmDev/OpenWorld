@@ -122,12 +122,6 @@ public class PlayerController : MonoBehaviour
             PlayerRotation = characterMovement.transform.rotation,
             CameraControllerRotation = cameraController.targetLook,
         });
-
-        saveGame.SaveHotbarData(new SaveGameInfos
-        {
-            Slot = hotbar.saveSlot,
-            Itens = hotbar.itens,
-        });
     }
 
     // Carrega as informações do SaveGame.

@@ -366,11 +366,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2580958f979c248982a3dc6f4307f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itensBase:
+  - prefab: {fileID: 2472990250725820308}
+    itemID: visor
+  - prefab: {fileID: 3190103312414735721}
+    itemID: slingshot
+  - prefab: {fileID: 1077206618470905913}
+    itemID: hook
   itens:
   - {fileID: 2472990250725820308}
   - {fileID: 3190103312414735721}
   - {fileID: 1077206618470905913}
-  - {fileID: 0}
+  saveSlot: 0
   slotImages:
   - {fileID: 0}
   - {fileID: 0}
@@ -383,7 +390,6 @@ MonoBehaviour:
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   ogSize: 0.5
-  saveSlot: 0
   VisorUI: {fileID: 0}
 --- !u!1 &3190103312414735721
 GameObject:

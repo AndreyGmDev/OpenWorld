@@ -1,5 +1,4 @@
 using System.Collections;
-using System.ComponentModel;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +12,7 @@ public struct SaveGameInfos
 
     // Hotbar infos.
     public float Slot;
-    public GameObject[] Itens;
+    public string[] ItensID;
 
     // DaylightCycle infos.
     public float Seconds;
@@ -182,7 +181,7 @@ public class SaveGame : MonoBehaviour
     public void SaveHotbarData(in SaveGameInfos infos)
     {
         saveGameInfos.Slot = infos.Slot;
-        saveGameInfos.Itens = infos.Itens;
+        saveGameInfos.ItensID = infos.ItensID;
     }
 
     // Save do DaylightCycle - Script DaylightCycle.
@@ -230,7 +229,7 @@ public class SaveGame : MonoBehaviour
             PlayerRotation = Quaternion.identity,
             CameraControllerRotation = Vector3.zero,
             Slot = 0,
-            Itens = new GameObject[4],
+            ItensID = new string[3],
             Seconds = 28800 // 08:00 horas.
         };
         return save;

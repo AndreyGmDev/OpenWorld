@@ -1,14 +1,19 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Hotbar : MonoBehaviour
 {
-    public GameObject[] itens = new GameObject[3];
+    [Header("Itens")]
+    public List<HotbarBase> itensBase = new List<HotbarBase>(); // Todos os itens que o player pode possuir.
+    public GameObject[] itens; // Itens que o player possui.
 
-    //HUD
+    private float slotAnt;
+    private float slot = 1;
+    [HideInInspector] public float saveSlot = 1;
 
-    //public RectTransform[] slotTransforms = new RectTransform[4]; 
+    [Header("HUD")]
     public Image[] slotImages = new Image[4];
     public GameObject[] slotSelection = new GameObject[4];
     public Color selectedColor = Color.yellow; 
@@ -16,18 +21,20 @@ public class Hotbar : MonoBehaviour
     public float ogSize = 0.5f;
 
     private InputActionsManager input;
-    private float slotAnt;
-    private float slot = 1;
-    [HideInInspector] public float saveSlot = 1;
+    private SaveGame saveGame;
 
     private bool isVisorEnabled;
     public GameObject VisorUI;
 
     private void Start()
     {
-        input = InputActionsManager.Instance;
+        itens = new GameObject[itens.Length];
 
-        //Load();
+        input = InputActionsManager.Instance;
+        saveGame = SaveGame.Instance;
+
+        Load();
+
         slot = saveSlot;
         ChangeSlot();
         UpdateHUD();
@@ -64,6 +71,7 @@ public class Hotbar : MonoBehaviour
             slotAnt = slot;
         }
 
+        Save(); // Passa as informações para o SaveGame.
     }
 
     private void ChangeSlot()
@@ -77,16 +85,12 @@ public class Hotbar : MonoBehaviour
         {
             if (itens[i] != null)
                 itens[i].SetActive(false);
-
-           
-
-
         }
 
         // Ativa o item selecionado.
         itens[Mathf.RoundToInt(slot - 1)].SetActive(true);
 
-        UpdateHUD();
+        UpdateHUD(); // Atualiza a HUD.
     }
 
     private void UpdateHUD()
@@ -114,17 +118,65 @@ public class Hotbar : MonoBehaviour
 
     }
 
+    private void Save()
+    {
+        string[] itensID = new string[itens.Length];
+
+        // Carrega todos os itens salvos pelo player.
+        for (int i = 0; i < itens.Length; i++)
+        {
+            if (itens[i] != null)
+            {
+                HotbarBase hotbarBase = GetIDByItem(itens[i]);
+
+                if (hotbarBase.itemID != null)
+                {
+                    itensID[i] = hotbarBase.itemID;
+                }
+            }
+        }
+
+        // Faz o save.
+        saveGame.SaveHotbarData(new SaveGameInfos
+        {
+            Slot = saveSlot,
+            ItensID = itensID,
+        });
+    }
     // Carrega as informa��es do SaveGame.
     private void Load()
     {
-        SaveGame saveGame = SaveGame.Instance;
-
         if (saveGame != null)
         {
             SaveGameInfos save = saveGame.LoadData();
+            saveSlot = save.Slot; // Carrega o slot que o player está usando.
 
-            saveSlot = save.Slot;
-            itens = save.Itens;
+            // Carrega todos os itens salvos pelo player.
+            for (int i = 0; i < itens.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(save.ItensID[i]))
+                {
+                    HotbarBase hotbarBase = GetItemByID(save.ItensID[i]);
+                    itens[i] = hotbarBase.prefab;
+                }
+            }
         }
     }
+
+    private HotbarBase GetItemByID(string ID)
+    {
+        return itensBase.Find(itens => itens.itemID == ID);
+    }
+
+    private HotbarBase GetIDByItem(GameObject prefab)
+    {
+        return itensBase.Find(itens => itens.prefab == prefab);
+    }
+}
+
+[System.Serializable]
+public class HotbarBase
+{
+    public GameObject prefab;
+    public string itemID;
 }
