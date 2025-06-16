@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Load();
+        //Load();
     }
 
     private void Update()

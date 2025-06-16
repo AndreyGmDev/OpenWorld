@@ -193,6 +193,7 @@ public class SaveGame : MonoBehaviour
     // Função para o carregar o jogo.
     public SaveGameInfos LoadData()
     {
+        
         // Confere se é para carregar o save game.
         if (saveBetweenScenes.loadSaveGame)
         {
@@ -217,8 +218,9 @@ public class SaveGame : MonoBehaviour
         {
             return saveBetweenScenes.newSaveGameInfos;
         }
+
         
-    }
+     }
 
     // Função para criar um novo save.
     private SaveGameInfos NewSaveGame()
