@@ -63,17 +63,24 @@ public class Hotbar : MonoBehaviour
             }
         }
 
-        slot = input.inputActions.Game.Slots.ReadValue<float>(); // Captura o slot de acordo com o input pressionado.
+        // Reseta o slot (Evita que a mudança de slot seja chamada a cada frame).
+        slot = 0; 
 
+        // Somente troca o slot se clicar no Input.
+        if (input.inputActions.Game.Slots.WasPerformedThisFrame())
+        {
+            slot = input.inputActions.Game.Slots.ReadValue<float>(); // Captura o slot de acordo com o input pressionado.
+        }
+
+        // Confere se há um item no slot pressionado.
         if (slot > 0)
         {
             slot = itens[Mathf.RoundToInt(slot - 1)] != null ? slot : slotAnt; // Se houver algum item mantem no novo slot, se não houver, volta para o slot anterior.
         }
-
-        if (slot != slotAnt)
+        
+        if (slot != 0)
         {
             ChangeSlot();
-            slotAnt = slot;
         }
 
         Save(); // Passa as informações para o SaveGame.
@@ -81,7 +88,7 @@ public class Hotbar : MonoBehaviour
 
     private void ChangeSlot()
     {
-        if (itens == null || slot == 0) return;
+        if (itens == null) return;
 
         saveSlot = slot;
 
@@ -93,7 +100,16 @@ public class Hotbar : MonoBehaviour
         }
 
         // Ativa o item selecionado.
-        itens[Mathf.RoundToInt(slot - 1)].SetActive(true);
+        if (slot != slotAnt)
+        {
+            itens[Mathf.RoundToInt(slot - 1)].SetActive(true);
+        }
+        else
+        {
+            slot = 0;
+        }
+
+        slotAnt = slot;
 
         UpdateHUD(); // Atualiza a HUD.
     }
