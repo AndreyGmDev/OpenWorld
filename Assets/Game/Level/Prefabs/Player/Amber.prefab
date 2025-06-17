@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9df1e0bd32b6d0a4cb481bd11f3e4964, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1287542132067729854, guid: 9df1e0bd32b6d0a4cb481bd11f3e4964, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -159,3 +159,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactPrompt: {fileID: 0}
+  nextInteraction: {fileID: 0}
+  hasInteracted: 0
