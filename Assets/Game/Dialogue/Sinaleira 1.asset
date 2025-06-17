@@ -12,4 +12,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a81cce62cdcaf34cb4e9ff083e3e683, type: 3}
   m_Name: Sinaleira 1
   m_EditorClassIdentifier: 
-  dialogueGroups: []
+  dialogueGroups:
+  - flag: 0
+    dialogueLines:
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Oia! Que \xF3culos estranho... ou ser\xE1 um... Aha! Um visor!
+        Queria um desses faz tempo! Ser\xE1 que era desses que o papai me falava?"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: Oxii, ligou!?
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Chamou, meu Rei?
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Vish Maria! Uma intelig\xEAncia artificial no visor!?"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Eu tenho um nome, compadre, sou o Operador Cerebral Hipot\xE1lamo
+        Inteligente, ou O.C.H.I.!"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: ...Oxi?
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "N\xE3o... O.C.H.I.! Com C e H. De qualquer forma"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Eu fui feito para ajudar os cangaceiros afortunados que usam
+        esse visor!
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Mas... vou admitir que j\xE1 estou aqui h\xE1 algum tempo...
+        Voc\xEA \xE9 um cangaceiro, meu Rei?"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: Bem... sou um dos descendentes dos que sobraram.
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Interessante... e qual o seu nome?
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Sou Jo\xE3o Ningu\xE9m. Gosto muito de estudar hist\xF3ria e
+        fazer inven\xE7\xF5es! Por isso voc\xEA me deixou muito curioso Oxi!"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "\xC9 O.C.H.I.! Mas prazer em te conhecer, Jo\xE3o! Ser um descendente
+        j\xE1 \xE9 bom o suficiente pra mim. Agora vou te explicar como o visor funciona!"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Esse visor permite ver coisas invis\xEDveis a olho nu e tamb\xE9m
+        a enxergar atrav\xE9s de ilus\xF5es! Especialmente nessas Sinaleiras."
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Seus antepassados fizeram armadilhas para proteger os tesouros
+        das Sinaleiras.
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Apenas um verdadeiro cangaceiro pode passar pelas armadilhas,
+        e esse visor foi feito para ajudar nisso.
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Al\xE9m disso, se voc\xEA achar algum item, eu posso analisar
+        ele para voc\xEA"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "E a\xED? T\xE1 duvidando? Testa agora com aquela porta!"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Que porta? Aqui \xE9 s\xF3 uma sala..."
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "S\xF3 usa o visor logo!"
