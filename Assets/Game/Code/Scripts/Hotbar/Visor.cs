@@ -11,9 +11,6 @@ public class Visor : MonoBehaviour
     private MeshRenderer meshRenderer;
     private Collider coll;
 
-    public GameObject VisorUI;
-    private Hotbar hotbar;
-
     private bool meshRendererEnabled;
     private bool colliderEnabled;
 
@@ -22,13 +19,6 @@ public class Visor : MonoBehaviour
         if (Action.Count > 3) Action.RemoveRange(3 , Action.Count - 3);
 
         isVisorEnabled = GameObject.Find("Visor");
-
-        if (VisorUI != null) {
-            VisorUI.SetActive(true);
-        }
-
-        // Get reference to Hotbar component
-        hotbar = FindObjectOfType<Hotbar>();
 
         meshRenderer = GetComponent<MeshRenderer>();
         coll = GetComponent<Collider>();
@@ -52,7 +42,7 @@ public class Visor : MonoBehaviour
     {
         bool visorActive = GameObject.Find("Visor") != null;
         
-        // Play sound effects based on visor state using audio clips from Hotbar
+        /*// Play sound effects based on visor state using audio clips from Hotbar
         if (visorActive && !isVisorEnabled)
         {
             // Visor is being turned on
@@ -64,7 +54,7 @@ public class Visor : MonoBehaviour
             // Visor is being turned off
             if (hotbar != null && hotbar.visorOffSFX != null)
                 AudioManager.Instance.PlaySoundFXClip(hotbar.visorOffSFX, transform, 1f, false);
-        }
+        }*/
 
         if (visorActive)
         {

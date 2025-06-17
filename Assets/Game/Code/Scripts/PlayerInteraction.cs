@@ -7,8 +7,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private LayerMask layerMask;
     private SphereCollider coll;
-    public GameObject nextInteraction = null;
-    public bool hasInteracted = false;
+    private GameObject nextInteraction = null;
+    private bool hasInteracted = false;
 
     private void Start()
     {

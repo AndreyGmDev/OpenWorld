@@ -21,14 +21,14 @@ public class Hotbar : MonoBehaviour
     public float ogSize = 0.5f;
 
     [Header("Visor Sound Effects")]
-    [SerializeField] public AudioClip visorOnSFX;
-    [SerializeField] public AudioClip visorOffSFX;
+    public AudioClip visorOnSFX;
+    public AudioClip visorOffSFX;
 
     private InputActionsManager input;
     private SaveGame saveGame;
 
     private bool isVisorEnabled;
-    public GameObject VisorUI;
+    [SerializeField] GameObject visorUI;
 
     private void Start()
     {
@@ -50,16 +50,16 @@ public class Hotbar : MonoBehaviour
 
         if (isVisorEnabled)
         {
-            if (VisorUI != null)
+            if (visorUI != null)
             {
-                VisorUI.SetActive(true);
+                visorUI.SetActive(true);
             }
         }
         else 
         {
-            if (VisorUI != null)
+            if (visorUI != null)
             {
-                VisorUI.SetActive(false);
+                visorUI.SetActive(false);
             }
         }
 
@@ -180,18 +180,22 @@ public class Hotbar : MonoBehaviour
                 if (!string.IsNullOrEmpty(save.ItensID[i]))
                 {
                     HotbarBase hotbarBase = GetItemByID(save.ItensID[i]);
-                    itens[i] = hotbarBase.prefab;
+
+                    if (hotbarBase != null)
+                    {
+                        itens[i] = hotbarBase.prefab;
+                    }
                 }
             }
         }
     }
 
-    private HotbarBase GetItemByID(string ID)
+    public HotbarBase GetItemByID(string ID)
     {
         return itensBase.Find(itens => itens.itemID == ID);
     }
 
-    private HotbarBase GetIDByItem(GameObject prefab)
+    public HotbarBase GetIDByItem(GameObject prefab)
     {
         return itensBase.Find(itens => itens.prefab == prefab);
     }
