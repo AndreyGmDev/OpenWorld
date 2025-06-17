@@ -2143,6 +2143,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3067326771331399202, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+      propertyPath: m_text
+      value: "SINALEIRA\nTESTE DE VIS\xC3O"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067326771331399202, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+      propertyPath: m_fontSize
+      value: 68.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067326771331399202, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 68.44
+      objectReference: {fileID: 0}
     - target: {fileID: 7578689254579594181, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
