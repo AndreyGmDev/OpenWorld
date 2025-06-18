@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1521874249624595673}
   - component: {fileID: 7667542739836366936}
   - component: {fileID: 5107615883194796815}
+  - component: {fileID: 5690365656910767905}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -131,3 +132,23 @@ MonoBehaviour:
   telaDeLoading: {fileID: 0}
   animator: {fileID: 0}
   objetosParaDesativar: []
+--- !u!114 &5690365656910767905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287767131786995797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb1ecb9707e5c047a783dfb871e279d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueUI: {fileID: 0}
+  characterNameText: {fileID: 0}
+  characterImage: {fileID: 0}
+  dialogueText: {fileID: 0}
+  nextButton: {fileID: 0}
+  dialogueAnimator: {fileID: 0}
+  blipSFX: {fileID: 8300000, guid: 6667aef945103a94ba60c178b177b394, type: 3}
+  clickSFX: {fileID: 8300000, guid: 6667aef945103a94ba60c178b177b394, type: 3}

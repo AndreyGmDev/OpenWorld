@@ -45,12 +45,14 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        //print(gameObject.name);
         // Inicializa a referência do AudioManager.
         audioManager = AudioManager.Instance;
     }
 
     public void StartDialogue(DialogueData dialogueData, Animator npcAnimator, int flag)
     {
+        dialogueUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         InputActionsManager.Instance.DisableGameActions();
 

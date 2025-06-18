@@ -25,7 +25,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
         }
 
         PlayerInteraction playerInteraction = FindAnyObjectByType<PlayerInteraction>();
@@ -35,7 +35,8 @@ public class DialogueTrigger : MonoBehaviour
         {
             if (input.inputActions.Game.Interaction.WasPressedThisFrame()) // Se apertar a letra 'F' Gabriel!
             {
-                StartDialogue();      
+                StartDialogue();
+                
             }
         }
         else

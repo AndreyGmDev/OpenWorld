@@ -37,9 +37,15 @@ public class Hotbar : MonoBehaviour
         input = InputActionsManager.Instance;
         saveGame = SaveGame.Instance;
 
-        Load();
+        //Load();
 
         slot = saveSlot;
+
+        foreach (var i in slotSelection)
+        {
+            i.SetActive(false);
+        }
+
         ChangeSlot();
         UpdateHUD();
     }
@@ -114,8 +120,21 @@ public class Hotbar : MonoBehaviour
         UpdateHUD(); // Atualiza a HUD.
     }
 
-    private void UpdateHUD()
+    public void UpdateHUD()
     {
+        for (int i = 0; i < itens.Length; i++)
+        {
+            if (itens[i] == null)
+            {
+                slotImages[i].GetComponent<Image>().enabled = false;
+            }
+            else
+            {
+                slotImages[i].GetComponent<Image>().enabled = true;
+            }
+
+        }
+
         if (slotSelection.Any(x => x == null)) return;
 
         for (int i = 0; i < slotImages.Length; i++)
