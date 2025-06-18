@@ -5,6 +5,9 @@ public class JoinExitBelfry : MonoBehaviour
     private enum Levels { Island, Belfry1, Belfry2, Belfry3, Belfry4 }
     [SerializeField] Levels levels;
 
+    private enum Mode { Interaction, Automatic }
+    [SerializeField] Mode mode;
+    
     [Header("PlayerInfosNextScene")]
     [SerializeField, Tooltip("Se ativo, a unity gravará as informações do player em tempo real")] bool recordInformations;
     [SerializeField] Vector3 playerPosition;
@@ -19,6 +22,11 @@ public class JoinExitBelfry : MonoBehaviour
         recordInformations = false;
 
         playerInteraction = FindFirstObjectByType<PlayerInteraction>();
+
+        if (mode == Mode.Automatic)
+        {
+            PassScene();
+        }
     }
     private void Update()
     {
@@ -31,29 +39,16 @@ public class JoinExitBelfry : MonoBehaviour
             cameraRotation = player.cameraController.targetLook;
         }
 
-        // Interação.
-        if (playerInteraction.NextInteraction() == gameObject)
+        if (mode == Mode.Interaction)
         {
-            InputActionsManager input = InputActionsManager.Instance;
-            if (input.inputActions.Game.Interaction.WasPressedThisFrame())
+            // Interação.
+            if (playerInteraction.NextInteraction() == gameObject)
             {
-                float seconds = SaveGame.Instance.saveBetweenScenes.saveGameInfos.Seconds; // Garante que o tempo será o mesmo de quando entrou na cena.
-                if (FindFirstObjectByType<DaylightCycle>())
+                InputActionsManager input = InputActionsManager.Instance;
+                if (input.inputActions.Game.Interaction.WasPressedThisFrame())
                 {
-                    seconds = FindFirstObjectByType<DaylightCycle>().seconds; // Passa o tempo atual da cena para a próxima cena.
+                    PassScene();
                 }
-
-                SaveGame saveGame = SaveGame.Instance;
-                saveGame.saveBetweenScenes.BetweenScenesPlayerInfos(new SaveGameInfos()
-                {
-                    PlayerPosition = playerPosition,
-                    PlayerRotation = playerRotation,
-                    CameraControllerRotation = cameraRotation,
-                    Seconds = seconds,
-                });
-
-                string levelName = LevelName(); // Pega o nome da cena.
-                LoadingManager.Instance.LoadAsyncScene(levelName); // Carrega a cena.
             }
         }
     }
@@ -74,7 +69,7 @@ public class JoinExitBelfry : MonoBehaviour
                 levelName = "Belfry2";
                 break;
             case Levels.Belfry3:
-                levelName = "Belfry2";
+                levelName = "Belfry3";
                 break;
             case Levels.Belfry4:
                 levelName = "Belfry2";
@@ -82,5 +77,26 @@ public class JoinExitBelfry : MonoBehaviour
         }
 
         return levelName;
+    }
+
+    private void PassScene()
+    {
+        float seconds = SaveGame.Instance.saveBetweenScenes.saveGameInfos.Seconds; // Garante que o tempo será o mesmo de quando entrou na cena.
+        if (FindFirstObjectByType<DaylightCycle>())
+        {
+            seconds = FindFirstObjectByType<DaylightCycle>().seconds; // Passa o tempo atual da cena para a próxima cena.
+        }
+
+        SaveGame saveGame = SaveGame.Instance;
+        saveGame.saveBetweenScenes.BetweenScenesPlayerInfos(new SaveGameInfos()
+        {
+            PlayerPosition = playerPosition,
+            PlayerRotation = playerRotation,
+            CameraControllerRotation = cameraRotation,
+            Seconds = seconds,
+        });
+
+        string levelName = LevelName(); // Pega o nome da cena.
+        LoadingManager.Instance.LoadAsyncScene(levelName); // Carrega a cena.
     }
 }

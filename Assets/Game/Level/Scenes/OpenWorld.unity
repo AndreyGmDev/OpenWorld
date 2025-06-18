@@ -4785,7 +4785,7 @@ GameObject:
   - component: {fileID: 648693526}
   - component: {fileID: 648693528}
   - component: {fileID: 648693527}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: teleport_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4841,6 +4841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels: 3
+  mode: 0
   recordInformations: 0
   playerPosition: {x: 0, y: 0, z: 0}
   playerRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -8326,6 +8327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels: 1
+  mode: 0
   recordInformations: 0
   playerPosition: {x: -219.05978, y: 8.46, z: -753.95}
   playerRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -14404,7 +14406,7 @@ GameObject:
   - component: {fileID: 1756994164}
   - component: {fileID: 1756994166}
   - component: {fileID: 1756994165}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Teleport_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14439,6 +14441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels: 2
+  mode: 0
   recordInformations: 0
   playerPosition: {x: -229.968, y: 3.746, z: -688.35}
   playerRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -14977,7 +14980,7 @@ GameObject:
   - component: {fileID: 1813750607}
   - component: {fileID: 1813750609}
   - component: {fileID: 1813750608}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15012,6 +15015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels: 4
+  mode: 0
   recordInformations: 0
   playerPosition: {x: 0, y: 0, z: 0}
   playerRotation: {x: 0, y: 0, z: 0, w: 0}
