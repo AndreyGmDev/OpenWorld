@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3436433546420129357
+--- !u!114 &-7754396497448951348
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: roof_joao
+  m_Name: door_joao
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,11 +42,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f2e13cf67f399094bbd7c08db1dddf47, type: 3}
+        m_Texture: {fileID: 2800000, guid: c1e67ffb94bc4ae4fa29eb65279bbcae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: b9cf08e538d6cad4f99663cd0e2c44ba, type: 3}
+        m_Texture: {fileID: 2800000, guid: 57353424b347c1b4d866b210efedc576, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -66,7 +66,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f2e13cf67f399094bbd7c08db1dddf47, type: 3}
+        m_Texture: {fileID: 2800000, guid: c1e67ffb94bc4ae4fa29eb65279bbcae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -74,11 +74,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 06e560cc9e5adf841b4aaefd7b8f2b51, type: 3}
+        m_Texture: {fileID: 2800000, guid: a8407c237dc11d54bbe180f43600a59c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 06e560cc9e5adf841b4aaefd7b8f2b51, type: 3}
+        m_Texture: {fileID: 2800000, guid: a8407c237dc11d54bbe180f43600a59c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
