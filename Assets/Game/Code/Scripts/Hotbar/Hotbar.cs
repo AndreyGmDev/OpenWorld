@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Hotbar : MonoBehaviour
 {
     [Header("Itens")]
-    public List<HotbarBase> itensBase = new List<HotbarBase>(); // Todos os itens que o player pode possuir.
+    public List<HotbarBase> itensBase = new List<HotbarBase>(); // Todos os itens que o player pode possuir.v
     public GameObject[] itens; // Itens que o player possui.
 
     private float slotAnt;
@@ -28,6 +28,7 @@ public class Hotbar : MonoBehaviour
     private SaveGame saveGame;
 
     private bool isVisorEnabled;
+    private bool wasVisorEnabledLastFrame; // Variável para rastrear o estado anterior do visor
     [SerializeField] GameObject visorUI;
 
     private void Start()
@@ -54,19 +55,42 @@ public class Hotbar : MonoBehaviour
     {
         isVisorEnabled = GameObject.Find("Visor");
 
-        if (isVisorEnabled)
+        // Verifica se o estado do visor mudou desde o último frame
+        if (isVisorEnabled != wasVisorEnabledLastFrame)
         {
-            if (visorUI != null)
+            if (isVisorEnabled)
             {
-                visorUI.SetActive(true);
+                // Visor foi ativado
+                if (visorUI != null)
+                {
+                    visorUI.SetActive(true);
+                }
+                
+                // Toca o som de ativar o visor
+                if (visorOnSFX != null)
+                {
+                    AudioManager.Instance.InterruptSFX();
+                    AudioManager.Instance.PlaySoundFXClip(visorOnSFX, transform, 1f, false);
+                }
             }
-        }
-        else 
-        {
-            if (visorUI != null)
+            else 
             {
-                visorUI.SetActive(false);
+                // Visor foi desativado
+                if (visorUI != null)
+                {
+                    visorUI.SetActive(false);
+                }
+                
+                // Toca o som de desativar o visor
+                if (visorOffSFX != null)
+                {
+                    AudioManager.Instance.InterruptSFX();
+                    AudioManager.Instance.PlaySoundFXClip(visorOffSFX, transform, 1f, false);
+                }
             }
+            
+            // Atualiza o estado anterior
+            wasVisorEnabledLastFrame = isVisorEnabled;
         }
 
         // Reseta o slot (Evita que a mudança de slot seja chamada a cada frame).

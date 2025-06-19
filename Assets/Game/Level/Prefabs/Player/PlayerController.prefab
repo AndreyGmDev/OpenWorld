@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: accf239fdaff8fd42b56821f8298d197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hotbar: {fileID: 8426032721110057960}
   characterMovement: {fileID: 3485395261577642864}
   cameraController: {fileID: 8608771062078424533}
-  hotbar: {fileID: 8426032721110057960}
 --- !u!1001 &2180296753074329803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +113,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7687275427462355747, guid: 4fcba655682599d4a9167436b2b006d1, type: 3}
+      propertyPath: visorOnSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d52e744f06cb604cbb8c96f400ad3d0, type: 3}
+    - target: {fileID: 7687275427462355747, guid: 4fcba655682599d4a9167436b2b006d1, type: 3}
+      propertyPath: visorOffSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 4b11c8e2074680048b18d4b2f1c749fd, type: 3}
     - target: {fileID: 8369961415893208433, guid: 4fcba655682599d4a9167436b2b006d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
