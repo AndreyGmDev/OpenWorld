@@ -3,7 +3,17 @@ guid: 16ef5377895f4e14a99af6420cedd278
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leather_red_02.002
+    second: {fileID: 2100000, guid: 13f4594d2aecfcd43b7805f1b679591e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: old_planks_02.002
+    second: {fileID: 2100000, guid: f9a4d90cd593ca84288dcbe9b9f76e45, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
