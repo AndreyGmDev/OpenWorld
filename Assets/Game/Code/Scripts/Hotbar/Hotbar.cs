@@ -38,7 +38,7 @@ public class Hotbar : MonoBehaviour
         input = InputActionsManager.Instance;
         saveGame = SaveGame.Instance;
 
-        //Load();
+        Load();
 
         slot = saveSlot;
 
