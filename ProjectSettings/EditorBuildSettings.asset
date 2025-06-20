@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Level/Scenes/Belfry3.unity
     guid: ee2c6869678486b4f8a4f453ee1d57d3
+  - enabled: 1
+    path: Assets/Game/Level/Scenes/Belfry4.unity
+    guid: ac98bd02caed93d46b6329b6568d8b2f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
