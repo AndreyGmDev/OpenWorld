@@ -8,7 +8,6 @@ public class DialogueManager : MonoBehaviour
 {
     private const int VOL = 1; // Volume constant
 
-    public static DialogueManager Instance;
 
     [Header("UI Elements")]
     public GameObject dialogueUI;
@@ -29,23 +28,53 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueActive;
 
     private AudioManager audioManager;
+    
+    private static DialogueManager dialogueManager;
+
+    public static DialogueManager Instance
+    {
+        get
+        {
+            if (dialogueManager == null)
+            {
+                dialogueManager = FindFirstObjectByType<DialogueManager>();
+
+                if (dialogueManager == null)
+                {
+                    if (GameObject.Find("GameManager"))
+                    {
+                        GameObject obj = GameObject.Find("GameManager");
+                        obj.AddComponent<AudioManager>();
+                        Debug.Log("Adicionado DialogueManager ao GameManager");
+                    }
+                    else
+                    {
+                        GameObject obj = new GameObject("GameManager");
+                        obj.AddComponent<AudioManager>();
+                        Debug.Log("Criado GameManager e adicionado DialogueManager");
+                    }
+                }
+            }
+            return dialogueManager;
+        }
+    }
 
     private void Awake()
     {
-        if (Instance == null)
+        if (dialogueManager == null)
         {
-            Instance = this;
+            dialogueManager = this;
             //Cursor.lockState = CursorLockMode.None;
         }
-        else
+        else if (dialogueManager != this)
         {
+            Debug.Log("Encontradas múltiplas instâncias do DialogueManager. Destruindo a duplicata em: " + gameObject.name);
             Destroy(gameObject);
         }
     }
 
     private void Start()
     {
-        //print(gameObject.name);
         // Inicializa a referência do AudioManager.
         audioManager = AudioManager.Instance;
     }
@@ -191,5 +220,10 @@ public class DialogueManager : MonoBehaviour
             
             DisplayNextLine();
         }
+    }
+
+    public bool IsInDialogue()
+    {
+        return isDialogueActive;
     }
 }

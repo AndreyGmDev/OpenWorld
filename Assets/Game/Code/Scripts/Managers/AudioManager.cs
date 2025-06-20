@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Audio;
-using System.ComponentModel;
 
 public class AudioManager : MonoBehaviour
 {
@@ -33,10 +32,10 @@ public class AudioManager : MonoBehaviour
     private DaylightCycle daylightCycle;
     private Coroutine windCoroutine;
 
-    private static AudioManager audioManager;
-
-    bool isDay;
+    private bool isDay;
     private bool isPaused = false;
+
+    private static AudioManager audioManager;
 
     public static AudioManager Instance
     {

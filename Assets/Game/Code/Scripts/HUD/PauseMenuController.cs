@@ -151,7 +151,7 @@ public class PauseMenuController : MonoBehaviour
     void Update()
     {
         // Ativar/Desativar o menu de pausa
-        if (input.inputActions.UI.Pause.WasPressedThisFrame())
+        if (input.inputActions.UI.Pause.WasPressedThisFrame() && !DialogueManager.Instance.IsInDialogue())
         {
             DisablePauseCanvas();
         }

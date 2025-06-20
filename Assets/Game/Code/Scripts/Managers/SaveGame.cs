@@ -16,6 +16,9 @@ public struct SaveGameInfos
 
     // DaylightCycle infos.
     public float Seconds;
+
+    // Hat_Quest.
+    public int HatsCollected;
 }
 
 public class SaveGame : MonoBehaviour
@@ -188,6 +191,11 @@ public class SaveGame : MonoBehaviour
     public void SaveDaylightCycleData(in SaveGameInfos infos)
     {
         saveGameInfos.Seconds = infos.Seconds;
+    }
+
+    public void SaveHatQuest(in SaveGameInfos infos)
+    {
+
     }
 
     // Função para o carregar o jogo.
