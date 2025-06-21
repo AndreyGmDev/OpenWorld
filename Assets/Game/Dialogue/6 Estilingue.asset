@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a81cce62cdcaf34cb4e9ff083e3e683, type: 3}
+  m_Name: 6 Estilingue
+  m_EditorClassIdentifier: 
+  dialogueGroups:
+  - flag: 0
+    dialogueLines:
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "U\xE9... Isso \xE9 meu... o que t\xE1 fazendo aqui? Ah, tem
+        uma nota..."
+    - characterName: Nota
+      characterImage: {fileID: 0}
+      dialogueText: "\u2018Voc\xEA esqueceu isso em casa, de novo!\u2019 \r\n\u2013
+        Assinado: Mainha.\u201D"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: Obrigado, mainha.
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Que sorte, meu rei! Essa sua baladeira pode servir de grande
+        ajuda aqui.
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Meu estilingue? Por qu\xEA?"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Tem alguns alvos que voc\xEA vai ter de acertar para testar
+        sua habilidade de mira! "
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Tem alguns que est\xE3o soltos nessa sala, ent\xE3o n\xE3o fazem
+        nada\u2026, mas nas pr\xF3ximas, com certeza."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Hm\u2026 N\xE3o parece muito dif\xEDcil."
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Hehe, talvez\u2026, mas um cangaceiro tem que ser esperto e
+        ligeiro. Talvez os alvos tenham algum truque..."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Ok, vou prestar aten\xE7\xE3o."

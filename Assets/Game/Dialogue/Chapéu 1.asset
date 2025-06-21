@@ -12,4 +12,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a81cce62cdcaf34cb4e9ff083e3e683, type: 3}
   m_Name: "Chap\xE9u 1"
   m_EditorClassIdentifier: 
-  dialogueGroups: []
+  dialogueGroups:
+  - flag: 0
+    dialogueLines:
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Oi\xE1 s\xF3! Foi muito bem para um novato, meu Rei! \r\n"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "...Mesmo que essa seja a Sinaleira mais f\xE1cil. Bom, vamos
+        ver o que tem aqui \u2013 Ei, isso \xE9 o que eu penso que \xE9?"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "\xC9 sim! O chap\xE9u s\xEDmbolo dos cangaceiros, que foi usado
+        pelo cangaceiro Bandeirinha!"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Como \xE9!? O Bandeirinha?!"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "O mesmo! Infelizmente ele se perdeu com toda a confus\xE3o com
+        a guerra que teve entre os dem\xF4nios e os humanos... bom, voc\xEA j\xE1
+        deve saber."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Como \xE9?"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "U\xE9... voc\xEA n\xE3o sabe o que aconteceu nessa \xE9poca?"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "N\xE3o falam muito sobre o nosso passado... o pessoal do outro
+        lado da ilha s\xE3o os \xFAnicos que falam sobre..."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "...e quando falam, dizem que n\xF3s fomos tra\xEDdos pelo Nordeste."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "O pessoal desse lado da ilha n\xE3o gosta de falar sobre isso
+        e s\xF3 descarta todo o nosso passado, dizendo que est\xE1vamos destinados
+        ao fracasso."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: Por isso eu gosto de estudar. Quero procurar respostas para todas
+        as perguntas que tenho e assim espalhar a verdade para todos.
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Ent\xE3o est\xE1 decidido, meu Rei... se voc\xEA quer procurar
+        respostas, as Sinaleiras s\xE3o o ponto principal."
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Mas com certeza deve ter outros pedacinhos do passado soltos
+        e espalhados pela ilha, e eu vou te ajudar a encontrar eles!
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Inclusive... os peda\xE7os de chap\xE9us podem ser importantes
+        para isso, podem ajudar a convencer os outros, a prova de que voc\xEA superou
+        os segredos e armadilhas das Sinaleiras."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Tem raz\xE3o. Ent\xE3o vamos para a pr\xF3xima Sinaleira logo!
+        A mais pr\xF3xima \xE9 seguindo reto na sa\xEDda da vila\u2013"
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Calma, meu Rei!
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "Acredito que a pr\xF3xima Sinaleira que temos condi\xE7\xE3o
+        de entrar \xE9 a que est\xE1 do outro lado da ilha, a Sinaleira onde eles
+        guardavam as armas."
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Se tentarmos entrar em outra, vamos ficar presos em alguma sala,
+        com certeza.
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: Os cangaceiros fizeram assim para testar mais e mais os que ousarem
+        entrar nas Sinaleiras...
+    - characterName: O.C.H.I.
+      characterImage: {fileID: 0}
+      dialogueText: "...tamb\xE9m fizeram isso para \u2018classificar\u2019 as Sinaleiras
+        da menos importante para a mais importante. Agora, vamos voltar!"

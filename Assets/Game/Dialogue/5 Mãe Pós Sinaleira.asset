@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a81cce62cdcaf34cb4e9ff083e3e683, type: 3}
+  m_Name: "5 M\xE3e P\xF3s Sinaleira"
+  m_EditorClassIdentifier: 
+  dialogueGroups:
+  - flag: 0
+    dialogueLines:
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "Voc\xEA est\xE1 bem, menino?! Se machucou?"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "N\xE3o, mainha, eu t\xF4 bem! Nem precisei do estilingue!"
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "Suspiro \xC9\u2026 porque voc\xEA o esqueceu! Bom, pelo menos
+        voc\xEA est\xE1 bem\u2026 e o que \xE9 essa coisa no seu rosto?"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "\xC9 um visor dos nossos antepassados! E tem at\xE9 uma IA!"
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "IA\u2026? Que isso, menino\u2026 bom, contanto que n\xE3o destrua
+        a casa\u2026"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "N\xE3o se preocupa! \xC9 inofensivo. Ele serve para me dar informa\xE7\xF5es
+        e me deixar ver coisas que s\xE3o invis\xEDveis. \xC9 INCR\xCDVEL!"
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "...Bom, toma cuidado com essa coisa, e v\xEA se n\xE3o quebra\u2026
+        a gente pode vender por muito se voc\xEA achou isso naquela torre."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Mas, mainha! Eu posso estudar esse visor e fazer inven\xE7\xF5es
+        ainda melhores pra gente vender! E vai me ajudar muito nas outras sinaleiras!"
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "Outras sinaleiras?! Menino abestado, voc\xEA n\xE3o vai l\xE1,
+        mas nem que chova rev\xF3lveres do c\xE9u!"
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "O que voc\xEA vai fazer se os estranhos do outro lado da ilha
+        te barrarem!?"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Eu juro que n\xE3o vou me destacar, mainha! Isso pode nos ajudar
+        muito, posso at\xE9 conseguir fazer aquela m\xE1quina de lavar que a senhora
+        tanto quer!"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Por favor! Olha, at\xE9 consegui um peda\xE7o desse chap\xE9u
+        do Bandeirinha."
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "...Esse chap\xE9u\u2026 seu av\xF4 j\xE1 me contou lendas sobre
+        ele."
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "O chap\xE9u s\xF3 poderia ser recuperado por aquele que traria
+        gl\xF3ria ao nosso bando de novo\u2026"
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "Quem diria que o meu menininho iria conseguir isso\u2026"
+    - characterName: "M\xE3e"
+      characterImage: {fileID: 0}
+      dialogueText: "...t\xE1 bom, meu filho\u2026 Mas se tiver perigoso, volte imediatamente,
+        ok?!"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Uh\u2026 t\xE1 bom\u2026"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: (Ela realmente confia em mim com isso... Tenho que tomar cuidado...)
