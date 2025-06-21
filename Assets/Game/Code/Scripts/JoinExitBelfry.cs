@@ -15,6 +15,7 @@ public class JoinExitBelfry : MonoBehaviour
     [SerializeField] Vector2 cameraRotation;
 
     private PlayerInteraction playerInteraction;
+    private InputActionsManager input;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class JoinExitBelfry : MonoBehaviour
         recordInformations = false;
 
         playerInteraction = FindFirstObjectByType<PlayerInteraction>();
+        input = InputActionsManager.Instance;
 
         if (mode == Mode.Automatic)
         {
@@ -44,7 +46,6 @@ public class JoinExitBelfry : MonoBehaviour
             // Interação.
             if (playerInteraction.NextInteraction() == gameObject)
             {
-                InputActionsManager input = InputActionsManager.Instance;
                 if (input.inputActions.Game.Interaction.WasPressedThisFrame())
                 {
                     PassScene();
@@ -72,7 +73,7 @@ public class JoinExitBelfry : MonoBehaviour
                 levelName = "Belfry3";
                 break;
             case Levels.Belfry4:
-                levelName = "Belfry2";
+                levelName = "Belfry4";
                 break;
         }
 

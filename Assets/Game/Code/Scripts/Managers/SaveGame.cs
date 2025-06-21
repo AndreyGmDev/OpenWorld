@@ -195,7 +195,7 @@ public class SaveGame : MonoBehaviour
 
     public void SaveHatQuest(in SaveGameInfos infos)
     {
-
+        saveGameInfos.HatsCollected = infos.HatsCollected;
     }
 
     // Função para o carregar o jogo.
