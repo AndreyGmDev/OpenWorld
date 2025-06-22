@@ -39,16 +39,24 @@ public class Hotbar : MonoBehaviour
         saveGame = SaveGame.Instance;
 
         Load();
-
         slot = saveSlot;
 
+        //ChangeSlot();
+
+        // Inicialmente desativa todos os itens que o player não possui.
+        UpdateHUD();
+
+        // Inicialmente desativa todas as caixas de seleção.
         foreach (var i in slotSelection)
         {
             i.SetActive(false);
         }
 
-        ChangeSlot();
-        UpdateHUD();
+        // Inicialmente volta todas as cores para default.
+        foreach (var i in slotImages)
+        {
+            i.color = defaultColor;
+        }
     }
 
     private void Update()

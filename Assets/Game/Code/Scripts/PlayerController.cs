@@ -72,10 +72,6 @@ public class PlayerController : MonoBehaviour
         // Pega o item que o player está segurando no momento.
         int slot = Mathf.RoundToInt(hotbar.saveSlot - 1);
 
-        /*if (slot >= 0)
-        {
-            slot = Mathf.Clamp(slot, 0, hotbar.itens.Length);
-        }*/
         if (slot < 0)
         {
             // Se não houver nenhum item ativado, então o player não estará mirando.
@@ -83,7 +79,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (hotbar.itens[slot].TryGetComponent<ItemConditions>(out var itemCondition))
+        if (hotbar.itens[slot].active && hotbar.itens[slot].TryGetComponent<ItemConditions>(out var itemCondition))
         {
             // Por padrão o item não pode mirar com nenhum dos botões do mouse.
             bool rightClick = false;
