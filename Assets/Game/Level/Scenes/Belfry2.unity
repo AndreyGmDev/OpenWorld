@@ -1193,6 +1193,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 408dccb995aee9e4389bf2db9f8864ed, type: 3}
+--- !u!1 &902509072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8259487921478748446, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+  m_PrefabInstance: {fileID: 1020407558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &902509073 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7054788049226935733, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+  m_PrefabInstance: {fileID: 1020407558}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1015391186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1337,6 +1347,18 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 56.6
       objectReference: {fileID: 0}
+    - target: {fileID: 3194216116017583387, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 687865855
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085332382010159300, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6323465316738787188, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 268435455
+      objectReference: {fileID: 0}
     - target: {fileID: 7578689254579594181, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1417,6 +1439,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8131296448389380803, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8166669699628947153, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
       propertyPath: cameraPos
       value: 
@@ -1487,17 +1513,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1020407564 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1337954706089839272, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
-  m_PrefabInstance: {fileID: 1020407558}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1026310314
@@ -1777,6 +1792,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 743854901}
   m_SourcePrefab: {fileID: 100100000, guid: 9dce04c772cd90942879f6b709c4caf2, type: 3}
+--- !u!114 &1204205261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5085332382010159300, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+  m_PrefabInstance: {fileID: 1020407558}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1217511701 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3604144517464728994, guid: 749891557e966e3499697df131c7718d, type: 3}
@@ -2930,11 +2956,11 @@ PrefabInstance:
     - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 902509073}
     - target: {fileID: 5107615883194796815, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: telaDeLoading
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 902509072}
     - target: {fileID: 5690365656910767905, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: dialogueUI
       value: 
@@ -2950,7 +2976,7 @@ PrefabInstance:
     - target: {fileID: 5690365656910767905, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: characterImage
       value: 
-      objectReference: {fileID: 1020407564}
+      objectReference: {fileID: 1204205261}
     - target: {fileID: 5690365656910767905, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: dialogueAnimator
       value: 

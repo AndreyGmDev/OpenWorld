@@ -3092,6 +3092,14 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 56.6
       objectReference: {fileID: 0}
+    - target: {fileID: 5085332382010159300, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7dfec1e70fb323f429c560f9b67f7d53, type: 3}
+    - target: {fileID: 5085332382010159300, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7578689254579594181, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3813,7 +3821,7 @@ PrefabInstance:
     - target: {fileID: 5690365656910767905, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: characterImage
       value: 
-      objectReference: {fileID: 1756499444}
+      objectReference: {fileID: 1882659909}
     - target: {fileID: 5690365656910767905, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: dialogueAnimator
       value: 
@@ -4589,17 +4597,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 408dccb995aee9e4389bf2db9f8864ed, type: 3}
---- !u!114 &1756499444 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1337954706089839272, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
-  m_PrefabInstance: {fileID: 1190003365}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1819499024
 GameObject:
   m_ObjectHideFlags: 0
@@ -4936,6 +4933,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1507636620937791777, guid: 7097ba7ba649e1f41bba232312bdcbd8, type: 3}
   m_PrefabInstance: {fileID: 21844790}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1882659909 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5085332382010159300, guid: fbbcf2cc2fa7aae49bca31e79a75800c, type: 3}
+  m_PrefabInstance: {fileID: 1190003365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1885602744
 PrefabInstance:
   m_ObjectHideFlags: 0
