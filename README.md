@@ -2,7 +2,7 @@
 
 Um jogo acadêmico de exploração e quebra-cabeça em mundo aberto sobre um cangaço futurista
 
-![Menu Principal do Jogo][https://github.com/AndreyGmDev/OpenWorld/blob/main/Images/MainMenu.png]
+![Menu Principal do Jogo](https://github.com/AndreyGmDev/OpenWorld/blob/main/Images/MainMenu.png "Main Menu")
 
 ## Começando
 
