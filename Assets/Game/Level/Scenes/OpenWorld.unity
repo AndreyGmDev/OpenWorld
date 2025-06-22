@@ -5016,7 +5016,7 @@ GameObject:
   - component: {fileID: 648693528}
   - component: {fileID: 648693527}
   m_Layer: 9
-  m_Name: teleport_3
+  m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14708,7 +14708,7 @@ GameObject:
   - component: {fileID: 1756994166}
   - component: {fileID: 1756994165}
   m_Layer: 9
-  m_Name: Teleport_2
+  m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14746,7 +14746,7 @@ MonoBehaviour:
   recordInformations: 0
   playerPosition: {x: -180.648, y: 42.521, z: -718.48}
   playerRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  cameraRotation: {x: 0, y: 0}
+  cameraRotation: {x: 0, y: 180}
 --- !u!65 &1756994166
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15282,7 +15282,7 @@ GameObject:
   - component: {fileID: 1813750609}
   - component: {fileID: 1813750608}
   m_Layer: 9
-  m_Name: GameObject
+  m_Name: Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15320,7 +15320,7 @@ MonoBehaviour:
   recordInformations: 0
   playerPosition: {x: -181.0019, y: 15.4748535, z: -711.1}
   playerRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  cameraRotation: {x: 0, y: 0}
+  cameraRotation: {x: 0, y: 180}
 --- !u!65 &1813750609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16831,9 +16831,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1211664141}
+  - {fileID: 1252102463}
   - {fileID: 2126161590}
   - {fileID: 984558789}
-  - {fileID: 1252102463}
   m_Father: {fileID: 119642942}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2007241888
