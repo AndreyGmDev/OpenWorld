@@ -386,11 +386,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   ogSize: 0.5
-  VisorUI: {fileID: 0}
+  visorOnSFX: {fileID: 0}
+  visorOffSFX: {fileID: 0}
+  visorUI: {fileID: 0}
 --- !u!1 &3190103312414735721
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class Target : MonoBehaviour
 {
     private const string collisionTag = "Projectile";
 
-    [SerializeField, Tooltip("Se ativado, No frame seguinto do alvo ser acertado, a colisão anterior será resetada, permitindo o alvo ser acertado mais de uma vez")]
+    [SerializeField, Tooltip("Se ativado, No frame seguinte do alvo ser acertado, a colisão anterior será resetada, permitindo o alvo ser acertado mais de uma vez")]
     bool resetCollision;
 
     private bool wasCollided;

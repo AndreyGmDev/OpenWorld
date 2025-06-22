@@ -14674,7 +14674,7 @@ GameObject:
   - component: {fileID: 7791668636591168321}
   - component: {fileID: 7442750624921153396}
   - component: {fileID: 7959686612029974993}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pedestal particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
