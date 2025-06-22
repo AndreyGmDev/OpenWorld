@@ -89,6 +89,8 @@ public class JoinExitBelfry : MonoBehaviour
         }
 
         SaveGame saveGame = SaveGame.Instance;
+
+        // Altera as informações do save na hora de passar de cena. O que não estiver alterando aqui mantem como estava antes de passar de cena.
         saveGame.saveBetweenScenes.BetweenScenesPlayerInfos(new SaveGameInfos()
         {
             PlayerPosition = playerPosition,

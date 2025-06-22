@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
         {
             SaveGameInfos save = saveGame.LoadData();
 
-            //characterMovement.motor.SetPosition(save.PlayerPosition);
+            characterMovement.motor.SetPosition(save.PlayerPosition);
             characterMovement.motor.RotateCharacter(save.PlayerRotation);
             cameraController.targetLook = save.CameraControllerRotation;
         }

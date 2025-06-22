@@ -4,15 +4,20 @@ using UnityEngine;
 public class SaveBetweenScenes : ScriptableObject
 {
     // Conferir se é para carregar o SaveGame no jogo(SaveGame.LoadData()). Se estiver desativado então o save não será carregado no inicio da fase mesmo existindo um save.
-    public bool loadSaveGame;
+    [SerializeField] bool loadSaveGame;
 
     public SaveGameInfos saveGameInfos;
     public SaveGameInfos newSaveGameInfos;
 
 
-    public void CanLoadSaveGame(bool canLoad)
+    public void SetLoadSaveGame(bool canLoad)
     {
         loadSaveGame = canLoad;
+    }
+
+    public bool CanLoadSaveGame()
+    {
+        return loadSaveGame;
     }
 
     public void BetweenScenesPlayerInfos(in SaveGameInfos infos)

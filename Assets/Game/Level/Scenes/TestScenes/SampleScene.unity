@@ -7517,6 +7517,9 @@ MonoBehaviour:
   settingsCanvas: {fileID: 207231786}
   resumeCanvas: {fileID: 1450537384}
   exitCanvas: {fileID: 1563997555}
+  hoverSFX: {fileID: 0}
+  clickSFX: {fileID: 0}
+  isPaused: 0
 --- !u!114 &1450537387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9988,11 +9991,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e2bc621fbd441fe4188c44767ef08817, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.616085
+      value: -9.994
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2bc621fbd441fe4188c44767ef08817, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6830002
+      value: -1.381
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2bc621fbd441fe4188c44767ef08817, type: 3}
       propertyPath: m_LocalPosition.z

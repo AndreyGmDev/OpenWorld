@@ -217,16 +217,19 @@ public class Hotbar : MonoBehaviour
             SaveGameInfos save = saveGame.LoadData();
             saveSlot = save.Slot; // Carrega o slot que o player está usando.
 
-            // Carrega todos os itens salvos pelo player.
-            for (int i = 0; i < itens.Length; i++)
+            if (save.ItensID != null)
             {
-                if (!string.IsNullOrEmpty(save.ItensID[i]))
+                // Carrega todos os itens salvos pelo player.
+                for (int i = 0; i < itens.Length; i++)
                 {
-                    HotbarBase hotbarBase = GetItemByID(save.ItensID[i]);
-
-                    if (hotbarBase != null)
+                    if (!string.IsNullOrEmpty(save.ItensID[i]))
                     {
-                        itens[i] = hotbarBase.prefab;
+                        HotbarBase hotbarBase = GetItemByID(save.ItensID[i]);
+
+                        if (hotbarBase != null)
+                        {
+                            itens[i] = hotbarBase.prefab;
+                        }
                     }
                 }
             }

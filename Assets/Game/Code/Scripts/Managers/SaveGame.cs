@@ -17,6 +17,9 @@ public struct SaveGameInfos
     // DaylightCycle infos.
     public float Seconds;
 
+    // Game infos.
+    public string LevelName;
+
     // Hat_Quest.
     public int HatsCollected;
 }
@@ -88,10 +91,19 @@ public class SaveGame : MonoBehaviour
 
     private void Start()
     {
-        // Faz o save de tempos em tempos.
+        // Pega o nome do level atual
+        SaveCurrentLevel(new SaveGameInfos
+        {
+            LevelName = SceneManager.GetActiveScene().name,
+        });
+
+        // Faz um save sempre que uma nova cena é carregada.
+        //StartCoroutine(MakeSaves(0, false)); 
+
+        // Confere se pode fazer save na cena.   
         if (delaySaveGame > 0)
         {
-            StartCoroutine(MakeSaves(5, true));
+            StartCoroutine(MakeSaves(5, true)); // Faz o save de tempos em tempos.
         }
     }
 
@@ -108,7 +120,7 @@ public class SaveGame : MonoBehaviour
 
         // 1° Condição - A cena carregada é Ilha.
 
-        if (!(SceneManager.GetActiveScene().name == "OpenWorld"))
+        if (SceneManager.GetActiveScene().name == "MainMenu")
         {
             condition &= false;
         }
@@ -117,10 +129,10 @@ public class SaveGame : MonoBehaviour
 
         // 2° Condição - A cena carregada é Ilha.
 
-        if (!(SceneManager.GetActiveScene().name == "OpenWorld"))
+        /*if (!(SceneManager.GetActiveScene().name == "OpenWorld"))
         {
             condition &= false;
-        }
+        }*/
 
         // Final da 2° condição.
 
@@ -180,7 +192,7 @@ public class SaveGame : MonoBehaviour
         saveGameInfos.CameraControllerRotation = infos.CameraControllerRotation;
     }
 
-    // Save da Hotbar - Scrip PlayerController.
+    // Save da Hotbar - Scrip Hotbar.
     public void SaveHotbarData(in SaveGameInfos infos)
     {
         saveGameInfos.Slot = infos.Slot;
@@ -193,6 +205,13 @@ public class SaveGame : MonoBehaviour
         saveGameInfos.Seconds = infos.Seconds;
     }
 
+    // Save do CurrentLevel - Script SaveGame.
+    public void SaveCurrentLevel(in SaveGameInfos infos)
+    {
+        saveGameInfos.LevelName = infos.LevelName;
+    }
+
+    // Save da HatQuest - Script Hat_Quest.
     public void SaveHatQuest(in SaveGameInfos infos)
     {
         saveGameInfos.HatsCollected = infos.HatsCollected;
@@ -201,12 +220,9 @@ public class SaveGame : MonoBehaviour
     // Função para o carregar o jogo.
     public SaveGameInfos LoadData()
     {
-        
         // Confere se é para carregar o save game.
-        if (saveBetweenScenes.loadSaveGame)
+        if (saveBetweenScenes.CanLoadSaveGame())
         {
-            saveBetweenScenes.CanLoadSaveGame(false); // Desativa para não carregar mais o load game nas próximas fases.
-
             // Se um save existir, carrega o save.
             if (File.Exists(SAVEPATH + SAVEDATA))
             {
@@ -226,8 +242,6 @@ public class SaveGame : MonoBehaviour
         {
             return saveBetweenScenes.newSaveGameInfos;
         }
-
-        
      }
 
     // Função para criar um novo save.
@@ -235,12 +249,15 @@ public class SaveGame : MonoBehaviour
     {
         SaveGameInfos save = new()
         {
-            PlayerPosition = new Vector3(81, 12.2770004f, 145.5f),
+            
+            PlayerPosition = new Vector3(-219.020004f, 8.46000004f, -753.950012f),
             PlayerRotation = Quaternion.identity,
             CameraControllerRotation = Vector3.zero,
             Slot = 0,
             ItensID = new string[3],
-            Seconds = 28800 // 08:00 horas.
+            Seconds = 28800, // 08:00 horas.
+            LevelName = "OpenWorld",
+            HatsCollected = 0,
         };
         return save;
     }

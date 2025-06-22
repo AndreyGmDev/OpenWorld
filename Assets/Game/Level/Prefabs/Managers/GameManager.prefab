@@ -127,8 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c257fa04cf0e0644ba157fd8b9088aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nomeDaCena: 
-  tempoDeLoading: 4
+  tempoDeLoading: 2.5
   telaDeLoading: {fileID: 0}
   animator: {fileID: 0}
   objetosParaDesativar: []

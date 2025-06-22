@@ -40,11 +40,6 @@ public class LoadingManager : MonoBehaviour
     }
     // Finalização do Singleton.
 
-    
-    [Header("Configurações")]
-    [Tooltip("Nome da cena para carregar.")]
-    public string nomeDaCena;
-
     [Tooltip("Tempo mínimo para exibir a tela de loading (em segundos).")]
     [SerializeField] float tempoDeLoading = 2f;
 
@@ -58,6 +53,7 @@ public class LoadingManager : MonoBehaviour
     [Tooltip("Lista de objetos a serem desativados ao pressionar Novo Jogo.")]
     public GameObject[] objetosParaDesativar;
 
+    private SaveGame saveGame;
 
     // Carrega as informações do save nos determinados locais.
     private void Awake()
@@ -77,8 +73,13 @@ public class LoadingManager : MonoBehaviour
         }
     }
 
-    // Função chamada pelo botão "Novo Jogo"
-    public void NovoJogo()
+    private void Start()
+    {
+        saveGame = SaveGame.Instance;
+    }
+
+    // Função chamada pelo botão "Novo Jogo" no menu.
+    public void NewGame()
     {
         if (!Directory.Exists(SaveGame.Instance.SAVEPATH)) 
         { 
@@ -95,68 +96,50 @@ public class LoadingManager : MonoBehaviour
                 objeto.SetActive(false);
             }
         }
+        
+        // Permite carregar o save do game para pegar as informações do save.
+        saveGame.saveBetweenScenes.SetLoadSaveGame(true);
 
-        // Inicia o processo de carregamento da cena
-        StartCoroutine(CarregarCenaAsync());
+        // Pega o level para iniciar.
+        string levelName = saveGame.LoadData().LevelName;
+
+        // Confere se não é nulo ou vazio.
+        if (!string.IsNullOrEmpty(levelName))
+        {
+            // Inicia o processo de carregamento da cena
+            StartCoroutine(LoadScene(levelName));
+        }
+    }
+
+    // Função chamada pelo botão "Continuar" no menu.
+    public void ContinueGame()
+    {
+        // Permite carregar o save do game.
+        saveGame.saveBetweenScenes.SetLoadSaveGame(true);
+
+        // Pega o level para iniciar.
+        string levelName = saveGame.LoadData().LevelName;
+
+        // Confere se não é nulo ou vazio.
+        if (!string.IsNullOrEmpty(levelName))
+        {
+            // Inicia o processo de carregamento da cena
+            StartCoroutine(LoadScene(levelName));
+        }
     }
 
     // Coroutine para carregar a cena de forma assíncrona
-    private IEnumerator CarregarCenaAsync()
+    public void LoadAsyncScene(string levelName)
     {
-        Time.timeScale = 1;
+        // Não permite carregar o save do game.
+        saveGame.saveBetweenScenes.SetLoadSaveGame(false);
 
-        PauseMenuController pauseMenuController = FindAnyObjectByType<PauseMenuController>();
-        //pauseMenuController.isPaused(0);
-
-        // Desabilita o cursor.
-        Cursor.lockState = CursorLockMode.Locked;
-
-        // Disabilita todos os inputs.
-        InputActionsManager input = InputActionsManager.Instance;
-        input.DisableAllActions();
-
-        // Ativa a tela de loading
-        telaDeLoading.SetActive(true);
-
-        // Toca a animação do loading, caso o Animator seja configurado
-        if (animator != null)
-        {
-            animator.SetTrigger("IniciarLoading");
-        }
-
-        // Aguarda o tempo mínimo de exibição da tela de loading
-        float tempoInicial = Time.unscaledTime;
-
-        // Inicia o carregamento assíncrono da cena
-        AsyncOperation operacao = SceneManager.LoadSceneAsync(nomeDaCena);
-        operacao.allowSceneActivation = false;
-
-        // Aguarda até que a cena esteja completamente carregada
-        while (!operacao.isDone)
-        {
-            // Checa se o carregamento chegou a 90% (padrão para pronto, mas ainda não ativado)
-            if (operacao.progress >= 0.9f && Time.unscaledTime >= tempoInicial + tempoDeLoading)
-            {
-                // Certifique-se de que os shaders estejam compilados
-                //Shader.WarmupAllShaders();
-
-                // Permite a ativação da cena
-                operacao.allowSceneActivation = true;
-            }
-
-            yield return null;
-        }
-    }
-
-
-    public void LoadAsyncScene(string nameScene)
-    {
-        StartCoroutine(LoadScene(nameScene));
+        StartCoroutine(LoadScene(levelName));
 
         Time.timeScale = 1;
     }
 
-    public IEnumerator LoadScene(string nameScene)
+    public IEnumerator LoadScene(string levelName)
     {
         // Desabilita o cursor.
         Cursor.lockState = CursorLockMode.Locked;
@@ -178,7 +161,7 @@ public class LoadingManager : MonoBehaviour
         }
 
         // Inicia o carregamento assíncrono da cena
-        AsyncOperation operation = SceneManager.LoadSceneAsync(nameScene);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(levelName);
         operation.allowSceneActivation = false;
 
         // Aguarda o tempo mínimo de exibição da tela de loading

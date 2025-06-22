@@ -49,6 +49,9 @@ public class Hat_Quest : MonoBehaviour
 
     private IEnumerator UpdateQuest()
     {
+        // Desativa a colisão.
+        GetComponent<BoxCollider>().enabled = false;
+
         // Atualiza o número de chapéus coletados.
         hatsCollected++;
 
@@ -60,6 +63,8 @@ public class Hat_Quest : MonoBehaviour
         {
             startDialogue.StartDialogue();
         }
+
+        yield return new WaitForSeconds(1);
 
         // Impede o código de continuar enquanto o player estiver em dialogo.
         while (dialogue.IsInDialogue())
@@ -75,9 +80,6 @@ public class Hat_Quest : MonoBehaviour
 
         // Ativa o script de trocar de cena.
         scriptToActivate.enabled = true;
-
-        // Destói o objeto depois de coletá-lo.
-        //Destroy(gameObject);
     }
 
     private void Load()
