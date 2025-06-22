@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class JoinExitBelfry : MonoBehaviour
 {
-    private enum Levels { Island, Belfry1, Belfry2, Belfry3, Belfry4 }
+    private enum Levels { Island, Belfry1, Belfry2, Belfry3, Belfry4, Menu }
     [SerializeField] Levels levels;
 
     private enum Mode { Interaction, Automatic }
@@ -74,6 +74,9 @@ public class JoinExitBelfry : MonoBehaviour
                 break;
             case Levels.Belfry4:
                 levelName = "Belfry4";
+                break;
+            case Levels.Menu:
+                levelName = "MainMenu";
                 break;
         }
 
