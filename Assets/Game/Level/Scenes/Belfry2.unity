@@ -2158,15 +2158,15 @@ MonoBehaviour:
   lever: {fileID: 215831699}
   platformLever: {fileID: 743854897}
   platformLeverFinalPosition: {x: -180.8, y: 36.93, z: -807.71}
-  durationPlatformLever: 7
+  durationPlatformLever: 8
   target1: {fileID: 9034482}
   platformTarget1: {fileID: 1635865775}
   platformTarget1FinalPosition: {x: -180.8, y: 36.93, z: -790.5}
-  durationPlatformTarget1: 4
+  durationPlatformTarget1: 6
   target2: {fileID: 1617579312}
   platformTarget2: {fileID: 1026310316}
   platformTarget2FinalPosition: {x: -180.8, y: 36.93, z: -799.1}
-  durationPlatformTarget2: 4
+  durationPlatformTarget2: 6
   time: 0.5
 --- !u!1001 &1484908115
 PrefabInstance:
