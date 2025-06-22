@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: table.002
     second: {fileID: 2100000, guid: de5e582bc65113b41bacbb8fbfec3433, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: table.005
+    second: {fileID: 2100000, guid: 6e34368cacf8ff8488a217235daeefa9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
