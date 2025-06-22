@@ -1542,7 +1542,7 @@ MonoBehaviour:
   levels: 0
   mode: 1
   recordInformations: 0
-  playerPosition: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 45.56, y: 21.87, z: 75.74}
   playerRotation: {x: 0, y: 0, z: 0, w: 0}
   cameraRotation: {x: 0, y: 0}
 --- !u!4 &668928326 stripped

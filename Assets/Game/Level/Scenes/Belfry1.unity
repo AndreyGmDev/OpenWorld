@@ -1089,16 +1089,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408146863}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31412d7d158196343b7129db5bc25417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   levels: 0
   mode: 1
-  recordInformations: 0
-  playerPosition: {x: 81, y: 12.277, z: 145.5}
-  playerRotation: {x: 0, y: 0, z: 0, w: 0}
+  recordInformations: 1
+  playerPosition: {x: -1.109, y: 28.148, z: 241.73}
+  playerRotation: {x: 0, y: 0, z: 0, w: 1}
   cameraRotation: {x: 0, y: 0}
 --- !u!114 &408146870
 MonoBehaviour:
@@ -1604,7 +1604,7 @@ PrefabInstance:
       addedObject: {fileID: 636807052}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5859d15c64196ec4c8d0372ccb004236, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 636807056}
+      addedObject: {fileID: 636807053}
   m_SourcePrefab: {fileID: 100100000, guid: 5859d15c64196ec4c8d0372ccb004236, type: 3}
 --- !u!1 &636807051 stripped
 GameObject:
@@ -1626,7 +1626,7 @@ MonoBehaviour:
   Action:
   - type: 0
     mode: 1
---- !u!65 &636807056
+--- !u!65 &636807053
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1645,8 +1645,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.023041837, y: 0.00010907648, z: 0.031710662}
-  m_Center: {x: 0.00004403433, y: 0.4296036, z: -0.060659077}
+  m_Size: {x: 2.304184, y: 3.1710672, z: 0.0109062195}
+  m_Center: {x: 0.000000059604645, y: 0, z: 0.0000019073486}
 --- !u!1 &642924108 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4031e9718f5ae334ba4bb371f03dbf06, type: 3}

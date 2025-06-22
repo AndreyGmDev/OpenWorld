@@ -5075,7 +5075,7 @@ MonoBehaviour:
   recordInformations: 0
   playerPosition: {x: -120.085, y: 10.4, z: -695.04}
   playerRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  cameraRotation: {x: 0, y: 0}
+  cameraRotation: {x: 0, y: 180}
 --- !u!1 &653988474 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b360854324322d74297a51296ca22266, type: 3}
@@ -8560,8 +8560,8 @@ MonoBehaviour:
   mode: 0
   recordInformations: 0
   playerPosition: {x: -219.05978, y: 8.46, z: -753.95}
-  playerRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  cameraRotation: {x: 0.9999998, y: 182.8}
+  playerRotation: {x: 0, y: 0, z: 0, w: 1}
+  cameraRotation: {x: 0, y: 0}
 --- !u!1 &1064709676 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d43f9160254f10043ad029e226b1c437, type: 3}
@@ -11627,7 +11627,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 171193963070971375, guid: 749891557e966e3499697df131c7718d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 421074180198787910, guid: 749891557e966e3499697df131c7718d, type: 3}
       propertyPath: m_Layer
