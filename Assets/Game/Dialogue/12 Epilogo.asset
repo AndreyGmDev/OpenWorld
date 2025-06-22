@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a81cce62cdcaf34cb4e9ff083e3e683, type: 3}
+  m_Name: 12 Epilogo
+  m_EditorClassIdentifier: 
+  dialogueGroups:
+  - flag: 0
+    dialogueLines:
+    - characterName: 
+      characterImage: {fileID: 0}
+      dialogueText: "Ent\xE3o ele come\xE7ou a conversar com todos os habitantes
+        da ilha, tentando revelar a verdade para eles."
+    - characterName: 
+      characterImage: {fileID: 0}
+      dialogueText: "No come\xE7o, muitos n\xE3o acreditaram, mas pouco a pouco,
+        todos da ilha viram a vontade de Jo\xE3o de limpar o nome deles e tirar eles
+        da situa\xE7\xE3o dif\xEDcil em que se encontravam."
+    - characterName: 
+      characterImage: {fileID: 0}
+      dialogueText: "Ele at\xE9 convenceu aqueles que tinham \xF3dio do Nordeste
+        que tinha expulsado eles."
+    - characterName: 
+      characterImage: {fileID: 0}
+      dialogueText: "Uma nova era ent\xE3o come\xE7ou para a ilha Mechaxeira, uma
+        de mais prosperidade e fartura. Com o tempo, eles at\xE9 voltaram a ter contato
+        com o Nordeste."
+    - characterName: 
+      characterImage: {fileID: 0}
+      dialogueText: "Assim, os dois lados come\xE7aram a se ajudar de novo, mostrando
+        que aprenderam com os erros do passado. "
+    - characterName: 
+      characterImage: {fileID: 0}
+      dialogueText: "Jo\xE3o ent\xE3o provou a import\xE2ncia de procurar a verdade,
+        e usou esse conhecimento n\xE3o para benef\xEDcio pr\xF3prio, mas para os
+        outros tamb\xE9m."
+    - characterName: 
+      characterImage: {fileID: 0}
+      dialogueText: "Ele tamb\xE9m comprou a m\xE1quina de lavar que sua m\xE3e queria
+        tanto."

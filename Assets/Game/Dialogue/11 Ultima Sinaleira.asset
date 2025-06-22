@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a81cce62cdcaf34cb4e9ff083e3e683, type: 3}
+  m_Name: 11 Ultima Sinaleira
+  m_EditorClassIdentifier: 
+  dialogueGroups:
+  - flag: 0
+    dialogueLines:
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "O \xFAltimo peda\xE7o do chap\xE9u\u2026 Finalmente conseguimos."
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "Eu sabia que voc\xEA era capaz, meu rei!"
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "Agora, coloca esse chap\xE9u na cabe\xE7a e veja como voc\xEA
+        fica nele!"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "T\xE1 bom\u2026"
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "*Coloca Chap\xE9u*"
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Oxi\u2026 Aconteceu nada-"
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "Oxente, voc\xEA achou que ia ganhar poderes c\xF3smicos?"
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "\u2026O poder do chap\xE9u \xE9 simb\xF3lico, meu rei. O verdadeiro
+        poder \xE9 o conhecimento que voc\xEA ganhou buscando a verdade."
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "Com ele, voc\xEA pode mostrar quem \xE9 o melhor\u2026 Falar
+        que o seu lado \xE9 o certo, e eles provavelmente v\xE3o te seguir."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "...Ent\xE3o eu posso s\xF3 comandar as pessoas?"
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "\u201CIsso s\xF3 cabe a voc\xEA, meu rei. Voc\xEA sabe a hist\xF3ria
+        todinha por tr\xE1s dos cangaceiros\u2026"
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "E com esse chap\xE9u, voc\xEA vira o \u2018l\xEDder\u2019 do
+        bando que restou aqui na ilha. O que voc\xEA vai fazer com isso \xE9 sua
+        responsabilidade."
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: Mas se lembre dos erros dos seus antepassados...
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "Se os cangaceiros v\xE3o ser perdoados ou n\xE3o vai depender
+        das a\xE7\xF5es de todos na ilha... Positivas ou negativas..."
+    - characterName: O.C.H.I
+      characterImage: {fileID: 0}
+      dialogueText: "Isso vai come\xE7ar com a sua escolha."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "...Acho que sei o que tenho que fazer ent\xE3o."
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: "Vou espalhar o conhecimento para todos e ajudar a gente a limpar
+        o nosso nome! Espero que assim a nossa situa\xE7\xE3o na ilha e no Nordeste
+        inteiro melhore."
