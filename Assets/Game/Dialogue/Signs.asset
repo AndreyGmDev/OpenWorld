@@ -27,7 +27,8 @@ MonoBehaviour:
     dialogueLines:
     - characterName: 
       characterImage: {fileID: 21300000, guid: 7dfec1e70fb323f429c560f9b67f7d53, type: 3}
-      dialogueText: "Aquele que est\xE1 no topo, sempre \xE9 o n\xFAmero 1."
+      dialogueText: "Aquele que est\xE1 no topo, sempre \xE9 o n\xFAmero 1 e todos
+        se adaptam a ele. N\xE3o mude a ordem natural das coisas."
   - flag: 3
     dialogueLines:
     - characterName: 

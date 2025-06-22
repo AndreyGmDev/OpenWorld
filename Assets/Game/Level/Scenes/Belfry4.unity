@@ -4952,7 +4952,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 427409225719115454, guid: e05f0510efa30154da546f14e6ba5642, type: 3}
       propertyPath: flag
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 427409225719115454, guid: e05f0510efa30154da546f14e6ba5642, type: 3}
       propertyPath: npcAnimator
