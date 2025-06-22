@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -119,8 +120,15 @@ public class PauseMenuController : MonoBehaviour
 
     private void DisablePauseCanvas()
     {
+        // Add mais uma condição para o botão save game.
+        bool interactable = true;
+        interactable &= saveGame.CanMakeSaves();
+        interactable &= SceneManager.GetActiveScene().name == "OpenWorld";
+
         // Habilita ou desabilita o botão de save game.
-        saveButton.interactable = saveGame.CanMakeSaves();
+        saveButton.interactable = interactable;
+
+
         saveButton.GetComponent<ButtonMouseEffects>().enabled = saveButton.interactable;
 
         pauseCanvas.enabled = !pauseCanvas.enabled;

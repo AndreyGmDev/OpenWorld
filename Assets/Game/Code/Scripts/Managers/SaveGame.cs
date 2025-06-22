@@ -87,18 +87,32 @@ public class SaveGame : MonoBehaviour
             print("Procure esses objetos e retire o script SaveGame até sobrar apenas um: " + gameObject.name + ", " + saveGame.name);
             Destroy(gameObject);
         }
-    }
 
-    private void Start()
-    {
+        // Carrega as informações do Game no SaveGame.
+        SaveGameInfos _saveGameInfos = LoadData();
+        saveGameInfos = new()
+        {
+            PlayerPosition = _saveGameInfos.PlayerPosition,
+            PlayerRotation = _saveGameInfos.PlayerRotation,
+            CameraControllerRotation = _saveGameInfos.CameraControllerRotation,
+            Slot = _saveGameInfos.Slot,
+            ItensID = _saveGameInfos.ItensID,
+            Seconds = _saveGameInfos.Seconds,
+            LevelName = _saveGameInfos.LevelName,
+            HatsCollected = _saveGameInfos.HatsCollected,
+        };
+
         // Pega o nome do level atual
         SaveCurrentLevel(new SaveGameInfos
         {
             LevelName = SceneManager.GetActiveScene().name,
         });
+    }
 
+    private void Start()
+    {
         // Faz um save sempre que uma nova cena é carregada.
-        //StartCoroutine(MakeSaves(0, false)); 
+        Invoke(nameof(FirstMakeSaves),0.5f);
 
         // Confere se pode fazer save na cena.   
         if (delaySaveGame > 0)
@@ -136,8 +150,14 @@ public class SaveGame : MonoBehaviour
 
         // Final da 2° condição.
 
-        // Se nenhuma das condições forem atendidas, return false.
+        // Se nenhuma das condições forem atendidas, return true.
         return condition;
+    }
+
+    // Faz um save assim que uma cena é carregada. Isso deve ocorrer depois do LoadGame ser carregado.
+    private void FirstMakeSaves()
+    {
+        StartCoroutine(MakeSaves(0, false));
     }
 
     public IEnumerator MakeSaves(float delay, bool makeSaveAgain)

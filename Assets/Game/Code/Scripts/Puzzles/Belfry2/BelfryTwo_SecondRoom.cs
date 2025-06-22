@@ -40,48 +40,57 @@ public class BelfryTwo_SecondRoom : MonoBehaviour
         delayLever -= Time.deltaTime; // Delay para poder usar a lever novamente.
 
         // Se a alavanca for a interação mais próxima
-        if (lever == playerInteraction.NextInteraction())
+        if (lever != null)
         {
-            // Se o cooldown da alavanca tiver acabado
-            if (delayLever < 0)
+            if (lever == playerInteraction.NextInteraction())
             {
-                if (input.inputActions.Game.Interaction.WasPressedThisFrame())
+                // Se o cooldown da alavanca tiver acabado
+                if (delayLever < 0)
                 {
-                    StartCoroutine(Platform(platformLever, platformLeverFinalPosition, durationPlatformLever)); // Levanta a plataforma.
-                    delayLever = durationPlatformLever + (time * 2); // Calcula o cooldown.
+                    if (input.inputActions.Game.Interaction.WasPressedThisFrame())
+                    {
+                        StartCoroutine(Platform(platformLever, platformLeverFinalPosition, durationPlatformLever)); // Levanta a plataforma.
+                        delayLever = durationPlatformLever + (time * 2); // Calcula o cooldown.
+                    }
+                    else
+                    {
+                        playerInteraction.HasInteracted(false);
+                    }
                 }
                 else
                 {
-                    playerInteraction.HasInteracted(false);
+                    playerInteraction.HasInteracted(true); // Não permite o prompt aparecer enquanto estiver no cooldown da alavanca.
                 }
             }
-            else
-            {
-                playerInteraction.HasInteracted(true); // Não permite o prompt aparecer enquanto estiver no cooldown da alavanca.
-            }
         }
 
-        if (target1.TryGetComponent<Target>(out var script))
+        if (target1 != null)
         {
-            delayTarget1 -= Time.deltaTime; // Delay para poder usar o alvo novamente.
-
-            // Se o alvo for acertado e o cooldown estiver terminado.
-            if (script.WasCollided() && delayTarget1 <= 0)
+            if (target1.TryGetComponent<Target>(out var script))
             {
-                StartCoroutine(Platform(platformTarget1, platformTarget1FinalPosition, durationPlatformTarget1)); // Levanta a plataforma.
-                delayTarget1 = durationPlatformTarget1 + (time * 2); // Calcula o cooldown.
+                delayTarget1 -= Time.deltaTime; // Delay para poder usar o alvo novamente.
+
+                // Se o alvo for acertado e o cooldown estiver terminado.
+                if (script.WasCollided() && delayTarget1 <= 0)
+                {
+                    StartCoroutine(Platform(platformTarget1, platformTarget1FinalPosition, durationPlatformTarget1)); // Levanta a plataforma.
+                    delayTarget1 = durationPlatformTarget1 + (time * 2); // Calcula o cooldown.
+                }
             }
         }
-
-        if (target2.TryGetComponent<Target>(out var script2))
+        
+        if (target2 != null)
         {
-            delayTarget2 -= Time.deltaTime; // Delay para poder usar o alvo novamente.
-
-            // Se o alvo for acertado e o cooldown estiver terminado.
-            if (script2.WasCollided() && delayTarget2 <= 0)
+            if (target2.TryGetComponent<Target>(out var script2))
             {
-                StartCoroutine(Platform(platformTarget2, platformTarget2FinalPosition, durationPlatformTarget2)); // Levanta a plataforma.
-                delayTarget2 = durationPlatformTarget2 + (time * 2); // Calcula o cooldown.
+                delayTarget2 -= Time.deltaTime; // Delay para poder usar o alvo novamente.
+
+                // Se o alvo for acertado e o cooldown estiver terminado.
+                if (script2.WasCollided() && delayTarget2 <= 0)
+                {
+                    StartCoroutine(Platform(platformTarget2, platformTarget2FinalPosition, durationPlatformTarget2)); // Levanta a plataforma.
+                    delayTarget2 = durationPlatformTarget2 + (time * 2); // Calcula o cooldown.
+                }
             }
         }
     }

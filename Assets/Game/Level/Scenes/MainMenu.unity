@@ -4634,7 +4634,7 @@ PrefabInstance:
       objectReference: {fileID: 1487665579}
     - target: {fileID: 6367620829642616566, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: delaySaveGame
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6504738768027931084, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: m_LocalPosition.x
