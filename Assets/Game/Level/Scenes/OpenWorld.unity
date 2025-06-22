@@ -5073,7 +5073,7 @@ MonoBehaviour:
   levels: 3
   mode: 0
   recordInformations: 0
-  playerPosition: {x: 0, y: 0, z: 0}
+  playerPosition: {x: -120.085, y: 10.4, z: -695.04}
   playerRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   cameraRotation: {x: 0, y: 0}
 --- !u!1 &653988474 stripped
@@ -14744,7 +14744,7 @@ MonoBehaviour:
   levels: 2
   mode: 0
   recordInformations: 0
-  playerPosition: {x: -229.968, y: 3.746, z: -688.35}
+  playerPosition: {x: -180.648, y: 42.521, z: -718.48}
   playerRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   cameraRotation: {x: 0, y: 0}
 --- !u!65 &1756994166
@@ -15318,9 +15318,9 @@ MonoBehaviour:
   levels: 4
   mode: 0
   recordInformations: 0
-  playerPosition: {x: -181.0019, y: 15.47485, z: -710.191}
+  playerPosition: {x: -181.0019, y: 15.4748535, z: -711.1}
   playerRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  cameraRotation: {x: 180, y: 0}
+  cameraRotation: {x: 0, y: 0}
 --- !u!65 &1813750609
 BoxCollider:
   m_ObjectHideFlags: 0
