@@ -2,7 +2,7 @@
 
 Um jogo acadêmico de exploração e quebra-cabeça em mundo aberto sobre um cangaço futurista
 
-[FOTOS - IMPLEMENTAR]
+![Menu Principal do Jogo][https://github.com/AndreyGmDev/OpenWorld/blob/main/Images/MainMenu.png]
 
 ## Começando
 
@@ -12,7 +12,7 @@ Siga o passo-a-passo abaixo para desenvolver e testar o jogo em sua própria má
 
 ### Pré-requisitos
 
-* Unity 6 (6000.0.35f1, baixe o editor em https://unity.com/releases/editor/archive)
+* Unity 6 (6000.0.35f1, baixe o editor de https://unity.com/releases/editor/archive)
 * Git (baixe de www.git-scm.com) ou GitHub Desktop
 
 ### Instalação
@@ -29,7 +29,7 @@ Abra o projeto de seu disco, que está na pasta anteriormente clonada.
 
 ## Construído com
 
-* Unity
+* Unity 6
 * Blender - Modelos 3D
 * FL Studio, Splice - Música, Efeitos Sonoros
 * Adobe Substance 3D Painter - Texturização 3D
@@ -49,7 +49,7 @@ Abra o projeto de seu disco, que está na pasta anteriormente clonada.
 
 ## Licença
 
-Este projeto está sob a licença [CC-BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Clique no hiperlink para mais detalhes.
+Este projeto está sob a licença [GPLv3](https://github.com/AndreyGmDev/OpenWorld/blob/main/LICENSE). Clique no hiperlink para mais detalhes.
 
 ## Expressões de gratidão
 
