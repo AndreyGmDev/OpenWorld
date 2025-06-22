@@ -23,3 +23,13 @@ MonoBehaviour:
     - characterName: Placa #2
       characterImage: {fileID: 21300000, guid: 7dfec1e70fb323f429c560f9b67f7d53, type: 3}
       dialogueText: 'Jaz aqui: <color=#0BA>Poggers.'
+  - flag: 2
+    dialogueLines:
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: 7dfec1e70fb323f429c560f9b67f7d53, type: 3}
+      dialogueText: "Aquele que est\xE1 no topo, sempre \xE9 o n\xFAmero 1."
+  - flag: 3
+    dialogueLines:
+    - characterName: 
+      characterImage: {fileID: 21300000, guid: 7dfec1e70fb323f429c560f9b67f7d53, type: 3}
+      dialogueText: "O que vc t\xE1 fazendo aqui? Tem nada pra mexer aqui do\xEDdo."
