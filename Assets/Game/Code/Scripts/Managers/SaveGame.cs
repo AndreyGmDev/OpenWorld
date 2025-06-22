@@ -250,7 +250,7 @@ public class SaveGame : MonoBehaviour
         SaveGameInfos save = new()
         {
             
-            PlayerPosition = new Vector3(-219.020004f, 8.46000004f, -753.950012f),
+            PlayerPosition = new Vector3(-86.1620026f, 26.3700008f, 229.979996f),
             PlayerRotation = Quaternion.identity,
             CameraControllerRotation = Vector3.zero,
             Slot = 0,

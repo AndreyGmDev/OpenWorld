@@ -10,27 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a81cce62cdcaf34cb4e9ff083e3e683, type: 3}
-  m_Name: "7 Segundo Chap\xE9u"
+  m_Name: Chapeu3
   m_EditorClassIdentifier: 
   dialogueGroups:
   - flag: 0
     dialogueLines:
     - characterName: O.C.H.I.
       characterImage: {fileID: 0}
-      dialogueText: "Muito bem, meu rei, voc\xEA conseguiu a segunda parte do chap\xE9u
-        do Bandeirinha!"
+      dialogueText: "Muito bem, meu rei! Agora s\xF3 falta mais uma sinaleira, a
+        mais isolada da ilha."
     - characterName: O.C.H.I.
       characterImage: {fileID: 0}
-      dialogueText: "Agora, a pr\xF3xima sinaleira \xE9 aquela mais pr\xF3xima da
-        sua vila, onde os cangaceiros guardavam ferramentas e todo tipo de bugiganga."
+      dialogueText: "De acordo com meus dados, \xE9 a sinaleira onde os cangaceiros
+        guardavam tudo de valor: dinheiro, recompensas valiosas etc."
     - characterName: "Jo\xE3o Ningu\xE9m"
       characterImage: {fileID: 0}
-      dialogueText: "T\xE1 certo, Oxi! Me pergunto que tipo de inven\xE7\xE3o seguinte
-        a gente vai encontrar l\xE1..."
+      dialogueText: "Hmm, interessante... Vamos logo! Quero descobrir a verdade por
+        tr\xE1s de tudo! "
+    - characterName: "Jo\xE3o Ningu\xE9m"
+      characterImage: {fileID: 0}
+      dialogueText: Assim, eu posso saber como ajudar o pessoal da ilha... Pelo menos,
+        eu espero.
     - characterName: O.C.H.I.
       characterImage: {fileID: 0}
-      dialogueText: "Eu j\xE1 te falei... \xC9 O.C.H.I., meu Rei!"
-    - characterName: "Jo\xE3o Ningu\xE9m"
-      characterImage: {fileID: 0}
-      dialogueText: "Esquece, vamos para a pr\xF3xima sinaleira logo, assim voc\xEA
-        n\xE3o fica curioso por muito tempo."
+      dialogueText: "Eu sei que voc\xEA vai descobrir, meu rei. Apenas continue procurando
+        conhecimento!"
