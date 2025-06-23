@@ -2895,7 +2895,6 @@ MonoBehaviour:
   cycleTime: 360
   timeOfTheDay: {fileID: 2026848347}
   seconds: 0
-  multiplier: 1200
 --- !u!4 &330207849
 Transform:
   m_ObjectHideFlags: 0
@@ -18632,7 +18631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6367620829642616566, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: delaySaveGame
-      value: 3
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6504738768027931084, guid: 62bec02210f5ba846b826be5d5a45b65, type: 3}
       propertyPath: m_LocalPosition.x

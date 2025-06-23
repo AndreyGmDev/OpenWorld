@@ -10,14 +10,14 @@ public class DaylightCycle : MonoBehaviour
     [SerializeField, Tooltip("Time in seconds of a day's length")] float cycleTime;
     [SerializeField] TextMeshProUGUI timeOfTheDay;
 
-    public float seconds;
-    public float multiplier;
+    [HideInInspector] public float seconds;
+    private float multiplier;
 
     SaveGame saveGame;
 
     private void Start()
     {
-        multiplier = (REAL_TIME_DAY_LENGTH / cycleTime) + 1000;
+        multiplier = (REAL_TIME_DAY_LENGTH / cycleTime);
         saveGame = SaveGame.Instance;
         Load();
     }

@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionalLight: {fileID: 0}
-  cycleTime: 720
+  cycleTime: 360
   timeOfTheDay: {fileID: 190712365}
   seconds: 0
 --- !u!4 &197342478
